@@ -1,0 +1,1195 @@
+---
+title: "Clara Master Doc"
+author: "Clara Copeland"
+date: "2023-07-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("setup.R")
+```
+
+```{r btch code from greg}
+BiocManager::install("sva")
+library(sva)
+library(ALDEx2)
+
+# load test dataset
+load('Rdata/egg.both.Rda')
+
+conds <- c(rep('h', 8), rep('b', 28), rep('h',8))
+btch <- c(rep('1',22), rep('2', 22))
+
+egg.btch <- ComBat_seq(as.matrix(egg.both), batch=btch, group=conds, full_mod=F)
+
+btch.clr <- apply(egg.btch+0.5, 2, function(x) log(x) - mean(log(x)))
+
+
+
+conds <- c(rep('h',8), rep('b',14), rep('b',14), rep('h',8))
+btch <- c(rep(1,22), rep(2,22))
+both.combat <- sva::ComBat_seq(as.matrix(both.filt), batch=btch, group=conds, full_mod=T)
+
+clr.input <- cmultRepl(t(both.combat), method='CZM', label=0)
+
+
+both.clr <- apply(t(clr.input) , 2, function(x) log(x) - mean(log(x)))
+```
+
+```{r Everything biplot - btch correction and new code from Scott}
+library(zCompositions)
+load("~/Documents/GitHub/metatranscriptome/Rdata/both.data.Rda")
+
+filt.both<-codaSeq.filter(both.data, min.occurrence = 0.30,
+                               min.prop = 0.00005, samples.by.row = FALSE)
+tax.table <- read.table("~/Documents/GitHub/metatranscriptome/1_VIRGO/1.taxon.tbl.txt",
+                        header=F, row.names=2)
+tax.colors <- read.table("~/Documents/GitHub/metatranscriptome/code/species_colors.txt",
+                         sep="\t", header=T, row.names=1, stringsAsFactors=F)
+
+conds <- c(rep('h',8), rep('b',14), rep('b',14), rep('h',8))
+btch <- c(rep(1,22), rep(2,22))
+both.combat <- sva::ComBat_seq(as.matrix(filt.both), batch=btch, group=conds, full_mod=T)
+
+both.clr.input<-cmultRepl(t(both.combat), method = "CZM",label = 0)
+
+both.clr<- as.data.frame(apply(t(both.clr.input), 2, function(x) log(x) - mean(log(x))))
+both.pca<-prcomp(t(both.clr))
+
+# make vector of tax IDs corresponding to all V numbers
+both.tax.vec <- tax.table[rownames(filt.both),2]
+
+# assign V numbers to tax IDs
+names(both.tax.vec) <- rownames(filt.both)
+
+# get total number of genes in each species for london data
+both.no.genes<-vector()
+for (i in levels(factor(both.tax.vec))) {
+  both.no.genes[i]<-length(which(both.tax.vec==i))
+}
+
+# get species represented by >100 genes
+both.no.genes.100<-names(which(both.no.genes >100))
+
+# get corresponding taxa cols, plus 'Other' col
+both.tax.cols<- c(tax.colors[both.no.genes.100,],
+                          rgb(0,0,0,0.035))
+
+# create a nested list: lists of each species w/ >100 genes, containing the 
+# indices of the corresponding V numbers in the taxonomy vector (will be used
+# for colouring species!)
+both.species.ind<-list()
+for (spp in 1:length(both.no.genes.100)) {
+  both.species.ind[[both.no.genes.100[spp]]]<-which(both.tax.vec==both.no.genes.100[spp])
+}
+
+# finds the V number indices present in the london bv feature table that are not
+# present in the list of species represented by >100 genes (i.e. all other genes)
+
+both.species.ind[["Other"]]<-setdiff(c(1:nrow(filt.both)),
+                                          unlist(both.species.ind))
+
+
+# plot new version:
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = NULL, plot.density = NULL,
+                load.grp = both.species.ind, load.col = both.tax.cols,
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 5,
+                title = "PCA: London BV")
+
+# if you want to draw ellipses around taxa, AND have the 'Other' loadings shown,
+# can add these manually with points():
+
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = "loadings", plot.density = NULL,
+                load.grp = both.species.ind[1:12], load.col = both.tax.cols[1:12],
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 5,
+                title = "PCA: London BV")
+
+scale.factor.1 <- max(abs(both.pca$x[,1]))/max(abs(both.pca$rotation[,1]))
+scale.factor.2 <- max(abs(both.pca$x[,2]))/max(abs(both.pca$rotation[,2]))
+
+points(both.pca$rotation[,1][both.species.ind[["Other"]]]*scale.factor.1,
+       both.pca$rotation[,2][both.species.ind[["Other"]]]*scale.factor.2,
+       pch= 19, cex= 0.5, col= both.tax.cols[13])
+
+# note: the R plot device will show the legend as being massively stretched! This
+# goes away when you save the image with png() as below:
+
+png("london_bv_newPlotFunction.png", units = "in", height = 6, width = 12, res = 400)
+
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = "loadings", plot.density = NULL,
+                load.grp = both.species.ind[1:12], load.col = both.tax.cols[1:12],
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 4,
+                title = "PCA: London BV")
+
+points(both.pca$rotation[,1][both.species.ind[["Other"]]]*scale.factor.1,
+       both.pca$rotation[,2][both.species.ind[["Other"]]]*scale.factor.2,
+       pch= 19, cex= 0.5, col= both.tax.cols[13])
+
+dev.off()
+
+# new option to add density plots (currently, no way of adding 'Other' points):
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = "loadings", plot.density = "loadings",
+                load.grp = both.species.ind[1:12], load.col = both.tax.cols[1:12],
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 5,
+                title = "PCA: L+E   H+BV")
+
+```
+
+```{r}
+#Run reference table beforehand
+both.data$row_names <- row.names(both.data)
+
+K12340.ref.table <- subset(egg.ko.ec.path.tax.table, egg.ko.ec.path.tax.table$V2 == "K12340")
+
+K12340.data <- subset(both.data, both.data$row_names %in% K12340.ref.table$row_names)
+
+K12340.ref.table.data <- subset(K12340.ref.table, K12340.ref.table$row_names %in% K12340.data$row_names)
+
+```
+
+```{r Everything biplot - filter prop increase}
+library(zCompositions)
+load("~/Documents/GitHub/metatranscriptome/Rdata/both.data.Rda")
+
+filt.both<-codaSeq.filter(both.data, min.occurrence = 0.10,
+                               min.prop = 0.00005, samples.by.row = FALSE)
+tax.table <- read.table("~/Documents/GitHub/metatranscriptome/1_VIRGO/1.taxon.tbl.txt",
+                        header=F, row.names=2)
+tax.colors <- read.table("~/Documents/GitHub/metatranscriptome/code/species_colors.txt",
+                         sep="\t", header=T, row.names=1, stringsAsFactors=F)
+
+conds <- c(rep('h',8), rep('b',14), rep('b',14), rep('h',8))
+btch <- c(rep(1,22), rep(2,22))
+both.combat <- sva::ComBat_seq(as.matrix(filt.both), batch=btch, group=conds, full_mod=T)
+
+both.clr.input<-cmultRepl(t(both.combat), method = "CZM",label = 0)
+
+both.clr<- as.data.frame(apply(t(both.clr.input), 2, function(x) log(x) - mean(log(x))))
+both.pca<-prcomp(t(both.clr))
+
+# make vector of tax IDs corresponding to all V numbers
+both.tax.vec <- tax.table[rownames(filt.both),2]
+
+# assign V numbers to tax IDs
+names(both.tax.vec) <- rownames(filt.both)
+
+# get total number of genes in each species for london data
+both.no.genes<-vector()
+for (i in levels(factor(both.tax.vec))) {
+  both.no.genes[i]<-length(which(both.tax.vec==i))
+}
+
+# get species represented by >100 genes
+both.no.genes.100<-names(which(both.no.genes >100))
+
+# get corresponding taxa cols, plus 'Other' col
+both.tax.cols<- c(tax.colors[both.no.genes.100,],
+                          rgb(0,0,0,0.035))
+
+# create a nested list: lists of each species w/ >100 genes, containing the 
+# indices of the corresponding V numbers in the taxonomy vector (will be used
+# for colouring species!)
+both.species.ind<-list()
+for (spp in 1:length(both.no.genes.100)) {
+  both.species.ind[[both.no.genes.100[spp]]]<-which(both.tax.vec==both.no.genes.100[spp])
+}
+
+# finds the V number indices present in the london bv feature table that are not
+# present in the list of species represented by >100 genes (i.e. all other genes)
+
+both.species.ind[["Other"]]<-setdiff(c(1:nrow(filt.both)),
+                                          unlist(both.species.ind))
+
+
+# plot new version:
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = NULL, plot.density = NULL,
+                load.grp = both.species.ind, load.col = both.tax.cols,
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 5,
+                title = "PCA: London BV")
+
+# if you want to draw ellipses around taxa, AND have the 'Other' loadings shown,
+# can add these manually with points():
+
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = "loadings", plot.density = NULL,
+                load.grp = both.species.ind[1:12], load.col = both.tax.cols[1:12],
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 5,
+                title = "PCA: London BV")
+
+scale.factor.1 <- max(abs(both.pca$x[,1]))/max(abs(both.pca$rotation[,1]))
+scale.factor.2 <- max(abs(both.pca$x[,2]))/max(abs(both.pca$rotation[,2]))
+
+points(both.pca$rotation[,1][both.species.ind[["Other"]]]*scale.factor.1,
+       both.pca$rotation[,2][both.species.ind[["Other"]]]*scale.factor.2,
+       pch= 19, cex= 0.5, col= both.tax.cols[13])
+
+# note: the R plot device will show the legend as being massively stretched! This
+# goes away when you save the image with png() as below:
+
+png("london_bv_newPlotFunction.png", units = "in", height = 6, width = 12, res = 400)
+
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = "loadings", plot.density = NULL,
+                load.grp = both.species.ind[1:12], load.col = both.tax.cols[1:12],
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 4,
+                title = "PCA: London BV")
+
+points(both.pca$rotation[,1][both.species.ind[["Other"]]]*scale.factor.1,
+       both.pca$rotation[,2][both.species.ind[["Other"]]]*scale.factor.2,
+       pch= 19, cex= 0.5, col= both.tax.cols[13])
+
+dev.off()
+
+# new option to add density plots (currently, no way of adding 'Other' points):
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = "loadings", plot.density = "loadings",
+                load.grp = both.species.ind[1:12], load.col = both.tax.cols[1:12],
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 5,
+                title = "PCA: L+E   H+BV")
+
+```
+
+```{r coordinates}
+codaSeq.PCAvalues<-function(pcx){
+  if((attributes(pcx)$class == "prcomp") == FALSE) stop("please use the prcomp() function for the SVD")
+  
+  no.cols<-as.numeric(ncol(pcx$rotation))
+  
+  for(i in 1:no.cols){
+    scale.factor<- max(abs(pcx$x[,i]))/max(abs(pcx$rotation[,i]))
+    assign(paste0("scale.factor.PC", i), scale.factor)
+  }
+  
+  for(j in 1:no.cols){
+    pca.values<-pcx$rotation[,j]*eval(parse(text = paste0("scale.factor.PC",j)))
+    assign(paste0("pca.val.PC",j),pca.values)
+  }
+  
+  all.pca.values<-list()
+  for (k in 1:no.cols) {
+    all.pca.values[[paste0("PC",k)]] <-eval(parse(text = paste0("pca.val.PC",k)))
+  }
+  
+  all.pca.values.df<-do.call(rbind,all.pca.values)
+  return(as.data.frame(t(all.pca.values.df)))
+}
+```
+
+
+```{r}
+
+K07264.both.data <- subset(both.data, subset=row.names(both.data) %in% K07264.table$row_names)
+
+K07264.tax <- subset(tax.table, subset=tax.table$row_names %in% row.names(K07264.both.data))
+
+
+filt.both$row_names <- row.names(filt.both)
+
+K03760.table <- subset(KO, subset=KO$V2 == 'K03760')
+K03760.table$row_names <- row.names(K03760.table)
+K03760.filt.both <- subset(filt.both, subset=filt.both$row_names %in% K03760.table$row_names)
+K03760.coordinates
+
+
+
+K12340.table <- subset(KO, subset=KO$V2 == 'K12340')
+K12340.table$row_names <- row.names(K12340.table)
+K12340.filt.both <- subset(filt.both, subset=filt.both$row_names %in% K12340.table$row_names)
+
+K07264.table <- subset(KO, subset=KO$V2 == 'K07264')
+K07264.table$row_names <- row.names(K07264.table)
+K07264.filt.both <- subset(filt.both, subset=filt.both$row_names %in% K07264.table$row_names)
+
+K07264.tax <- subset(tax.table, subset=tax.table$row_names %in% K07264.table$row_names)
+
+
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = "loadings", plot.density = "loadings",
+                load.grp = both.species.ind[1:12], load.col = both.tax.cols[1:12],
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 5,
+                title = "PCA: L+E   H+BV",
+                points(K03760.coordinates$PC1,K03760.coordinates$PC2,pch= 15, cex=2))
+
+points(K03760.coordinates$PC1,K03760.coordinatess$PC2,pch= 15, cex=2)
+
+
+coordinates <- as.data.frame(codaSeq.PCAvalues(both.pca))
+coordinates$row_names <- row.names(coordinates)
+
+K03760.coordinates <- subset(coordinates, subset=coordinates$row_names %in% K03760.table$row_names)
+K07264.coordinates <- subset(coordinates, subset=coordinates$row_names %in% K07264.table$row_names)
+K12340.coordinates <- subset(coordinates, subset=coordinates$row_names %in% K12340.table$row_names)
+
+
+```
+
+
+```{r Everything biplot - btch correction and new code from Scott - playing with filter}
+tax.table <- read.table("~/Documents/GitHub/metatranscriptome/1_VIRGO/1.taxon.tbl.txt",
+                        header=F, row.names=2)
+tax.colors <- read.table("~/Documents/GitHub/metatranscriptome/code/species_colors.txt",
+                         sep="\t", header=T, row.names=1, stringsAsFactors=F)
+
+both.filt <-codaSeq.filter(both.data, min.occurrence = 0.30, min.prop = 0.00005, samples.by.row = FALSE)
+
+conds <- c(rep('h',8), rep('b',14), rep('b',14), rep('h',8))
+btch <- c(rep(1,22), rep(2,22))
+both.combat <- sva::ComBat_seq(as.matrix(both.filt), batch=btch, group=conds, full_mod=T)
+
+
+both.clr <- apply(both.combat+0.5, 2, function(x) log(x) - mean(log(x)))
+
+both.pca<-prcomp(t(both.clr))
+
+# make vector of tax IDs corresponding to all V numbers
+both.tax.vec <- tax.table[rownames(both.filt),2]
+
+# assign V numbers to tax IDs
+names(both.tax.vec) <- rownames(both.filt)
+
+# get total number of genes in each species for london data
+both.no.genes<-vector()
+for (i in levels(factor(both.tax.vec))) {
+  both.no.genes[i]<-length(which(both.tax.vec==i))
+}
+
+# get species represented by >100 genes
+both.no.genes.100<-names(which(both.no.genes >100))
+
+# get corresponding taxa cols, plus 'Other' col
+both.tax.cols<- c(tax.colors[both.no.genes.100,],
+                          rgb(0,0,0,0.035))
+
+# create a nested list: lists of each species w/ >100 genes, containing the 
+# indices of the corresponding V numbers in the taxonomy vector (will be used
+# for colouring species!)
+both.species.ind<-list()
+for (spp in 1:length(both.no.genes.100)) {
+  both.species.ind[[both.no.genes.100[spp]]]<-which(both.tax.vec==both.no.genes.100[spp])
+}
+
+# finds the V number indices present in the london bv feature table that are not
+# present in the list of species represented by >100 genes (i.e. all other genes)
+
+both.species.ind[["Other"]]<-setdiff(c(1:nrow(both.data)),
+                                          unlist(both.species.ind))
+
+
+# plot new version:
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = NULL, plot.density = NULL,
+                load.grp = both.species.ind, load.col = both.tax.cols,
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 5,
+                title = "PCA: London BV")
+
+# if you want to draw ellipses around taxa, AND have the 'Other' loadings shown,
+# can add these manually with points():
+
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = "loadings", plot.density = NULL,
+                load.grp = both.species.ind[1:12], load.col = both.tax.cols[1:12],
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 5,
+                title = "PCA: London BV")
+
+scale.factor.1 <- max(abs(both.pca$x[,1]))/max(abs(both.pca$rotation[,1]))
+scale.factor.2 <- max(abs(both.pca$x[,2]))/max(abs(both.pca$rotation[,2]))
+
+points(both.pca$rotation[,1][both.species.ind[["Other"]]]*scale.factor.1,
+       both.pca$rotation[,2][both.species.ind[["Other"]]]*scale.factor.2,
+       pch= 19, cex= 0.5, col= both.tax.cols[13])
+
+# note: the R plot device will show the legend as being massively stretched! This
+# goes away when you save the image with png() as below:
+
+png("london_bv_newPlotFunction.png", units = "in", height = 6, width = 12, res = 400)
+
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = "loadings", plot.density = NULL,
+                load.grp = both.species.ind[1:12], load.col = both.tax.cols[1:12],
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 4,
+                title = "PCA: London BV")
+
+points(both.pca$rotation[,1][both.species.ind[["Other"]]]*scale.factor.1,
+       both.pca$rotation[,2][both.species.ind[["Other"]]]*scale.factor.2,
+       pch= 19, cex= 0.5, col= both.tax.cols[13])
+
+dev.off()
+
+# new option to add density plots (currently, no way of adding 'Other' points):
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = "loadings", plot.density = "loadings",
+                load.grp = both.species.ind[1:12], load.col = both.tax.cols[1:12],
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 5,
+                title = "PCA: L+E   H+BV",
+                points(K12340.coordinates$PC1,K12340.coordinates$PC2,pch= 15, cex=2))
+
+points(K12340.coordinates$PC1,K12340.coordinates$PC2,pch= 15, cex=2)
+
+
+coordinates <- as.data.frame(codaSeq.PCAvalues(both.pca))
+coordinates$row_names <- row.names(coordinates)
+
+```
+
+```{r Playing around with points}
+# new option to add density plots (currently, no way of adding 'Other' points):
+
+png(filename="~/Documents/GitHub/metatranscriptome/K12340.coordinates.png", units = "in", height = 6, width = 12, res = 400)
+
+codaSeq.PCAplot(both.pca, plot.groups = FALSE, plot.loadings = TRUE,
+                plot.ellipses = "loadings", plot.density = "loadings",
+                load.grp = both.species.ind[1:12], load.col = both.tax.cols[1:12],
+                load.sym = 19, load.cex = 0.5, PC = c(1,2), plot.legend = "loadings",
+                leg.position = "bottomleft",leg.cex = 0.55,leg.columns = 5,
+                title = "PCA: L+E   H+BV",
+                points(K12340.coordinates$PC1,K12340.coordinates$PC2,pch= 15, cex=2))
+
+dev.off()
+
+
+
+coordinates <- as.data.frame(codaSeq.PCAvalues(both.pca))
+coordinates$row_names <- row.names(coordinates)
+
+
+
+#subset KO.table to match with K0
+K03760.table <- subset(KO, subset=KO$V2 == 'K03760')
+# Subset coordinates that match with those Vnumbers
+K03760.coordinates <- subset(coordinates, subset=coordinates$row_names %in% K03760.table$row_names)
+
+K12340.table <- subset(KO, subset=KO$V2 == 'K12340')
+K12340.coordinates <- subset(coordinates, subset=coordinates$row_names %in% K12340.table$row_names)
+
+K07264.table <- subset(KO, subset=KO$V2 == 'K07264')
+K07264.coordinates <- subset(coordinates, subset=coordinates$row_names %in% K07264.table$row_names)
+
+#K03760 0 observations
+#K12340 1 observations
+#K07264 0 observations
+
+both.clr$row_names <- row.names(both.clr)
+filt.both$row_names <- row.names(filt.both)
+both.data$row_names <- row.names(both.data)
+
+K03760.both.clr <- subset(both.clr, subset=both.clr$row_names %in% K03760.table$row_names)
+K03760.filt.both <- subset(filt.both, subset=filt.both$row_names %in% K03760.table$row_names)
+K03760.both.data <- subset(both.data, subset=both.data$row_names %in% K03760.table$row_names)
+# 26 observations show up in both.data
+
+K12340.both.clr <- subset(both.clr, subset=both.clr$row_names %in% K12340.table$row_names)
+K12340.filt.both <- subset(filt.both, subset=filt.both$row_names %in% K12340.table$row_names)
+K12340.both.data <- subset(both.data, subset=both.data$row_names %in% K12340.table$row_names)
+# 16 observations show up in both.data
+
+
+K07264.both.clr <- subset(both.clr, subset=both.clr$row_names %in% K07264.table$row_names)
+K07264.filt.both <- subset(filt.both, subset=filt.both$row_names %in% K07264.table$row_names)
+K07264.both.data <- subset(both.data, subset=both.data$row_names %in% K07264.table$row_names)
+# 8 observations show up in both.data
+
+# Most of the vnumbers are being filtered out at the filt stage
+#filt.both<-codaSeq.filter(both.data, min.occurrence = 0.30, min.prop = 0.00005, samples.by.row = FALSE)
+
+
+# Try matching unkown Vnumbers with tax
+tax.table$row_names <- row.names(tax.table)
+
+K03760.tax.table <- subset(tax.table, subset=tax.table$row_names %in% K03760.table$row_names)
+K12340.tax.table <- subset(tax.table, subset=tax.table$row_names %in% K12340.table$row_names)
+K07264.tax.table <- subset(tax.table, subset=tax.table$row_names %in% K07264.table$row_names)
+
+
+K03760.KO.table <- subset(KO.table, subset=KO.table$row_names %in% K03760.table$row_names)
+K12340.KO.table <- subset(KO.table, subset=KO.table$row_names %in% K12340.table$row_names)
+K07264.KO.table <- subset(KO.table, subset=KO.table$row_names %in% K07264.table$row_names)
+
+K03760.egg.subset <- subset(egg.subset, subset=egg.subset$row_names %in% K03760.table$row_names)
+K12340.egg.subset <- subset(egg.subset, subset=egg.subset$row_names %in% K12340.table$row_names)
+K07264.egg.subset <- subset(egg.subset, subset=egg.subset$row_names %in% K07264.table$row_names)
+
+```
+
+#Biplots
+```{r Pathways Biplot London BV - top x or threshold x}
+path.bv.v0.data <- data.frame(both.data[,grep('v.0', colnames(both.data))])
+path.bv.v0.filt <-  codaSeq.filter(path.bv.v0.data, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+path.bv.v0.clr.input <- cmultRepl(t(path.bv.v0.filt), method='CZM', label=0)
+path.bv.v0.clr <- apply(t(path.bv.v0.clr.input), 2, function(x) log(x) - mean(log(x)))
+path.bv.v0.clr.pcx <- prcomp(t(path.bv.v0.clr))
+
+path.table <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""), sep="\t",
+    header=T, row.names=1, fill=TRUE)
+
+pathway.colors <- read.table(paste("/Users/claracopeland/Documents/GitHub/metatranscriptome/code/pathway_colors_table3.txt"), sep="\t",
+    header=F, row.names = 2 ,stringsAsFactors=F)
+
+# assign a pathway to all rows
+path.vec.bv.v0 <- as.vector(path.table[rownames(path.bv.v0.filt),2])
+names(path.vec.bv.v0) <- rownames(path.bv.v0.filt)
+
+# lets get the total number of genes in each pathway
+path.n.genes.bv.v0 <- vector()
+for(i in levels(factor(path.vec.bv.v0))){
+path.n.genes.bv.v0[i] <- length(which(path.vec.bv.v0 == i))
+}
+
+# order has two options: get the top x pathways to show, or the pathways above x threshold
+# colours: if you want "other" to disappear, change the last value to 0.0
+#path.order.bv.v0 <- names(tail(sort(path.n.genes.bv.v0),2))
+path.order.bv.v0 <- names(which(path.n.genes.bv.v0 > 900))
+path.colours.bv.v0 <- c(pathway.colors[path.order.bv.v0,], rgb(0,0,0,0.0))
+
+path.loadings.group.bv.v0 <- list()
+for(i in 1:length(path.order.bv.v0)){
+    path.loadings.group.bv.v0[[path.order.bv.v0[i]]] <- which(path.vec.bv.v0 == path.order.bv.v0[i])
+}
+
+path.loadings.group.bv.v0[["other"]] <- setdiff(c(1:nrow(path.bv.v0.clr)),unlist(path.loadings.group.bv.v0))
+path.symbol.v0 <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+# PCA biplot
+path.bv.v0.pcx <- prcomp(t(path.bv.v0.clr))
+#biplot(bv.v0.pcx, cex=c(0.7,0.1), var.axes=F, col=c('black', rgb(1,0,0,0.1)))
+
+#By pathway
+codaSeq.PCAplot(path.bv.v0.pcx, plot.groups=F, plot.circles=F,
+    plot.loadings=TRUE, loadings.grp=path.loadings.group.bv.v0,
+    loadings.col=path.colours.bv.v0, loadings.sym=19, main="London BV Ribosome only", PC=c(1,2))
+
+legend("topright", legend=names(path.loadings.group.bv.v0),
+    col=path.colours.bv.v0, pch=19, cex=0.3)
+```
+```{r Pathways Biplot Europe BV - top x or threshold x}
+path.bv.va.data <- data.frame(both.data[,grep('v.a', colnames(both.data))])
+path.bv.va.filt <-  codaSeq.filter(path.bv.va.data, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+path.bv.va.clr.input <- cmultRepl(t(path.bv.va.filt), method='CZM', label=0)
+path.bv.va.clr <- apply(t(path.bv.va.clr.input), 2, function(x) log(x) - mean(log(x)))
+path.bv.va.clr.pcx <- prcomp(t(path.bv.va.clr))
+
+path.table <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""), sep="\t",
+    header=T, row.names=1, fill=TRUE)
+
+pathway.colors <- read.table(paste("/Users/claracopeland/Documents/GitHub/metatranscriptome/code/pathway_colors_table3.txt"), sep="\t",
+    header=F, row.names = 2 ,stringsAsFactors=F)
+
+# assign a pathway to all rows
+path.vec.bv.va <- as.vector(path.table[rownames(path.bv.va.filt),2])
+names(path.vec.bv.va) <- rownames(path.bv.va.filt)
+
+# lets get the total number of genes in each pathway
+path.n.genes.bv.va <- vector()
+for(i in levels(factor(path.vec.bv.va))){
+path.n.genes.bv.va[i] <- length(which(path.vec.bv.va == i))
+}
+
+# order has two options: get the top x pathways to show, or the pathways above x threshold
+# colours: if you want "other" to disappear, change the last value to 0.0
+#path.order.bv.va <- names(tail(sort(path.n.genes.bv.va),2))
+path.order.bv.va <- names(which(path.n.genes.bv.va > 500))
+path.colours.bv.va <- c(pathway.colors[path.order.bv.va,], rgb(0,0,0,0.0))
+
+path.loadings.group.bv.va <- list()
+for(i in 1:length(path.order.bv.va)){
+    path.loadings.group.bv.va[[path.order.bv.va[i]]] <- which(path.vec.bv.va == path.order.bv.va[i])
+}
+
+path.loadings.group.bv.va[["other"]] <- setdiff(c(1:nrow(path.bv.va.clr)),unlist(path.loadings.group.bv.va))
+path.symbol.va <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+# PCA biplot
+path.bv.va.pcx <- prcomp(t(path.bv.va.clr))
+#biplot(bv.va.pcx, cex=c(0.7,0.1), var.axes=F, col=c('black', rgb(1,0,0,0.1)))
+
+#By pathway
+codaSeq.PCAplot(path.bv.va.pcx, plot.groups=F, plot.circles=F,
+    plot.loadings=TRUE, loadings.grp=path.loadings.group.bv.va,
+    loadings.col=path.colours.bv.va, loadings.sym=19, main="Europe BV Ribosome only", PC=c(1,2))
+
+legend("topright", legend=names(path.loadings.group.bv.va),
+    col=path.colours.bv.va, pch=19, cex=0.3)
+```
+```{r Pathways Biplot London Healthy - top x or threshold x}
+path.h.h0.data <- data.frame(both.data[,grep('h.0', colnames(both.data))])
+path.h.h0.filt <-  codaSeq.filter(path.h.h0.data, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+path.h.h0.clr.input <- cmultRepl(t(path.h.h0.filt), method='CZM', label=0)
+path.h.h0.clr <- apply(t(path.h.h0.clr.input), 2, function(x) log(x) - mean(log(x)))
+path.h.h0.clr.pcx <- prcomp(t(path.h.h0.clr))
+
+path.table <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""), sep="\t",
+    header=T, row.names=1, fill=TRUE)
+
+pathway.colors <- read.table(paste("/Users/claracopeland/Documents/GitHub/metatranscriptome/code/pathway_colors_table3.txt"), sep="\t",
+    header=F, row.names = 2 ,stringsAsFactors=F)
+
+# assign a pathway to all rows
+path.vec.h.h0 <- as.vector(path.table[rownames(path.h.h0.filt),2])
+names(path.vec.h.h0) <- rownames(path.h.h0.filt)
+
+# lets get the total number of genes in each pathway
+path.n.genes.h.h0 <- vector()
+for(i in levels(factor(path.vec.h.h0))){
+path.n.genes.h.h0[i] <- length(which(path.vec.h.h0 == i))
+}
+
+# order has two options: get the top x pathways to show, or the pathways above x threshold
+# colours: if you want "other" to disappear, change the last value to 0.0
+#path.order.h.h0 <- names(tail(sort(path.n.genes.h.h0),2))
+path.order.h.h0 <- names(which(path.n.genes.h.h0 > 170))
+path.colours.h.h0 <- c(pathway.colors[path.order.h.h0,], rgb(0,0,0,0.0))
+
+path.loadings.group.h.h0 <- list()
+for(i in 1:length(path.order.h.h0)){
+    path.loadings.group.h.h0[[path.order.h.h0[i]]] <- which(path.vec.h.h0 == path.order.h.h0[i])
+}
+
+path.loadings.group.h.h0[["other"]] <- setdiff(c(1:nrow(path.h.h0.clr)),unlist(path.loadings.group.h.h0))
+path.symbol.v0 <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+# PCA biplot
+path.h.h0.pcx <- prcomp(t(path.h.h0.clr))
+#biplot(h.h0.pcx, cex=c(0.7,0.1), var.axes=F, col=c('black', rgb(1,0,0,0.1)))
+
+#By pathway
+codaSeq.PCAplot(path.h.h0.pcx, plot.groups=F, plot.circles=F,
+    plot.loadings=TRUE, loadings.grp=path.loadings.group.h.h0,
+    loadings.col=path.colours.h.h0, loadings.sym=19, main="London Healthy Ribosome only", PC=c(1,2))
+
+legend("topright", legend=names(path.loadings.group.h.h0),
+    col=path.colours.h.h0, pch=19, cex=0.3)
+```
+```{r Pathways Biplot Europe Healthy - top x or threshold x}
+path.h.hb.data <- data.frame(both.data[,grep('h.b', colnames(both.data))])
+path.h.hb.filt <-  codaSeq.filter(path.h.hb.data, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+path.h.hb.clr.input <- cmultRepl(t(path.h.hb.filt), method='CZM', label=0)
+path.h.hb.clr <- apply(t(path.h.hb.clr.input), 2, function(x) log(x) - mean(log(x)))
+path.h.hb.clr.pcx <- prcomp(t(path.h.hb.clr))
+
+path.table <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""), sep="\t",
+    header=T, row.names=1, fill=TRUE)
+
+pathway.colors <- read.table(paste("/Users/claracopeland/Documents/GitHub/metatranscriptome/code/pathway_colors_table3.txt"), sep="\t",
+    header=F, row.names = 2 ,stringsAsFactors=F)
+
+# assign a pathway to all rows
+path.vec.h.hb <- as.vector(path.table[rownames(path.h.hb.filt),2])
+names(path.vec.h.hb) <- rownames(path.h.hb.filt)
+
+# lets get the total number of genes in each pathway
+path.n.genes.h.hb <- vector()
+for(i in levels(factor(path.vec.h.hb))){
+path.n.genes.h.hb[i] <- length(which(path.vec.h.hb == i))
+}
+
+# order has two options: get the top x pathways to show, or the pathways above x threshold
+# colours: if you want "other" to disappear, change the last value to 0.0
+#path.order.h.hb <- names(tail(sort(path.n.genes.h.hb),2))
+path.order.h.hb <- names(which(path.n.genes.h.hb > 110))
+path.colours.h.hb <- c(pathway.colors[path.order.h.hb,], rgb(0,0,0,0.0))
+
+path.loadings.group.h.hb <- list()
+for(i in 1:length(path.order.h.hb)){
+    path.loadings.group.h.hb[[path.order.h.hb[i]]] <- which(path.vec.h.hb == path.order.h.hb[i])
+}
+
+path.loadings.group.h.hb[["other"]] <- setdiff(c(1:nrow(path.h.hb.clr)),unlist(path.loadings.group.h.hb))
+path.symbol.v0 <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+# PCA biplot
+path.h.hb.pcx <- prcomp(t(path.h.hb.clr))
+#biplot(h.hb.pcx, cex=c(0.7,0.1), var.axes=F, col=c('black', rgb(1,0,0,0.1)))
+
+#By pathway
+codaSeq.PCAplot(path.h.hb.pcx, plot.groups=F, plot.circles=F,
+    plot.loadings=TRUE, loadings.grp=path.loadings.group.h.hb,
+    loadings.col=path.colours.h.hb, loadings.sym=19, main="Europe Healthy Ribosome only", PC=c(1,2))
+
+legend("topright", legend=names(path.loadings.group.h.hb),
+    col=path.colours.h.hb, pch=19, cex=0.3)
+```
+
+```{r Species Biplot London BV - Ref}
+bv.v0.data <- data.frame(both.data[,grep('v.0', colnames(both.data))])
+bv.v0.filt <-  codaSeq.filter(bv.v0.data, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+bv.v0.clr.input <- cmultRepl(t(bv.v0.filt), method='CZM', label=0)
+bv.v0.clr <- apply(t(bv.v0.clr.input), 2, function(x) log(x) - mean(log(x)))
+bv.v0.clr.pcx <- prcomp(t(bv.v0.clr))
+
+# assign a taxonomy to all rows
+tax.vec.bv.v0 <- as.vector(tax.table[rownames(bv.v0.filt),2])
+names(tax.vec.bv.v0) <- rownames(bv.v0.filt)
+
+# lets get the total number of genes in each species
+n.genes.bv.v0 <- vector()
+for(i in levels(factor(tax.vec.bv.v0))){
+n.genes.bv.v0[i] <- length(which(tax.vec.bv.v0 == i))
+}
+
+tax.order.bv.v0 <- names(which(n.genes.bv.v0 > 100))
+tax.colours.bv.v0 <- c(tax.colors[tax.order.bv.v0,], rgb(0,0,0,0.0))
+
+loadings.group.bv.v0 <- list()
+for(i in 1:length(tax.order.bv.v0)){
+    loadings.group.bv.v0[[tax.order.bv.v0[i]]] <- which(tax.vec.bv.v0 == tax.order.bv.v0[i])
+}
+loadings.group.bv.v0[["other"]] <- setdiff(c(1:nrow(bv.v0.clr)),unlist(loadings.group.bv.v0))
+tax.symbol.v0 <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+# PCA biplot
+bv.v0.pcx <- prcomp(t(bv.v0.clr))
+biplot(bv.v0.pcx, cex=c(0.7,0.1), var.axes=F, col=c('black', rgb(1,0,0,0.1)))
+
+#By species
+codaSeq.PCAplot(bv.v0.pcx, plot.groups=F, plot.circles=F,
+    plot.loadings=TRUE, loadings.grp=loadings.group.bv.v0,
+    loadings.col=tax.colours.bv.v0, loadings.sym=19, main="London BV Species", PC=c(1,2))
+
+legend(-400,270, legend=names(loadings.group.bv.v0),
+    col=tax.colours.bv.v0, pch=19, cex=0.3)
+```
+```{r Species Biplot Europe BV - Ref}
+bv.va.data <- data.frame(both.data[,grep('v.0', colnames(both.data))])
+bv.va.filt <-  codaSeq.filter(bv.va.data, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+bv.va.clr.input <- cmultRepl(t(bv.va.filt), method='CZM', label=0)
+bv.va.clr <- apply(t(bv.va.clr.input), 2, function(x) log(x) - mean(log(x)))
+bv.va.clr.pcx <- prcomp(t(bv.va.clr))
+
+# assign a taxonomy to all rows
+tax.vec.bv.va <- as.vector(tax.table[rownames(bv.va.filt),2])
+names(tax.vec.bv.va) <- rownames(bv.va.filt)
+
+# lets get the total number of genes in each species
+n.genes.bv.va <- vector()
+for(i in levels(factor(tax.vec.bv.va))){
+n.genes.bv.va[i] <- length(which(tax.vec.bv.va == i))
+}
+
+tax.order.bv.va <- names(which(n.genes.bv.va > 100))
+tax.colours.bv.va <- c(tax.colors[tax.order.bv.va,], rgb(0,0,0,0.0))
+
+loadings.group.bv.va <- list()
+for(i in 1:length(tax.order.bv.va)){
+    loadings.group.bv.va[[tax.order.bv.va[i]]] <- which(tax.vec.bv.va == tax.order.bv.va[i])
+}
+loadings.group.bv.va[["other"]] <- setdiff(c(1:nrow(bv.va.clr)),unlist(loadings.group.bv.va))
+tax.symbol.v0 <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+# PCA biplot
+bv.va.pcx <- prcomp(t(bv.va.clr))
+biplot(bv.va.pcx, cex=c(0.7,0.1), var.axes=F, col=c('black', rgb(1,0,0,0.1)))
+
+#By species
+codaSeq.PCAplot(bv.va.pcx, plot.groups=F, plot.circles=F,
+    plot.loadings=TRUE, loadings.grp=loadings.group.bv.va,
+    loadings.col=tax.colours.bv.va, loadings.sym=19, main="Europe BV Species", PC=c(1,2))
+
+legend(-400,270, legend=names(loadings.group.bv.va),
+    col=tax.colours.bv.va, pch=19, cex=0.3)
+```
+```{r Species Biplot London Healthy}
+h.h0.data <- data.frame(both.data[,grep('h.0', colnames(both.data))])
+h.h0.filt <-  codaSeq.filter(h.h0.data, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+h.h0.clr.input <- cmultRepl(t(h.h0.filt), method='CZM', label=0)
+h.h0.clr <- apply(t(h.h0.clr.input), 2, function(x) log(x) - mean(log(x)))
+h.h0.clr.pcx <- prcomp(t(h.h0.clr))
+
+# assign a taxonomy to all rows
+tax.vec.h.h0 <- as.vector(tax.table[rownames(h.h0.filt),2])
+names(tax.vec.h.h0) <- rownames(h.h0.filt)
+
+# lets get the total number of genes in each species
+n.genes.h.h0 <- vector()
+for(i in levels(factor(tax.vec.h.h0))){
+n.genes.h.h0[i] <- length(which(tax.vec.h.h0 == i))
+}
+
+tax.order.h.h0 <- names(which(n.genes.h.h0 > 100))
+tax.colours.h.h0 <- c(tax.colors[tax.order.h.h0,], rgb(0,0,0,0.0))
+
+loadings.group.h.h0 <- list()
+for(i in 1:length(tax.order.h.h0)){
+    loadings.group.h.h0[[tax.order.h.h0[i]]] <- which(tax.vec.h.h0 == tax.order.h.h0[i])
+}
+loadings.group.h.h0[["other"]] <- setdiff(c(1:nrow(h.h0.clr)),unlist(loadings.group.h.h0))
+tax.symbol.v0 <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+# PCA biplot
+h.h0.pcx <- prcomp(t(h.h0.clr))
+biplot(h.h0.pcx, cex=c(0.7,0.1), var.axes=F, col=c('black', rgb(1,0,0,0.1)))
+
+#By species
+codaSeq.PCAplot(h.h0.pcx, plot.groups=F, plot.circles=F,
+    plot.loadings=TRUE, loadings.grp=loadings.group.h.h0,
+    loadings.col=tax.colours.h.h0, loadings.sym=19, main="London Healthy Species", PC=c(1,2))
+
+legend(-400,270, legend=names(loadings.group.h.h0),
+    col=tax.colours.h.h0, pch=19, cex=0.3)
+```
+```{r Species Biplot Europe Healthy}
+h.hb.data <- data.frame(both.data[,grep('h.0', colnames(both.data))])
+h.hb.filt <-  codaSeq.filter(h.hb.data, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+h.hb.clr.input <- cmultRepl(t(h.hb.filt), method='CZM', label=0)
+h.hb.clr <- apply(t(h.hb.clr.input), 2, function(x) log(x) - mean(log(x)))
+h.hb.clr.pcx <- prcomp(t(h.hb.clr))
+
+# assign a taxonomy to all rows
+tax.vec.h.hb <- as.vector(tax.table[rownames(h.hb.filt),2])
+names(tax.vec.h.hb) <- rownames(h.hb.filt)
+
+# lets get the total number of genes in each species
+n.genes.h.hb <- vector()
+for(i in levels(factor(tax.vec.h.hb))){
+n.genes.h.hb[i] <- length(which(tax.vec.h.hb == i))
+}
+
+tax.order.h.hb <- names(which(n.genes.h.hb > 100))
+tax.colours.h.hb <- c(tax.colors[tax.order.h.hb,], rgb(0,0,0,0.0))
+
+loadings.group.h.hb <- list()
+for(i in 1:length(tax.order.h.hb)){
+    loadings.group.h.hb[[tax.order.h.hb[i]]] <- which(tax.vec.h.hb == tax.order.h.hb[i])
+}
+loadings.group.h.hb[["other"]] <- setdiff(c(1:nrow(h.hb.clr)),unlist(loadings.group.h.hb))
+tax.symbol.v0 <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+# PCA biplot
+h.hb.pcx <- prcomp(t(h.hb.clr))
+biplot(h.hb.pcx, cex=c(0.7,0.1), var.axes=F, col=c('black', rgb(1,0,0,0.1)))
+
+#By species
+codaSeq.PCAplot(h.hb.pcx, plot.groups=F, plot.circles=F,
+    plot.loadings=TRUE, loadings.grp=loadings.group.h.hb,
+    loadings.col=tax.colours.h.hb, loadings.sym=19, main="Europe Healthy Species", PC=c(1,2))
+
+legend(-400,270, legend=names(loadings.group.h.hb),
+    col=tax.colours.h.hb, pch=19, cex=0.3)
+```
+
+```{r Overlay Ribosome over Species London BV}
+bv.v0.data <- data.frame(both.data[,grep('v.0', colnames(both.data))])
+bv.v0.filt <-  codaSeq.filter(bv.v0.data, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+bv.v0.clr.input <- cmultRepl(t(bv.v0.filt), method='CZM', label=0)
+bv.v0.clr <- apply(t(bv.v0.clr.input), 2, function(x) log(x) - mean(log(x)))
+bv.v0.clr.pcx <- prcomp(t(bv.v0.clr))
+
+# assign a taxonomy to all rows
+tax.vec.bv.v0 <- as.vector(tax.table[rownames(bv.v0.filt),2])
+names(tax.vec.bv.v0) <- rownames(bv.v0.filt)
+
+# lets get the total number of genes in each species
+n.genes.bv.v0 <- vector()
+for(i in levels(factor(tax.vec.bv.v0))){
+n.genes.bv.v0[i] <- length(which(tax.vec.bv.v0 == i))
+}
+
+tax.order.bv.v0 <- names(which(n.genes.bv.v0 > 100))
+tax.colours.bv.v0 <- c(tax.colors[tax.order.bv.v0,], rgb(0,0,0,0.0))
+
+loadings.group.bv.v0 <- list()
+for(i in 1:length(tax.order.bv.v0)){
+    loadings.group.bv.v0[[tax.order.bv.v0[i]]] <- which(tax.vec.bv.v0 == tax.order.bv.v0[i])
+}
+loadings.group.bv.v0[["other"]] <- setdiff(c(1:nrow(bv.v0.clr)),unlist(loadings.group.bv.v0))
+tax.symbol.v0 <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+# PATHWAY SECTION BELOW
+path.table <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""), sep="\t",
+    header=T, row.names=1, fill=TRUE)
+
+pathway.colors <- read.table(paste("/Users/claracopeland/Documents/GitHub/metatranscriptome/code/pathway_colors_table3.txt"), sep="\t",
+    header=F, row.names = 2 ,stringsAsFactors=F)
+
+# assign a pathway to all rows
+path.vec.bv.v0 <- as.vector(path.table[rownames(bv.v0.filt),2])
+names(path.vec.bv.v0) <- rownames(bv.v0.filt)
+
+# lets get the total number of genes in each pathway
+path.n.genes.bv.v0 <- vector()
+for(i in levels(factor(path.vec.bv.v0))){
+path.n.genes.bv.v0[i] <- length(which(path.vec.bv.v0 == i))
+}
+
+# order has two options: get the top x pathways to show, or the pathways above x threshold
+# colours: if you want "other" to disappear, change the last value to 0.0
+#path.order.bv.v0 <- names(tail(sort(path.n.genes.bv.v0),2))
+path.order.bv.v0 <- names(which(path.n.genes.bv.v0 > 900))
+path.colours.bv.v0 <- c(pathway.colors[path.order.bv.v0,], rgb(0,0,0,0.0))
+
+path.loadings.group.bv.v0 <- list()
+for(i in 1:length(path.order.bv.v0)){
+    path.loadings.group.bv.v0[[path.order.bv.v0[i]]] <- which(path.vec.bv.v0 == path.order.bv.v0[i])
+}
+
+path.loadings.group.bv.v0[["other"]] <- setdiff(c(1:nrow(bv.v0.clr)),unlist(path.loadings.group.bv.v0))
+path.symbol.v0 <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+#
+loadings.group.bv.v0[["Ribosome"]] <- path.loadings.group.bv.v0[["Ribosome"]]
+x.tax.colours.bv.v0 <- append(tax.colours.bv.v0, 'black')
+
+# PCA biplot
+bv.v0.pcx <- prcomp(t(bv.v0.clr))
+#biplot(bv.v0.pcx, cex=c(0.7,0.1), var.axes=F, col=c('black', rgb(1,0,0,0.1)))
+
+#By species
+codaSeq.PCAplot(bv.v0.pcx, plot.groups=F, plot.circles=F,
+    plot.loadings=TRUE, loadings.grp=loadings.group.bv.v0,
+    loadings.col=x.tax.colours.bv.v0, loadings.sym=19, main="Overlay Ribosome over Species London BV", PC=c(1,2))
+
+legend(-400,270, legend=names(loadings.group.bv.v0),
+    col=x.tax.colours.bv.v0, pch=19, cex=0.3)
+```
+```{r Overlay Ribosome over Species Europe BV}
+bv.va.data <- data.frame(both.data[,grep('v.a', colnames(both.data))])
+bv.va.filt <-  codaSeq.filter(bv.va.data, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+bv.va.clr.input <- cmultRepl(t(bv.va.filt), method='CZM', label=0)
+bv.va.clr <- apply(t(bv.va.clr.input), 2, function(x) log(x) - mean(log(x)))
+bv.va.clr.pcx <- prcomp(t(bv.va.clr))
+
+# assign a taxonomy to all rows
+tax.vec.bv.va <- as.vector(tax.table[rownames(bv.va.filt),2])
+names(tax.vec.bv.va) <- rownames(bv.va.filt)
+
+# lets get the total number of genes in each species
+n.genes.bv.va <- vector()
+for(i in levels(factor(tax.vec.bv.va))){
+n.genes.bv.va[i] <- length(which(tax.vec.bv.va == i))
+}
+
+tax.order.bv.va <- names(which(n.genes.bv.va > 100))
+tax.colours.bv.va <- c(tax.colors[tax.order.bv.va,], rgb(0,0,0,0.0))
+
+loadings.group.bv.va <- list()
+for(i in 1:length(tax.order.bv.va)){
+    loadings.group.bv.va[[tax.order.bv.va[i]]] <- which(tax.vec.bv.va == tax.order.bv.va[i])
+}
+loadings.group.bv.va[["other"]] <- setdiff(c(1:nrow(bv.va.clr)),unlist(loadings.group.bv.va))
+tax.symbol.va <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+# PATHWAY SECTION BELOW
+path.table <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""), sep="\t",
+    header=T, row.names=1, fill=TRUE)
+
+pathway.colors <- read.table(paste("/Users/claracopeland/Documents/GitHub/metatranscriptome/code/pathway_colors_table3.txt"), sep="\t",
+    header=F, row.names = 2 ,stringsAsFactors=F)
+
+# assign a pathway to all rows
+path.vec.bv.va <- as.vector(path.table[rownames(bv.va.filt),2])
+names(path.vec.bv.va) <- rownames(bv.va.filt)
+
+# lets get the total number of genes in each pathway
+path.n.genes.bv.va <- vector()
+for(i in levels(factor(path.vec.bv.va))){
+path.n.genes.bv.va[i] <- length(which(path.vec.bv.va == i))
+}
+
+# order has two options: get the top x pathways to show, or the pathways above x threshold
+# colours: if you want "other" to disappear, change the last value to 0.0
+#path.order.bv.va <- names(tail(sort(path.n.genes.bv.va),2))
+path.order.bv.va <- names(which(path.n.genes.bv.va > 900))
+path.colours.bv.va <- c(pathway.colors[path.order.bv.va,], rgb(0,0,0,0.0))
+
+path.loadings.group.bv.va <- list()
+for(i in 1:length(path.order.bv.va)){
+    path.loadings.group.bv.va[[path.order.bv.va[i]]] <- which(path.vec.bv.va == path.order.bv.va[i])
+}
+
+path.loadings.group.bv.va[["other"]] <- setdiff(c(1:nrow(bv.va.clr)),unlist(path.loadings.group.bv.va))
+path.symbol.va <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+#
+loadings.group.bv.va[["Ribosome"]] <- path.loadings.group.bv.va[["Ribosome"]]
+x.tax.colours.bv.va <- append(tax.colours.bv.va, 'black')
+
+# PCA biplot
+bv.va.pcx <- prcomp(t(bv.va.clr))
+#biplot(bv.va.pcx, cex=c(0.7,0.1), var.axes=F, col=c('black', rgb(1,0,0,0.1)))
+
+#By species
+codaSeq.PCAplot(bv.va.pcx, plot.groups=F, plot.circles=F,
+    plot.loadings=TRUE, loadings.grp=loadings.group.bv.va,
+    loadings.col=x.tax.colours.bv.va, loadings.sym=19, main="Overlay Ribosome over Species Europe BV", PC=c(1,2))
+
+legend('topleft', legend=names(loadings.group.bv.va),
+    col=x.tax.colours.bv.va, pch=19, cex=0.3)
+```
+```{r Overlay Ribosome over Species Europe BV}
+h.hb.data <- data.frame(both.data[,grep('h.b', colnames(both.data))])
+h.hb.filt <-  codaSeq.filter(h.hb.data, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+h.hb.clr.input <- cmultRepl(t(h.hb.filt), method='CZM', label=0)
+h.hb.clr <- apply(t(h.hb.clr.input), 2, function(x) log(x) - mean(log(x)))
+h.hb.clr.pcx <- prcomp(t(h.hb.clr))
+
+# assign a taxonomy to all rows
+tax.vec.h.hb <- as.vector(tax.table[rownames(h.hb.filt),2])
+names(tax.vec.h.hb) <- rownames(h.hb.filt)
+
+# lets get the total number of genes in each species
+n.genes.h.hb <- vector()
+for(i in levels(factor(tax.vec.h.hb))){
+n.genes.h.hb[i] <- length(which(tax.vec.h.hb == i))
+}
+
+tax.order.h.hb <- names(which(n.genes.h.hb > 100))
+tax.colours.h.hb <- c(tax.colors[tax.order.h.hb,], rgb(0,0,0,0.0))
+
+loadings.group.h.hb <- list()
+for(i in 1:length(tax.order.h.hb)){
+    loadings.group.h.hb[[tax.order.h.hb[i]]] <- which(tax.vec.h.hb == tax.order.h.hb[i])
+}
+loadings.group.h.hb[["other"]] <- setdiff(c(1:nrow(h.hb.clr)),unlist(loadings.group.h.hb))
+tax.symbol.hb <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+# PATHWAY SECTION BELOW
+path.table <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""), sep="\t",
+    header=T, row.names=1, fill=TRUE)
+
+pathway.colors <- read.table(paste("/Users/claracopeland/Documents/GitHub/metatranscriptome/code/pathway_colors_table3.txt"), sep="\t",
+    header=F, row.names = 2 ,stringsAsFactors=F)
+
+# assign a pathway to all rows
+path.vec.h.hb <- as.vector(path.table[rownames(h.hb.filt),2])
+names(path.vec.h.hb) <- rownames(h.hb.filt)
+
+# lets get the total number of genes in each pathway
+path.n.genes.h.hb <- vector()
+for(i in levels(factor(path.vec.h.hb))){
+path.n.genes.h.hb[i] <- length(which(path.vec.h.hb == i))
+}
+
+# order has two options: get the top x pathways to show, or the pathways above x threshold
+# colours: if you want "other" to disappear, change the last hblue to 0.0
+#path.order.h.hb <- names(tail(sort(path.n.genes.h.hb),2))
+path.order.h.hb <- names(which(path.n.genes.h.hb > 230))
+path.colours.h.hb <- c(pathway.colors[path.order.h.hb,], rgb(0,0,0,0.0))
+
+path.loadings.group.h.hb <- list()
+for(i in 1:length(path.order.h.hb)){
+    path.loadings.group.h.hb[[path.order.h.hb[i]]] <- which(path.vec.h.hb == path.order.h.hb[i])
+}
+
+path.loadings.group.h.hb[["other"]] <- setdiff(c(1:nrow(h.hb.clr)),unlist(path.loadings.group.h.hb))
+path.symbol.hb <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+#
+loadings.group.h.hb[["Ribosome"]] <- path.loadings.group.h.hb[["Ribosome"]]
+x.tax.colours.h.hb <- append(tax.colours.h.hb, 'black')
+
+# PCA biplot
+h.hb.pcx <- prcomp(t(h.hb.clr))
+#biplot(h.hb.pcx, cex=c(0.7,0.1), hbr.axes=F, col=c('black', rgb(1,0,0,0.1)))
+
+#By species
+codaSeq.PCAplot(h.hb.pcx, plot.groups=F, plot.circles=F,
+    plot.loadings=TRUE, loadings.grp=loadings.group.h.hb,
+    loadings.col=x.tax.colours.h.hb, loadings.sym=19, main="Overlay Ribosome over Species Europe Healthy", PC=c(1,2))
+
+legend('topleft', legend=names(loadings.group.h.hb),
+    col=x.tax.colours.h.hb, pch=19, cex=0.3)
+```
+```{r Overlay Ribosome over Species London BV}
+h.h0.data <- data.frame(both.data[,grep('h.0', colnames(both.data))])
+h.h0.filt <-  codaSeq.filter(h.h0.data, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+h.h0.clr.input <- cmultRepl(t(h.h0.filt), method='CZM', label=0)
+h.h0.clr <- apply(t(h.h0.clr.input), 2, function(x) log(x) - mean(log(x)))
+h.h0.clr.pcx <- prcomp(t(h.h0.clr))
+
+# assign a taxonomy to all rows
+tax.vec.h.h0 <- as.vector(tax.table[rownames(h.h0.filt),2])
+names(tax.vec.h.h0) <- rownames(h.h0.filt)
+
+# lets get the total number of genes in each species
+n.genes.h.h0 <- vector()
+for(i in levels(factor(tax.vec.h.h0))){
+n.genes.h.h0[i] <- length(which(tax.vec.h.h0 == i))
+}
+
+tax.order.h.h0 <- names(which(n.genes.h.h0 > 100))
+tax.colours.h.h0 <- c(tax.colors[tax.order.h.h0,], rgb(0,0,0,0.0))
+
+loadings.group.h.h0 <- list()
+for(i in 1:length(tax.order.h.h0)){
+    loadings.group.h.h0[[tax.order.h.h0[i]]] <- which(tax.vec.h.h0 == tax.order.h.h0[i])
+}
+loadings.group.h.h0[["other"]] <- setdiff(c(1:nrow(h.h0.clr)),unlist(loadings.group.h.h0))
+tax.symbol.h0 <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+# PATHWAY SECTION BELOW
+path.table <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""), sep="\t",
+    header=T, row.names=1, fill=TRUE)
+
+pathway.colors <- read.table(paste("/Users/claracopeland/Documents/GitHub/metatranscriptome/code/pathway_colors_table3.txt"), sep="\t",
+    header=F, row.names = 2 ,stringsAsFactors=F)
+
+# assign a pathway to all rows
+path.vec.h.h0 <- as.vector(path.table[rownames(h.h0.filt),2])
+names(path.vec.h.h0) <- rownames(h.h0.filt)
+
+# lets get the total number of genes in each pathway
+path.n.genes.h.h0 <- vector()
+for(i in levels(factor(path.vec.h.h0))){
+path.n.genes.h.h0[i] <- length(which(path.vec.h.h0 == i))
+}
+
+# order has two options: get the top x pathways to show, or the pathways above x threshold
+# colours: if you want "other" to disappear, change the last h0lue to 0.0
+#path.order.h.h0 <- names(tail(sort(path.n.genes.h.h0),2))
+path.order.h.h0 <- names(which(path.n.genes.h.h0 > 360))
+path.colours.h.h0 <- c(pathway.colors[path.order.h.h0,], rgb(0,0,0,0.0))
+
+path.loadings.group.h.h0 <- list()
+for(i in 1:length(path.order.h.h0)){
+    path.loadings.group.h.h0[[path.order.h.h0[i]]] <- which(path.vec.h.h0 == path.order.h.h0[i])
+}
+
+path.loadings.group.h.h0[["other"]] <- setdiff(c(1:nrow(h.h0.clr)),unlist(path.loadings.group.h.h0))
+path.symbol.h0 <- c(rep(20, 8), 19, 18, 17, 15, 5, rep(20, 6))
+
+#
+loadings.group.h.h0[["Ribosome"]] <- path.loadings.group.h.h0[["Ribosome"]]
+x.tax.colours.h.h0 <- append(tax.colours.h.h0, 'black')
+
+# PCA biplot
+h.h0.pcx <- prcomp(t(h.h0.clr))
+#biplot(h.h0.pcx, cex=c(0.7,0.1), h0r.axes=F, col=c('black', rgb(1,0,0,0.1)))
+
+#By species
+codaSeq.PCAplot(h.h0.pcx, plot.groups=F, plot.circles=F,
+    plot.loadings=TRUE, loadings.grp=loadings.group.h.h0,
+    loadings.col=x.tax.colours.h.h0, loadings.sym=19, main="Overlay Ribosome over Species London Healthy", PC=c(1,2))
+
+legend('topleft', legend=names(loadings.group.h.h0),
+    col=x.tax.colours.h.h0, pch=19, cex=0.3)
+```
+

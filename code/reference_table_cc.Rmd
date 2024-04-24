@@ -1,0 +1,40 @@
+---
+title: "Reference Table"
+author: "Clara Copeland"
+date: "2023-07-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("setup.R")
+```
+
+```{r}
+tax.table <- read.table(paste(locn,'1_VIRGO/1.taxon.tbl.txt', sep=""), header=F, row.names=2)
+tax.table.subset <- subset(tax.table, select=-c(V1, V4))
+tax.table.subset$row_names <- row.names(tax.table.subset)
+
+EC <- read.table(paste(locn,"1_VIRGO/5.EC.txt", sep=""), header=F, row.names=2, sep="\t", stringsAsFactors=F, quote='')
+EC.subset <- subset(EC, select=-c(V1, V3, V4))
+EC.subset$row_names <- row.names(EC.subset)
+
+KO <- read.table(paste(locn,"1_VIRGO/8.A.kegg.ortholog.txt", sep=""), header=F, row.names=1, sep="\t", stringsAsFactors=F, quote='')
+KO.subset <- subset(KO, select=-c(V3, V4))
+KO.subset$row_names <- row.names(KO.subset)
+
+egg <- read.table(paste(locn,"1_VIRGO/3.eggnog.NOG.txt", sep=""), header=F, row.names=2, check.names=F, sep="\t", comment.char="", quote="")
+egg.subset <- subset(egg, select=-c(V1, V3, V4, V5, V7))
+egg.subset$row_names <- row.names(egg.subset)
+
+path.table <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""), sep="\t",header=T, row.names=1, fill=TRUE)
+path.table$row_names <- row.names(path.table)
+
+egg.ko <- merge(egg.subset, KO.subset, by.x="row_names", by.y="row_names", all.x=TRUE, all.y=FALSE)
+egg.ko.ec <- merge(egg.ko, EC.subset, by.x="row_names", by.y="row_names", all.x=TRUE, all.y=FALSE)
+egg.ko.ec.path.table <- merge(egg.ko.ec, path.table, by.x="row_names", by.y="row_names", all.x=TRUE, all.y=FALSE)
+egg.ko.ec.path.tax.table <- merge(egg.ko.ec.path.table, tax.table.subset, by.x="row_names", by.y="row_names", all.x=TRUE, all.y=FALSE)
+View(egg.ko.ec.path.tax.table)
+```
+
+

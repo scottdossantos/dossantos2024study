@@ -1,0 +1,135 @@
+------------------------------------------------------------------------------
+Record of edits made in Inkscape to assemble multi-panel figures
+------------------------------------------------------------------------------
+
+- All edits made by Scott Dos Santos using Inkscape v1.3.1 and all SVG
+  files are uploaded to the study's GitHub repository at:
+  https://github.com/ggloor/metatranscriptome/tree/main/figs_for_paper/SVGs
+
+------------------------------------------------------------------------------
+Fig 2: London & Europe Dataset summary / functional heatmaps & biplot
+------------------------------------------------------------------------------
+A) - Added lines surrounding colour boxes and heatmap colour scale in the 
+     legend.
+   - Added white boxes to obscure original numeric labels on colour scale and 
+     added corresponding text boxes with larger sized font.
+   - Added a label of 'Proportion' to the heatmap colour scale.
+
+B) - Added white boxes to obscure original numeric and text labels for the x 
+     and y axes of the PCA plot and density plots, and added text boxes with
+     corresponding labels in a larger font size (except for density plot x/y 
+     axis tick labels).
+   - Clipped both density plots and moved them closer to the corresponding y
+     and x axes of the PCA plot to reduce the gap between them.
+   - Added a large white box to the bottom-left corner of the PCA plot to 
+     obscure the original species -> colour legend and added text boxes and
+     coloured circles corresponding to the original legend, but in a larger 
+     font size and on the bottom right-hand corner of the figure.
+   - Obscured the original figure title at the top-centre of the figure with 
+     a white box and added a horizontal black line to fill in the resulting 
+     gap at the top y-axis.
+
+c) - Added lines surrounding colour boxes and heatmap colour scale in the 
+     legend.
+   - Added white box to obscure original text labels (pathways) and replaced 
+     these with the same labels, but rotated to ~45 degrees. Also added black 
+     tick marks to show which label goes with which column.
+   - Added white boxes to obscure original numeric labels on colour scale and 
+     added corresponding text boxes with larger sized font.
+   - Rotated the heatmap colour scale bar and added the text label 'Mean
+     CLR Z-score'.
+   - Clipped the heatmap legend into the three separate categories (CST, BV 
+     status, Dataset) and arranged as two columns at the top of the heatmap.
+   - Added white boxes to obscure ' (H)' and ' (BV)' at the end of several 
+     pathway labels as they were not necessary in this subset of pathways.
+
+D) - No changes- made with BioRender and original figure is on GitHub.
+
+------------------------------------------------------------------------------
+Fig 3: BV subgroup analyses for London/Europe datasets with stacked bar graphs
+       for composition (BVAB1)
+------------------------------------------------------------------------------
+
+   - Clipped the heatmap to keep only the first three cutree groups (i.e. top 
+     25 pathways).
+   - Added lines surrounding legend colour boxes and heatmap colour scale.
+   - Added white boxes to obscure original numeric labels on colour scale and 
+     added corresponding text boxes with larger sized font.
+   - Rotated the heatmap colour scale bar and added the text label 'Mean CLR 
+     Z-score'.
+   - Clipped the heatmap legend from the rest of the figure and arranged it to 
+     the right of the row labels.
+   - Made 3 copies of the stacked bar graph and clipped two in the  middle to
+     emphasise to introduce a slight gap at the divide between BV1 and BV2 
+     samples. Clipped the third to keep only the minor grid lines between this
+     gap and widened it to 'fit' into the resulting gap between both halves of
+     the stacked bar graph.
+   - Added a long white box to obscure the x axis tick lines at the bottom of 
+     the graph.
+   - Added coloured lines and text boxes to identify BV subgroups.
+   - Added a white box to obscure original species labels in the legend and 
+     replaced labels with text boxes of the same sized font as in the heatmap. 
+
+------------------------------------------------------------------------------
+Fig 4: Pregnant vs. non-pregnant metatranscriptome violin plot and Gardnerella 
+       spp. biplots
+------------------------------------------------------------------------------
+
+A) - Clipped the figure to remove the x-axis tick labels and title. Replaced 
+     with text boxes corresponding to original labels/title but in a larger 
+     font size.
+
+B) - Added white boxes to obscure original numeric and text labels for the x 
+     and y axes of the PCA plot and density plots, and added text boxes with 
+     corresponding labels in a larger font size (except for density plot x/y 
+     axis tick labels).
+   - Clipped both density plots and moved them closer to the corresponding y 
+     and x axes of the PCA plot to reduce the gap between them.
+   - Added a large white box to the top-right corner of the PCA plot to cover
+     the original species colour legend and added text boxes corresponding to 
+     the original legend, but in italic font. Also added a transparent circle
+     with dotted black outline and a text box containing '(not drawn)' which
+     corresponds to the 'Other taxa' label.
+   - Obscured the 'pp' in 'Gardnerella spp.' from the original figure title at
+     the top-centre of the plot with a white box and added a small horizontal
+     black line to fill in the gap introduced to the top y-axis.
+
+------------------------------------------------------------------------------
+Fig 5: Functional heatmaps for Virginia dataset
+------------------------------------------------------------------------------
+
+A) - Added lines surrounding colour boxes and the heatmap colour scale in the
+     legend.
+   - Rotated the heatmap colour scale bar and added the text label, 'Mean CLR 
+     Z-score'.   
+   - Added white boxes to obscure original numeric labels on colour scale and
+     added corresponding text boxes with rotated labels.
+   - Added a white box to obscure the original row text labels and replaced 
+     with text boxes containing the same text in a larger font size to match
+     the size of the text labels in the other heatmaps.
+   - Clipped the heatmap legend into the two separate categories (CST, Group)
+     and arranged as three columns at the right-hand side of the heatmap.
+   - Added a white box to obscure column colour bar labels, 'Group' and 'CST'.
+
+B) - Clipped the heatmap legend into two halves (CST, Subgroup) and arranged 
+     as two columns at the right-hand side of the heatmap.
+   - Added a vertical text box with the label 'Mean CLR Z-score' to the right
+     of the heatmap colour scale bar. 
+   - Added a white box to obscure column colour bar labels, 'Group' and 'CST'.
+   - Added a white box to obscure the text label for 'Biofilm formation' and 
+     replaced with a text box containing 'Exopolysaccharide biosynthesis'. I
+     could've replaced the label in R, but am very lazy and chose to do this 
+     instead. It's the same KO term (K11936). Sorrynotsorry.
+
+C) - Added lines surrounding the legend colour boxes and heatmap colour scale.
+   - Rotated the heatmap colour scale bar and added the text label 'Mean CLR 
+     Z-score'.   
+   - Added white boxes to obscure original numeric labels on colour scale and
+     added corresponding text boxes with rotated labels.
+   - Clipped the heatmap legend into two halves (CST, Group) and arranged as
+     three columns at the right-hand side of the heatmap.
+   - Added a white box to obscure the legend text labels, 'Group' and replaced
+     with a text box containing 'Subgroup'
+   - Added a white box to obscure column colour bar labels, 'Group' and 'CST'.
+   - Added white boxes to obscure ' (H)' and ' (BV)' at the end of several 
+     pathway labels as they were not necessary in this subset of pathways.

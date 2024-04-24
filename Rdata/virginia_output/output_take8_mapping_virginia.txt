@@ -1,0 +1,91 @@
+TrimmomaticSE: Started with arguments:
+ -threads 90 SRR6744562_1.fastq.gz SRR6744562_1.trim.fastq CROP:75 SLIDINGWINDOW:4:20 MINLEN:40
+Quality encoding detected as phred33
+Input Reads: 26497338 Surviving: 25807039 (97.39%) Dropped: 690299 (2.61%)
+TrimmomaticSE: Completed successfully
+25807039 reads; of these:
+  25807039 (100.00%) were unpaired; of these:
+    18241430 (70.68%) aligned 0 times
+    3206423 (12.42%) aligned exactly 1 time
+    4359186 (16.89%) aligned >1 times
+29.32% overall alignment rate
+18241430 reads; of these:
+  18241430 (100.00%) were unpaired; of these:
+    18215303 (99.86%) aligned 0 times
+    5042 (0.03%) aligned exactly 1 time
+    21085 (0.12%) aligned >1 times
+0.14% overall alignment rate
+18215303 reads; of these:
+  18215303 (100.00%) were unpaired; of these:
+    18210786 (99.98%) aligned 0 times
+    751 (0.00%) aligned exactly 1 time
+    3766 (0.02%) aligned >1 times
+0.02% overall alignment rate
+Arguments are all good !!!
+reads file  = SRR6744562_1.unalign.rRNA.fastq
+sample prefix  = SRR6744562_1
+VIRGO path   = /Volumes/data/twntyfr_2018/VIRGO/
+# reads processed: 18210786
+# reads with at least one reported alignment: 14112981 (77.50%)
+# reads that failed to align: 4097335 (22.50%)
+# reads with alignments suppressed due to -m: 470 (0.00%)
+Reported 14112981 alignments
+TrimmomaticSE: Started with arguments:
+ -threads 90 SRR6744563_1.fastq.gz SRR6744563_1.trim.fastq CROP:75 SLIDINGWINDOW:4:20 MINLEN:40
+Quality encoding detected as phred33
+Input Reads: 45009820 Surviving: 43848540 (97.42%) Dropped: 1161280 (2.58%)
+TrimmomaticSE: Completed successfully
+43848540 reads; of these:
+  43848540 (100.00%) were unpaired; of these:
+    42367795 (96.62%) aligned 0 times
+    84696 (0.19%) aligned exactly 1 time
+    1396049 (3.18%) aligned >1 times
+3.38% overall alignment rate
+42367795 reads; of these:
+  42367795 (100.00%) were unpaired; of these:
+    42363890 (99.99%) aligned 0 times
+    2239 (0.01%) aligned exactly 1 time
+    1666 (0.00%) aligned >1 times
+0.01% overall alignment rate
+42363890 reads; of these:
+  42363890 (100.00%) were unpaired; of these:
+    42352690 (99.97%) aligned 0 times
+    1587 (0.00%) aligned exactly 1 time
+    9613 (0.02%) aligned >1 times
+0.03% overall alignment rate
+Arguments are all good !!!
+reads file  = SRR6744563_1.unalign.rRNA.fastq
+sample prefix  = SRR6744563_1
+VIRGO path   = /Volumes/data/twntyfr_2018/VIRGO/
+# reads processed: 42352690
+# reads with at least one reported alignment: 13966566 (32.98%)
+# reads that failed to align: 28375682 (67.00%)
+# reads with alignments suppressed due to -m: 10442 (0.02%)
+Reported 13966566 alignments
+TrimmomaticSE: Started with arguments:
+ -threads 90 SRR6744564_1.fastq.gz SRR6744564_1.trim.fastq CROP:75 SLIDINGWINDOW:4:20 MINLEN:40
+Quality encoding detected as phred33
+Input Reads: 62438089 Surviving: 60404730 (96.74%) Dropped: 2033359 (3.26%)
+TrimmomaticSE: Completed successfully
+60404730 reads; of these:
+  60404730 (100.00%) were unpaired; of these:
+    41505479 (68.71%) aligned 0 times
+    10534061 (17.44%) aligned exactly 1 time
+    8365190 (13.85%) aligned >1 times
+31.29% overall alignment rate
+41505479 reads; of these:
+  41505479 (100.00%) were unpaired; of these:
+    41289967 (99.48%) aligned 0 times
+    29941 (0.07%) aligned exactly 1 time
+    185571 (0.45%) aligned >1 times
+0.52% overall alignment rate
+41289967 reads; of these:
+  41289967 (100.00%) were unpaired; of these:
+    41285832 (99.99%) aligned 0 times
+    843 (0.00%) aligned exactly 1 time
+    3292 (0.01%) aligned >1 times
+0.01% overall alignment rate
+Arguments are all good !!!
+reads file  = SRR6744564_1.unalign.rRNA.fastq
+sample prefix  = SRR6744564_1
+VIRGO path   = /Volumes/data/twntyfr_2018/VIRGO/

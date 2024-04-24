@@ -1,0 +1,303 @@
+######################## README for identifying genes unique to each named Gardnerella species ########################
+
+- If you have any questions about the content of this walkthough, please contact Dr. Scott Dos Santos (sdossa5@uwo.ca)
+  or Dr. Gregory Gloor (ggloor@uwo.ca) and they can help you out. 
+
+===================================== Genome annotation and pangenome analysis =====================================
+
+- NOTE: conda and mamba required for installation of several tools used herein
+
+- Downloaded 2 genomes for each Gardnerella species from NCBI:
+  4 type strains from Vaneechoutte et al. 2019 (https://pubmed.ncbi.nlm.nih.gov/30648938/)
+  plus 4 other genomes, one for each named species, from the linked NCBI genomes pages
+
+- Genomes:
+  	- G. vaginalis 		- ATCC14018 (type strain - Vaneechoutte)
+  	       			- NR001 (from BioProject PRJNA394757 - University of Saskatchewan, Canada)
+
+  	- G. leopoldii 		- UGent06.41 (type strain - Vaneechoutte)
+  	       			- UMB6774 (from BioProject PRJNA970254 - Loyola University Chicago, USA)
+  
+  	- G. piotii		- UGent18.01 (type strain - Vaneechoutte)
+  	       			- JNFY15 (from BioProject PRJNA761238 - Shandong University, China) 
+ 
+
+  	- G. swidsinskii	- GS9838-1 (type strain - Vaneechoutte)
+  				- JNFY3 (from BioProject PRJNA761238 - Shandong University, China)
+
+
+- Renamed genome FASTAs in the following format: 'gardnerella_[species])[strain].fna'
+  (e.g. 'gardnerella_vaginalis_ATCC14018.fna') and put all in a directory called 'fasta'
+
+- Made conda environment with aniclustermap installed (via mamba)
+
+conda create -n ani
+conda activate ani
+conda config --env --set subdir osx-64		# needed because I am using an Apple Silicon mac- ignore otherwise!
+mamba install -c bioconda -c conda-forge -c anaconda aniclustermap
+
+
+- Ran all genomes through ANIclustermap to get ANI matrix and confirm relatedness of type strains and
+  other genomes (and to confirm <95% ANI between species)
+
+ANIclustermap -i ./fasta/ -o ./ani/
+conda deactivate aniclustermap
+
+
+- Looks good! Matrix shows high degree of relatedness (red!) between genomes of same species
+  leopoldii and swidsinskii more related than other species (expected - both belong to old subgroup A)
+  and hover ~ 95% ANI. Others between 85 - 90% ANI.
+
+- Pangenome analysis with panaroo requires prokka-formatted .gff files. Install prokka & dependencies
+  using conda
+
+conda create -n prokka
+conda activate prokka
+conda config --env --set subdir osx-64		# needed because I am using an Apple Silicon mac- ignore otherwise!
+conda install -c bioconda prokka
+
+
+- Type-strain genomes used in Vaneechoutte et al. are not annotated, so we will use NCBI PGAP-annotated
+  gbff files from the other genomes as arguments for the '--proteins' option of prokka (reduces amount
+  of hypothetical annotations). These can be downloaded from NCBI and put in their own directory,
+  separate from the genome .fna files. Named 'gardnerella_[species])[strain].gbff'
+
+- Move into gbff directory and get basenames of .gbff files, splitting by species
+
+ls -1 gardnerella_vaginalis_* | sed 's/.gbff//' > base_g_vag
+ls -1 gardnerella_piotii_* | sed 's/.gbff//' > base_g_pio
+ls -1 gardnerella_swidsinskii_* | sed 's/.gbff//' > base_g_swid
+ls -1 gardnerella_leopoldii_U* | sed 's/.gbff//' > base_g_leo
+
+
+- move back to directory containing 'fasta/' and 'gbff/' directories, then run prokka using the 
+  flag --proteins to specify gbff files
+
+for i in `cat base_g_vag`; do prokka ./fasta/$i'.fna' --proteins ./gbff/gardnerella_vaginalis_NR001.gbff --outdir $i'_annotated' --prefix $i ; done
+
+for i in `cat base_g_leo` ; do prokka ./fasta/$i'.fna' --proteins ./gbff/gardnerella_leopoldii_UMB6774.gbff --outdir $i'_annotated' --prefix $i ; done
+
+for i in `cat base_g_swid` ; do prokka ./fasta/$i'.fna' --proteins ./gbff/gardnerella_swidsinskii_JFNY3.gbff --outdir $i'_annotated' --prefix $i ; done
+
+for i in `cat base_g_pio` ; do prokka ./fasta/$i'.fna' --proteins ./gbff/gardnerella_piotii_JFNY15.gbff --outdir $i'_annotated' --prefix $i ; done
+
+conda deactivate
+
+
+- make directory called prokka_output, move all prokka output directories into it and run a loop to
+  move all the .gff files out of their respective directories, into 'prokka_output'
+
+mkdir prokka_output
+mv *_annotated prokka_output
+cd prokka_output
+for i in `ls -1` ; do cd $i; mv *.gff .. ; cd .. ; done
+
+- Install panaroo using mamba
+
+conda create -n panaroo
+conda activate panaroo
+conda config --env --set subdir osx-64		# needed because I am using an Apple Silicon mac- ignore otherwise!
+mamba install -c conda-forge -c bioconda -c defaults 'panaroo>=1.3'
+
+- run panaroo in moderate mode, outputting to 'pan_results/', then deactivate environment
+
+panaroo -i *.gff -o ./pan_results/ --clean-mode moderate -t 8 --remove-invalid-genes
+conda deactivate
+
+- gene_presence_absence.csv contains a matrix of presence/absence showing which genes are in
+  which genomes
+
+- Now need to identify genese unique to each species: wrote 2 R scripts to help do so: 
+
+    - gardnerella_unique_genes.R --> goes through panaroo output and identifies genes unique to
+      each of the four named gardnerella species. Output is 4 files, one per named species, with
+      each unique gene header on a new line. Files are named "unique_genes_g_[species].txt"
+
+    - gardnerella_Vnumber_nonRedundant.R --> goes through London & Europe, Virginia, and all 3
+      combined datasets and identifies unique V numbers present in these 3 datasets. These V 
+      numbers and their gene sequences will be pulled out of the VIRGO nucleotide database to 
+      be used in BLAST searches.
+
+- Go through both of these scripts and put the output files in a new directory within the
+  'pan_results' directory
+
+mkdir gardnerella_genes
+[MOVE R SCRIPT OUTPUT FILES INTO THIS DIRECTORY]
+cd gardnerella genes
+
+======================================== Obtain sequences of VIRGO genes and unique genes ========================================
+
+- We now have a list of the genes which are unique to each named species of Gardnerella and want to
+  BLAST them against the non-redundant genes in the VIRGO database (V numbers).
+
+- Need to clone local copy of VIRGO github repository at: https://github.com/ravel-lab/VIRGO
+
+- files used to build/index/BLAST against VIRGO are located in a directory that is not included on
+  GitHub (files are too large), but they can be downloaded manually from: https://virgo.igs.umaryland.edu
+  by clicking on the VIRGO link on the homepage. You can manually download them, or use the following
+  code to automate it:
+
+- make a directory called '0_db' in your local copy of the VIRGO github repo and move into it
+
+cd [PATH-TO-CLONED-REPO]/VIRGO/
+mkdir 0_db
+cd 0_db
+
+
+- use a text editor to make a new file containing the URL linking to the files and paste the following
+  URLs into the editor (can exit nano with Ctrl + X, then hitting Y to save the file as 'files')
+
+nano files
+
+--------------------- START COPY BELOW THIS LINE ---------------------
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/AA.fasta
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/NT.fasta
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.1.bt2
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.2.bt2
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.3.bt2
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.4.bt2
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.1.ebwt
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.2.ebwt
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.3.ebwt
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.4.ebwt
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.nhr
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.nin
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.nsq
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.phr
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.pin
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.psq
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.rev.1.bt2
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.rev.2.bt2
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.rev.1.ebwt
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.rev.2.ebwt
+---------------------- END COPY ABOVE THIS LINE ----------------------
+
+
+- run wget in a loop to download each of the required files
+
+for i in `cat files` ; do wget $i ; done
+
+
+- Now set up conda environment with seqkit installed for FASTA manipulation
+
+conda create -n seqkit
+conda activate seqkit
+conda config --env --set subdir osx-64		# needed because I am using an Apple Silicon mac- ignore otherwise!
+conda install -c bioconda -c conda-forge seqkit
+
+
+- Pull out sequences corresponding to all our V numbers identified in lon/eur dataset from VIRGO
+  using seqkit grep. This will be indexed for BLASTing later.
+
+seqkit grep -f vnumbers_to_search_lon_eur.txt [PATH-TO-VIRGO]/0_db/NT.fasta > vnumbers_seqs_lon_eur.fasta
+
+
+- Pull out gene sequences for unique genes from each named gardnerella species (from the file, 
+  'pan_genome_reference.fa' in 'pan_results')
+
+seqkit grep -f unique_genes_g_leopoldii.txt ../pan_genome_reference.fa > seqs_genes_g_leopoldii.fasta
+seqkit grep -f unique_genes_g_piotii.txt ../pan_genome_reference.fa > seqs_genes_g_piotii.fasta
+seqkit grep -f unique_genes_g_swidsinskii.txt ../pan_genome_reference.fa > seqs_genes_g_swidsinskii.fasta
+seqkit grep -f unique_genes_g_vaginalis.txt ../pan_genome_reference.fa > seqs_genes_g_vaginalis.fasta
+
+conda deactivate
+
+
+======================================== BLAST: London/Europe dataset ========================================
+
+- Make a new conda environment with blast installed
+
+conda create -n blast
+conda activate blast
+conda config --env --set subdir osx-64		# needed because I am using an Apple Silicon mac- ignore otherwise!
+conda install -c bioconda blast
+
+
+- Edit species labels to each FASTA entry for each species' unique genes
+
+cp seqs_genes_g_leopoldii.fasta temp.fasta
+sed 's/^>/>g_leopoldii_/' temp.fasta > seqs_genes_g_leopoldii.fasta
+
+cp seqs_genes_g_piotii.fasta temp.fasta
+sed 's/^>/>g_piotii_/' temp.fasta > seqs_genes_g_piotii.fasta
+
+cp seqs_genes_g_swidsinskii.fasta temp.fasta
+sed 's/^>/>g_swidsinskii_/' temp.fasta > seqs_genes_g_swidsinskii.fasta
+
+cp seqs_genes_g_vaginalis.fasta temp.fasta
+sed 's/^>/>g_vaginalis_/' temp.fasta > seqs_genes_g_vaginalis.fasta
+
+rm temp.fasta
+
+
+- Indexed fast file of all V numbers in our dataset using makeblastdb
+
+makeblastdb -in vnumbers_seqs_lon_eur.fasta -input_type fasta -dbtype nucl
+
+
+- Pull out species name labels to use in a for loop for BLAST
+
+ls -1 seqs* | sed -e 's/.fasta//' -e 's/seqs_genes_//' > bases
+
+
+- Run blastn using unique gene sequences for each named gardnerella species as input, the
+  indexed FASTA file of all non-redundant v numbers in the Lon/Eur dataset as the database
+  file, and output the results in tabular format with the top hit only
+
+for i in `cat bases` ; do blastn -query seqs_genes_$i'.fasta' -db new_seqs_vnumbers_unique.fasta -num_alignments 1 -out blast_$i'.tsv' -outfmt 6 ; done
+
+conda deactivate
+
+
+- Use the provided R script, 'gardnerella_blastFilter.R' to filter for >98% sequence 
+  identity (see code in for details). These will be filtered further by Evalue and length
+  prior to using the genes in PCA to identify Gardnerella species.
+
+===================================== BLAST: Virginia / Preg-NonPreg ========================================
+
+- The sequences for the genes unique to each gardnerella species already exist in the files:
+    - seqs_genes_g_leopoldii.fasta
+    - seqs_genes_g_piotii.fasta
+    - seqs_genes_g_swidsinskii.fasta
+    - seqs_genes_g_vaginalis.fasta
+
+- All that needs to be done is pull the sequences for all vNumbers in the virginia dataset
+  and the sequences for all vNumbers in the all 3 combined dataset
+
+conda activate seqkit
+
+seqkit grep -f vnumbers_to_search_virginia.txt [PATH-TO-VIRGO]/0_db/NT.fasta  > vnumbers_seqs_virginia.fasta
+seqkit grep -f vnumbers_to_search_all3.txt [PATH-TO-VIRGO]/0_db/NT.fasta  > vnumbers_seqs_all3.fasta
+
+conda deactivate 
+
+
+- Index both vnumber sequence FASTAs
+
+conda activate blast 
+
+makeblastdb -in vnumbers_seqs_virginia.fasta -input_type fasta -dbtype nucl
+makeblastdb -in vnumbers_seqs_all3.fasta -input_type fasta -dbtype nucl
+
+
+- Run blastn using unique gene sequences for each named gardnerella species as input, the
+  indexed FASTA file of all non-redundant v numbers in the Virginia dataset as the database
+  file, and output the results in tabular format with the top hit only
+
+for i in `cat bases` ; do blastn -query seqs_genes_$i'.fasta' -db vnumbers_seqs_virginia.fasta -num_alignments 1 -out blast_virginia_$i'.tsv' -outfmt 6 ; done
+
+
+- Run blastn using unique gene sequences for each named gardnerella species as input, the
+  indexed FASTA file of all non-redundant v numbers in the Preg/Non-preg dataset as the database
+  file, and output the results in tabular format with the top hit only
+
+for i in `cat bases` ; do blastn -query seqs_genes_$i'.fasta' -db vnumbers_seqs_all3.fasta -num_alignments 1 -out blast_all3_$i'.tsv' -outfmt 6 ; done
+
+conda deactivate
+
+
+- Use the provided R script, 'gardnerella_blastFilter.R' to filter for >98% sequence 
+  identity (see code in for details). These will be filtered further by E-value and length
+  prior to using the genes in PCA to identify Gardnerella species.
+
+######################################################### END #########################################################

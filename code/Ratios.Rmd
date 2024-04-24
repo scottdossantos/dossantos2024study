@@ -1,0 +1,384 @@
+---
+title: "Ratios"
+author: "Clara Copeland"
+date: "2023-06-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("code/setup.R")
+library("dplyr")
+library('plyr')
+```
+
+```{r V numbers for scott}
+h.h0.data <- data.frame(both.data[,grep('h.0', colnames(both.data))])
+
+h.hb.data <- data.frame(both.data[,grep('h.b', colnames(both.data))])
+v.v0.data <- data.frame(both.data[,grep('v.0', colnames(both.data))])
+v.va.data <- data.frame(both.data[,grep('v.a', colnames(both.data))])
+
+healthy.london <- rownames(h.h0.data)
+bv.london <- rownames(v.v0.data) #or whatever the BV London data is called
+healthy.europe <- rownames(h.hb.data) #or whatever the healthy Europe data is called
+bv.europe <- rownames(v.va.data) #or whatever the BV Europe data is called
+
+maxLength<-max(length(h.h0.data), length(v.v0.data), length(h.hb.data), length(v.va.data)) 
+length(healthy.london) <- maxLength
+length(bv.london) <- maxLength
+length(healthy.europe) <- maxLength
+length(bv.london) <- maxLength
+
+v.num.for.scott<- cbind(healthy.london, bv.london, healthy.europe, bv.europe)
+write.csv(v.num.for.scott, "v_numbers_for_scott.csv")
+
+```
+
+```{r}
+
+# Extract and Filter London Healthy samples
+h0.data <- data.frame(both.data[,grep('h.0', colnames(both.data))])
+h0.filt <-  codaSeq.filter(h0.data, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+#Normalize
+#map.h0.clr.input <- cmultRepl(t(map.h0.filt), method='CZM', label=0)
+#map.h0.clr <- apply(t(map.h0.clr.input), 2, function(x) log(x) - mean(log(x)))
+
+# make a map table
+map.table.messy <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""),
+                              header=TRUE, row.names=1, fill = TRUE)
+map.table.messy$pathway <- paste(map.table.messy$V3, map.table.messy$V4, 
+                                 map.table.messy$V5, map.table.messy$V6, 
+                                 map.table.messy$V7, map.table.messy$V8, 
+                                 map.table.messy$V9)
+map.table.messy$map_number <- paste(map.table.messy$V2)
+map.table.tidy <- map.table.messy[,c('map_number','pathway')]
+
+# make map_number vector and assign to all rows
+map.vec.h0.filt <- as.vector(map.table.tidy[rownames(h0.filt),1])
+names(map.vec.h0.filt) <- rownames(h0.filt)
+
+# make pathway vector and assign to all rows
+path.vec.h0.filt <- as.vector(map.table.tidy[rownames(h0.filt),2])
+names(path.vec.h0.filt) <- rownames(h0.filt)
+
+group_by_at(path.vec.h0.filt, tbl_vars("Ribosome      ","Aminoacyl-tRNA biosynthesis     "))
+
+aatRNA.h0 <- subset(path.vec.h0.filt, path.vec.h0.filt == "Aminoacyl-tRNA biosynthesis     ")
+as.list(aatRNA.h0)
+
+# Make gene vector holding the number of counts in each pathway
+#path.n.genes.h0 <- vector()
+#for(i in levels(factor(path.vec.h0.filt))){
+#path.n.genes.h0[i] <- length(which(path.vec.h0.filt == i))
+#}
+
+#then I can get the sum of each pathway
+# then the ratios between pathway
+# then the consistency across samples - for this I just wouldn't seperate based on h.0
+```
+
+```{r Ratio calculations - Master}
+# make a map table
+map.table.messy <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""),
+                              header=TRUE, row.names=1, fill = TRUE)
+map.table.messy$pathway <- paste(map.table.messy$V3, map.table.messy$V4, 
+                                 map.table.messy$V5, map.table.messy$V6, 
+                                 map.table.messy$V7, map.table.messy$V8, 
+                                 map.table.messy$V9)
+map.table.messy$map_number <- paste(map.table.messy$V2)
+map.table.tidy <- map.table.messy[,c('map_number','pathway')]
+map.table.tidy2 <- map.table.tidy
+map.table.tidy2 <- tibble::rownames_to_column(map.table.tidy, "V_number")
+
+# Setting up data
+hb.data <- data.frame(both.data[,grep('h.b', colnames(both.data))])
+
+#library("dplyr")
+hb.data2 <- hb.data
+hb.data2 <- tibble::rownames_to_column(hb.data, "V_number")
+
+# subset of map table for pathway
+aatRNA.map2 <- subset(map.table.tidy2, pathway == "Aminoacyl-tRNA biosynthesis     ")
+DNArep.map2 <- subset(map.table.tidy2, pathway == "DNA replication     ")
+
+# Subset hb data based on matching V_numbers with pathway
+#library('plyr')
+hb.aatRNA.subset <- match_df(hb.data2, aatRNA.map2, on = "V_number")
+hb.DNArep.subset <- match_df(hb.data2, DNArep.map2, on = "V_number")
+
+# Turn V_number back to rownames
+hb.aatRNA.subset2 <- hb.aatRNA.subset[,-1]
+rownames(hb.aatRNA.subset2) <- hb.aatRNA.subset[,1]
+hb.DNArep.subset2 <- hb.DNArep.subset[,-1]
+rownames(hb.DNArep.subset2) <- hb.DNArep.subset[,1]
+
+# Sum counts
+hb.aatRNA.subset.sum <- apply(hb.aatRNA.subset2, 2, function(x) sum(x))
+hb.DNArep.subset.sum <- apply(hb.DNArep.subset2, 2, function(x) sum(x))
+print(hb.DNArep.subset.sum)
+print(hb.aatRNA.subset.sum)
+
+# Log ratio of counts
+log.ratio.hb.DNArep.aatRNA <- log2(hb.aatRNA.subset.sum/hb.DNArep.subset.sum)
+print(log.ratio.hb.DNArep.aatRNA)
+```
+
+
+```{r Ratio calculations - healthy europe}
+# Biplots with only 1 pathway showing, see if the species centers are distinct
+
+hb.data <- data.frame(both.data[,grep('h.b', colnames(both.data))])
+
+# make a map table
+map.table.messy <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""),
+                              header=TRUE, row.names=1, fill = TRUE)
+map.table.messy$pathway <- paste(map.table.messy$V3, map.table.messy$V4, 
+                                 map.table.messy$V5, map.table.messy$V6, 
+                                 map.table.messy$V7, map.table.messy$V8, 
+                                 map.table.messy$V9)
+map.table.messy$map_number <- paste(map.table.messy$V2)
+map.table.tidy <- map.table.messy[,c('map_number','pathway')]
+
+library("dplyr")
+hb.data2 <- hb.data
+hb.data2 <- tibble::rownames_to_column(hb.data, "V_number")
+
+map.table.tidy2 <- map.table.tidy
+map.table.tidy2 <- tibble::rownames_to_column(map.table.tidy, "V_number")
+
+# subset of map table for Aminoacyl-tRNA biosynthesis
+aatRNA.map2 <- subset(map.table.tidy2, pathway == "Aminoacyl-tRNA biosynthesis     ")
+
+# Subset hb data based on matching V_numbers with ribosome maps
+library('plyr')
+hb.aatRNA.subset <- match_df(hb.data2, aatRNA.map2, on = "V_number")
+
+hb.aatRNA.subset2 <- hb.aatRNA.subset[,-1]
+rownames(hb.aatRNA.subset2) <- hb.aatRNA.subset[,1]
+
+
+# Filter and CLR ribosome counts
+hb.aatRNA.subset.filt <-  codaSeq.filter(hb.aatRNA.subset2, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+
+#hb.aatRNA.subset.clr.input <- cmultRepl(t(hb.aatRNA.subset.filt), method='CZM', label=0)
+#hb.aatRNA.subset.clr <- apply(t(hb.aatRNA.subset.clr.input), 2, function(x) log(x) - mean(log(x)))
+
+# subset of map table for DNA
+DNArep.map2 <- subset(map.table.tidy2, pathway == "DNA replication     ")
+
+# Subset hb data based on matching V_numbers with ribosome maps
+library('plyr')
+hb.DNArep.subset <- match_df(hb.data2, DNArep.map2, on = "V_number")
+
+hb.DNArep.subset2 <- hb.DNArep.subset[,-1]
+rownames(hb.DNArep.subset2) <- hb.DNArep.subset[,1]
+
+
+# Filter and CLR ribosome counts
+hb.DNArep.subset.filt <-  codaSeq.filter(hb.DNArep.subset2, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+
+
+hb.aatRNA.subset.sum <- apply(hb.aatRNA.subset.filt, 2, function(x) sum(x))
+hb.DNArep.subset.sum <- apply(hb.DNArep.subset.filt, 2, function(x) sum(x))
+
+log.ratio.hb.DNArep.aatRNA <- log2(hb.aatRNA.subset.sum/hb.DNArep.subset.sum)
+
+```
+
+```{r Ratio calculations - healthy london}
+# Biplots with only 1 pathway showing, see if the species centers are distinct
+
+h0.data <- data.frame(both.data[,grep('h.0', colnames(both.data))])
+
+# make a map table
+map.table.messy <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""),
+                              header=TRUE, row.names=1, fill = TRUE)
+map.table.messy$pathway <- paste(map.table.messy$V3, map.table.messy$V4, 
+                                 map.table.messy$V5, map.table.messy$V6, 
+                                 map.table.messy$V7, map.table.messy$V8, 
+                                 map.table.messy$V9)
+map.table.messy$map_number <- paste(map.table.messy$V2)
+map.table.tidy <- map.table.messy[,c('map_number','pathway')]
+
+library("dplyr")
+h0.data2 <- h0.data
+h0.data2 <- tibble::rownames_to_column(h0.data, "V_number")
+
+map.table.tidy2 <- map.table.tidy
+map.table.tidy2 <- tibble::rownames_to_column(map.table.tidy, "V_number")
+
+# subset of map table for Aminoacyl-tRNA biosynthesis
+aatRNA.map2 <- subset(map.table.tidy2, pathway == "Aminoacyl-tRNA biosynthesis     ")
+
+# Subset h0 data based on matching V_numbers with ribosome maps
+library('plyr')
+h0.aatRNA.subset <- match_df(h0.data2, aatRNA.map2, on = "V_number")
+
+h0.aatRNA.subset2 <- h0.aatRNA.subset[,-1]
+rownames(h0.aatRNA.subset2) <- h0.aatRNA.subset[,1]
+
+
+# Filter and CLR ribosome counts
+h0.aatRNA.subset.filt <-  codaSeq.filter(h0.aatRNA.subset2, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+
+#h0.aatRNA.subset.clr.input <- cmultRepl(t(h0.aatRNA.subset.filt), method='CZM', label=0)
+#h0.aatRNA.subset.clr <- apply(t(h0.aatRNA.subset.clr.input), 2, function(x) log(x) - mean(log(x)))
+
+# subset of map table for DNA
+DNArep.map2 <- subset(map.table.tidy2, pathway == "DNA replication     ")
+
+# Subset h0 data based on matching V_numbers with ribosome maps
+library('plyr')
+h0.DNArep.subset <- match_df(h0.data2, DNArep.map2, on = "V_number")
+
+h0.DNArep.subset2 <- h0.DNArep.subset[,-1]
+rownames(h0.DNArep.subset2) <- h0.DNArep.subset[,1]
+
+
+# Filter and CLR ribosome counts
+h0.DNArep.subset.filt <-  codaSeq.filter(h0.DNArep.subset2, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+
+
+h0.aatRNA.subset.sum <- apply(h0.aatRNA.subset.filt, 2, function(x) sum(x))
+h0.DNArep.subset.sum <- apply(h0.DNArep.subset.filt, 2, function(x) sum(x))
+
+log.ratio.h0.DNArep.aatRNA <- log2(h0.aatRNA.subset.sum/h0.DNArep.subset.sum)
+
+```
+
+```{r Ratio calculations - BV europe}
+# Biplots with only 1 pathway showing, see if the species centers are distinct
+
+va.data <- data.frame(both.data[,grep('v.a', colnames(both.data))])
+
+# make a map table
+map.table.messy <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""),
+                              header=TRUE, row.names=1, fill = TRUE)
+map.table.messy$pathway <- paste(map.table.messy$V3, map.table.messy$V4, 
+                                 map.table.messy$V5, map.table.messy$V6, 
+                                 map.table.messy$V7, map.table.messy$V8, 
+                                 map.table.messy$V9)
+map.table.messy$map_number <- paste(map.table.messy$V2)
+map.table.tidy <- map.table.messy[,c('map_number','pathway')]
+
+library("dplyr")
+va.data2 <- va.data
+va.data2 <- tibble::rownames_to_column(va.data, "V_number")
+
+map.table.tidy2 <- map.table.tidy
+map.table.tidy2 <- tibble::rownames_to_column(map.table.tidy, "V_number")
+
+# subset of map table for Aminoacyl-tRNA biosynthesis
+aatRNA.map2 <- subset(map.table.tidy2, pathway == "Aminoacyl-tRNA biosynthesis     ")
+
+# Subset va data based on matching V_numbers with ribosome maps
+library('plyr')
+va.aatRNA.subset <- match_df(va.data2, aatRNA.map2, on = "V_number")
+
+va.aatRNA.subset2 <- va.aatRNA.subset[,-1]
+rownames(va.aatRNA.subset2) <- va.aatRNA.subset[,1]
+
+
+# Filter and CLR ribosome counts
+va.aatRNA.subset.filt <-  codaSeq.filter(va.aatRNA.subset2, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+
+#va.aatRNA.subset.clr.input <- cmultRepl(t(va.aatRNA.subset.filt), method='CZM', label=0)
+#va.aatRNA.subset.clr <- apply(t(va.aatRNA.subset.clr.input), 2, function(x) log(x) - mean(log(x)))
+
+# subset of map table for DNA
+DNArep.map2 <- subset(map.table.tidy2, pathway == "DNA replication     ")
+
+# Subset va data based on matching V_numbers with ribosome maps
+library('plyr')
+va.DNArep.subset <- match_df(va.data2, DNArep.map2, on = "V_number")
+
+va.DNArep.subset2 <- va.DNArep.subset[,-1]
+rownames(va.DNArep.subset2) <- va.DNArep.subset[,1]
+
+
+# Filter and CLR ribosome counts
+va.DNArep.subset.filt <-  codaSeq.filter(va.DNArep.subset2, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+
+
+va.aatRNA.subset.sum <- apply(va.aatRNA.subset.filt, 2, function(x) sum(x))
+va.DNArep.subset.sum <- apply(va.DNArep.subset.filt, 2, function(x) sum(x))
+
+log.ratio.va.DNArep.aatRNA <- log2(va.aatRNA.subset.sum/va.DNArep.subset.sum)
+
+```
+
+```{r Ratio calculations - BV london}
+# Biplots with only 1 pathway showing, see if the species centers are distinct
+
+v0.data <- data.frame(both.data[,grep('v.0', colnames(both.data))])
+
+# make a map table
+map.table.messy <- read.table(paste(locn,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""),
+                              header=TRUE, row.names=1, fill = TRUE)
+map.table.messy$pathway <- paste(map.table.messy$V3, map.table.messy$V4, 
+                                 map.table.messy$V5, map.table.messy$V6, 
+                                 map.table.messy$V7, map.table.messy$V8, 
+                                 map.table.messy$V9)
+map.table.messy$map_number <- paste(map.table.messy$V2)
+map.table.tidy <- map.table.messy[,c('map_number','pathway')]
+
+library("dplyr")
+v0.data2 <- v0.data
+v0.data2 <- tibble::rownames_to_column(v0.data, "V_number")
+
+map.table.tidy2 <- map.table.tidy
+map.table.tidy2 <- tibble::rownames_to_column(map.table.tidy, "V_number")
+
+# subset of map table for Aminoacyl-tRNA biosynthesis
+aatRNA.map2 <- subset(map.table.tidy2, pathway == "Aminoacyl-tRNA biosynthesis     ")
+
+# Subset v0 data based on matching V_numbers with ribosome maps
+library('plyr')
+v0.aatRNA.subset <- match_df(v0.data2, aatRNA.map2, on = "V_number")
+
+v0.aatRNA.subset2 <- v0.aatRNA.subset[,-1]
+rownames(v0.aatRNA.subset2) <- v0.aatRNA.subset[,1]
+
+
+# Filter and CLR ribosome counts
+v0.aatRNA.subset.filt <-  codaSeq.filter(v0.aatRNA.subset2, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+
+#v0.aatRNA.subset.clr.input <- cmultRepl(t(v0.aatRNA.subset.filt), method='CZM', label=0)
+#v0.aatRNA.subset.clr <- apply(t(v0.aatRNA.subset.clr.input), 2, function(x) log(x) - mean(log(x)))
+
+# subset of map table for DNA
+DNArep.map2 <- subset(map.table.tidy2, pathway == "DNA replication     ")
+
+# Subset v0 data based on matching V_numbers with ribosome maps
+library('plyr')
+v0.DNArep.subset <- match_df(v0.data2, DNArep.map2, on = "V_number")
+
+v0.DNArep.subset2 <- v0.DNArep.subset[,-1]
+rownames(v0.DNArep.subset2) <- v0.DNArep.subset[,1]
+
+
+# Filter and CLR ribosome counts
+v0.DNArep.subset.filt <-  codaSeq.filter(v0.DNArep.subset2, min.occurrence=0.30,
+    min.prop=0.00005, samples.by.row=F)
+
+
+v0.aatRNA.subset.sum <- apply(v0.aatRNA.subset.filt, 2, function(x) sum(x))
+v0.DNArep.subset.sum <- apply(v0.DNArep.subset.filt, 2, function(x) sum(x))
+
+log.ratio.v0.DNArep.aatRNA <- log2(v0.aatRNA.subset.sum/v0.DNArep.subset.sum)
+
+```
+
+
+
+
+

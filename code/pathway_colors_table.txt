@@ -1,0 +1,132 @@
+darkorchid4	ABC transporters
+bisque4	Adipocytokine signaling pathway
+lavenderblush4	African trypanosomiasis
+indianred1	Alanine aspartate and glutamate metabolism
+skyblue1	Alzheimers disease
+lightskyblue1	Amino sugar and nucleotide sugar metabolism
+steelblue3	Aminoacyl-tRNA biosynthesis
+steelblue4	Aminobenzoate degradation
+black	Amoebiasis 
+olivedrab3	Apoptosis 
+olivedrab2	Arachidonic acid metabolism
+plum2	Arginine and proline metabolism
+orange3	Ascorbate and aldarate metabolism
+violetred	Atrazine degradation
+mediumpurple1	Bacterial chemotaxis
+mediumpurple3	Bacterial secretion system
+mediumpurple4	Base excision repair
+mediumpurple2	Benzoate degradation
+mediumpurple	Biosynthesis of ansamycins
+purple4	Biosynthesis of unsaturated fatty acids
+lavenderblush2	Biosynthesis of vancomycin group antibiotics
+pink	Biotin metabolism
+pink3	Butanoate metabolism
+sandybrown	Butirosin and neomycin biosynthesis
+darkorchid4	C5-Branched dibasic acid metabolism
+bisque4	Caprolactam degradation
+lavenderblush4	Carbohydrate digestion and absorption
+indianred1	Carbon fixation in photosynthetic organisms
+skyblue1	Carbon fixation pathways in prokaryotes
+lightskyblue1	Cell cycle - Caulobacter
+steelblue3	Citrate cycle (TCA cycle)
+steelblue4	Cysteine and methionine metabolism
+black	D-Alanine metabolism
+olivedrab3	D-Glutamine and D-glutamate metabolism
+olivedrab2	DNA replication
+plum2	Drug metabolism - cytochrome P450
+orange3	Drug metabolism - other enzymes
+violetred	Epithelial cell signaling in Helicobacter pylori infection
+mediumpurple1	Fatty acid biosynthesis
+mediumpurple3	Flagellar assembly
+mediumpurple4	Folate biosynthesis
+mediumpurple2	Fructose and mannose metabolism
+mediumpurple	Galactose metabolism
+purple4	Glutamatergic synapse
+lavenderblush2	Glutathione metabolism
+pink	Glycerolipid metabolism
+pink3	Glycerophospholipid metabolism
+sandybrown	Glycine serine and threonine metabolism
+darkorchid4	Glycolysis / Gluconeogenesis
+bisque4	Glycosaminoglycan degradation
+lavenderblush4	Glyoxylate and dicarboxylate metabolism
+indianred1	Homologous recombination
+skyblue1	Inositol phosphate metabolism
+lightskyblue1	Insulin signaling pathway
+steelblue3	Limonene and pinene degradation
+steelblue4	Lipoic acid metabolism
+black	Lipopolysaccharide biosynthesis
+olivedrab3	Lysine biosynthesis
+olivedrab2	Lysine degradation
+plum2	Lysosome 
+orange3	MAPK signaling pathway - yeast
+violetred	Meiosis - yeast
+mediumpurple1	Methane metabolism
+mediumpurple3	Mismatch repair
+mediumpurple4	mRNA surveillance pathway
+mediumpurple2	N-Glycan biosynthesis
+mediumpurple	Naphthalene degradation
+purple4	Nicotinate and nicotinamide metabolism
+lavenderblush2	Nitrogen metabolism
+pink	Nitrotoluene degradation
+pink3	NOD-like receptor signaling pathway
+sandybrown	Novobiocin biosynthesis
+darkorchid4	Nucleotide excision repair
+bisque4	One carbon pool by folate
+lavenderblush4	Other glycan degradation
+indianred1	Oxidative phosphorylation
+skyblue1	Pantothenate and CoA biosynthesis
+lightskyblue1	Pentose and glucuronate interconversions
+steelblue3	Pentose phosphate pathway
+steelblue4	Peptidoglycan biosynthesis
+black	Peroxisome 
+olivedrab3	Phenylalanine metabolism
+olivedrab2	Phenylalanine tyrosine and tryptophan biosynthesis
+plum2	Phosphatidylinositol signaling system
+orange3	Phosphotransferase system (PTS)
+violetred	Photosynthesis 
+mediumpurple1	Plant-pathogen interaction
+mediumpurple3	Polycyclic aromatic hydrocarbon degradation
+mediumpurple4	Polyketide sugar unit biosynthesis
+mediumpurple2	Porphyrin and chlorophyll metabolism
+mediumpurple	Primary immunodeficiency
+purple4	Progesterone-mediated oocyte maturation
+lavenderblush2	Propanoate metabolism
+pink	Prostate cancer
+pink3	Protein digestion and absorption
+sandybrown	Protein export
+darkorchid4	Protein processing in endoplasmic reticulum
+bisque4	Purine metabolism
+lavenderblush4	Pyrimidine metabolism
+indianred1	Pyruvate metabolism
+skyblue1	Regulation of actin cytoskeleton
+lightskyblue1	Renal cell carcinoma
+steelblue3	Retinol metabolism
+steelblue4	Riboflavin metabolism
+black	Ribosome 
+olivedrab3	Ribosome biogenesis in eukaryotes
+olivedrab2	RNA degradation
+plum2	RNA polymerase
+orange3	RNA transport
+violetred	Selenocompound metabolism
+mediumpurple1	Sphingolipid metabolism
+mediumpurple3	Staphylococcus aureus infection
+mediumpurple4	Starch and sucrose metabolism
+mediumpurple2	Streptomycin biosynthesis
+mediumpurple	Styrene degradation
+purple4	Sulfur metabolism
+lavenderblush2	Sulfur relay system
+pink	Terpenoid backbone biosynthesis
+pink3	Thiamine metabolism
+sandybrown	Tropane piperidine and pyridine alkaloid biosynthesis 
+darkorchid4	Tuberculosis 
+bisque4	Two-component system
+lavenderblush4	Type I diabetes mellitus
+indianred1	Type II diabetes mellitus
+skyblue1	Tyrosine metabolism
+lightskyblue1	Ubiquinone and other terpenoid-quinone biosynthesis
+steelblue3	Valine leucine and isoleucine biosynthesis
+steelblue4	Vasopressin-regulated water reabsorption
+black	Vibrio cholerae pathogenic cycle
+olivedrab3	Viral myocarditis
+olivedrab2	Vitamin B6 metabolism
+plum2	Zeatin biosynthesis

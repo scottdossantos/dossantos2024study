@@ -1,0 +1,255 @@
+############################################# README for mapping metatranscriptome reads to VIRGO #############################################
+
+================== Download & indexing human genome (T2T) for mapping ==================
+
+- Downloaded latest version of the complete human genome produced by T2T consortium:
+  - Link to their GitHub: https://github.com/marbl/CHM13
+  - Downloaded chm13v2.0.fa.gz from: https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=T2T/CHM13/assemblies/analysis_set/
+
+- Unzipped with gunzip as bowtie2 can't index from a zipped file
+
+  gunzip chm13v2.0.fa.gz
+
+- Made new conda environment with Bowtie2 
+  - Because my Mac has an M2 chip, it doesn't play nice with conda install. Had to run 'conda config --env --set subdir osx-64' to get conda
+    packages to install properly (mamba install is still buggered)
+
+    conda create -n mapping
+    conda config --env --set subdir osx-64
+    conda activate mapping
+    conda install -c bioconda bowtie2
+
+- Indexed huge fasta file with bowtie2-build using 5 threads
+
+  bowtie2-build --threads 5 chm13v2.0.fa.gz t2t_chm13v2-0
+
+- Output files created as expected (took about 30 mins):
+  t2t_ch13v2-0.1.bt2
+  t2t_ch13v2-0.2.bt2
+  t2t_ch13v2-0.3.bt2
+  t2t_ch13v2-0.4.bt2
+  t2t_ch13v2-0.rev.1.bt2
+  t2t_ch13v2-0.rev.2.bt2
+
+
+================== Download & indexing SILVA v138.1 for mapping ==================
+
+- Obtained LSU and SSU gzipped multi-FASTA files for SILVA v138.1 from:
+https://www.arb-silva.de/fileadmin/silva_databases/release_138_1/Exports/SILVA_138.1_LSUParc_tax_silva_trunc.fasta.gz
+https://www.arb-silva.de/fileadmin/silva_databases/release_138_1/Exports/SILVA_138.1_SSUParc_tax_silva_trunc.fasta.gz
+
+- These are LSU and SSU sequences that have been truncated to only contain the effective LSU/SSU genes (i.e. there
+  has been some sort of quality control/filtering after the sequence was extracted from the public repository of
+  origin). 
+
+- Bowtie2 accepts .gz files, so left compressed to save space. Made script to run bowtie2-build to index both
+  LSU and SSU files (pasted command after creating file with nano):
+
+nano index_silva_138.sh
+bowtie2-build SILVA_138.1_LSUParc_tax_silva_trunc.fasta.gz,SILVA_138.1_SSUParc_tax_silva_trunc.fasta.gz silva_138_rrna
+
+- Activated mapping environment with bowtie2 and ran script:
+  - NOTE: this took approximately 35 hours to run
+
+conda activate mapping
+nohup bash index_silva_138.sh >> output_rRNA_mapping.txt &
+
+- Deleted the source fastq.gz files
+
+rm SILVA_138.1_LSUParc_tax_silva_trunc.fasta.gz
+rm SILVA_138.1_SSUParc_tax_silva_trunc.fasta.gz
+
+
+================== Manual download of FASTQ files for European dataset ==================
+
+- ENA allows you to generate and download a custom shell script containing wget commands for user selected files
+  - Got a script for all FASTQ files associated with BioProject PRJEB21446 (European data): https://www.ebi.ac.uk/ena/browser/view/PRJEB21446
+  - Pulled wget commands for forward reads only:
+
+    grep '_1.fastq.gz' new_script.sh > ena_wget_fastq_R1_script.sh
+
+- Ran script to wget FASTQ files from Europe dataset
+
+ sh ena_wget_fastq_R1_script.sh
+
+- Running these shell scripts as-is didn't work: wget did the first file and then couldn't download the others.
+  - Spent all morning and some of the afternoon trying to figure out what was going wrong. No success.
+  - Tried to use kingfisher to download files (https://wwood.github.io/kingfisher-download/¨), but that also failed after first two
+  - Finally tried editing shell scripts to remove 'wget -nc ' and calling 'wget -nc ' in a for loop on a list of the URLs. This
+    works with no problem. No idea what the issue was but stack overflow seems to think it is a problem with FTP protocols (see
+    https://stackoverflow.com/questions/76900954/ for more info).
+
+- What I actually did to download files: first pulled all URLs out of the shell script
+
+sed 's/wget -nc //' ena_wget_fastq_R1_script.sh > ena_wget_R1_URLs
+
+- Ran a 'for' loop calling wget individually
+  - NOTE: If this doesn't work, or is really slow, give it 30m - 1hr or so and try again. No idea what the issue was here.
+
+for i in `cat ena_wget_R1_URLs` ; do wget -nc $i ; done
+
+- Took a while to download all the files (between ~1-1.5 GB each, 80 files total)
+
+- Can repeat the same for London data (we had host-depleted files on the server already)
+
+- FASTQ files for Virginia dataset are available on dbGaP following an authorised access request (requires local ethics review board).
+  SRAtoolkit can then be used to access the fastq files (requires access key from dbGaP)
+
+
+================== Cloning of VIRGO GitHub repository and download of mandatory database files  ==================
+
+- files used to build/index/BLAST against VIRGO are located in a directory that is not included on
+  GitHub (files are too large), but they can be downloaded manually from: https://virgo.igs.umaryland.edu
+  by clicking on the VIRGO link on the homepage. You can manually download them, or use the following
+  code to automate it:
+
+- make a directory called '0_db' in your local copy of the VIRGO github repo and move into it
+
+cd [PATH-TO-CLONED-REPO]/VIRGO/
+mkdir 0_db
+cd 0_db
+
+
+- use a text editor to make a new file containing the URL linking to the files
+
+nano files
+
+--------------------- START COPY BELOW THIS LINE ---------------------
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/AA.fasta
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/NT.fasta
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.1.bt2
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.2.bt2
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.3.bt2
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.4.bt2
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.1.ebwt
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.2.ebwt
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.3.ebwt
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.4.ebwt
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.nhr
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.nin
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.nsq
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.phr
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.pin
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.psq
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.rev.1.bt2
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.rev.2.bt2
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.rev.1.ebwt
+http://downloads.igs.umaryland.edu/virgo/VIRGO/0_db/VIRGO.rev.2.ebwt
+---------------------- END COPY ABOVE THIS LINE ----------------------
+
+
+- run wget in a loop to download each of the required files
+
+for i in `cat files` ; do wget $i ; done
+
+
+- Can now proceed to the mapping steps
+
+================== Quality control and removal of host/rRNA reads  ==================
+
+- Data processing requires that trimmomatic (quality control) and bowtie2 (removal of human/rRNA reads) are installed.
+
+- Step 1 of the VIRGO pipeline requires that bowtie is installed (note bowtie 1, NOT bowtie 2)
+
+- Step 2 of the VIRGO pipeline requires that GNU awk (gawk) is installed (note, there are different versions of awk!)
+
+- All files for running VIRGO are available at: https://github.com/ravel-lab/VIRGO
+  The entire VIRGO directory must be downloaded. The scripts for mapping reads to the VIRGO database are included at:
+  [PATH]/VIRGO/3_run_VIRGO/runMapping.step1.sh
+   and
+  [PATH]/VIRGO/3_run_VIRGO/runMapping.step2.sh
+
+- Master script for running trimmomatic, sequential mapping to GRCh38, T2T, SILVA, and running step 1 of VIRGO for each
+  sample (open nano and paste the indicated code):
+
+nano master_qc_mapping_virgo1.sh 
+
+
+------------------------------------ START COPY BELOW THIS LINE ------------------------------------
+export PATH=$PATH:[PATH-TO]/bowtie-1.2.3-linux-x86_64
+
+TRIM='[PATH-TO]/Trimmomatic-0.36/trimmomatic-0.36.jar'
+BOWTIE2='[PATH-TO]/bowtie2-2.3.5/bowtie2'
+
+for i in `cat [DIRECTORY-WITH-FASTQ.GZ-FILES]` ;\
+do java -jar $TRIM SE -threads 80\
+ $i'.fastq.gz' $i'.trim.fastq'\
+ CROP:75 SLIDINGWINDOW:4:20 MINLEN:40 ;\
+$BOWTIE2 -x [PATH-TO-GRCh38-BT2-INDEXES]
+ -U $i'.trim.fastq' -p 80 -S $i'.sam'\
+ --end-to-end --very-sensitive --un $i'.unalign.HG38.fastq' ;\
+rm $i'.sam' ;\
+$BOWTIE2 -x [PATH-TO-T2T-BT2-INDEXES]
+ -U $i'.unalign.HG38.fastq' -p 80 -S $i'_T2T.sam'\
+ --end-to-end --very-sensitive --un $i'.unalign.T2T.fastq' ;\
+rm $i'_T2T.sam' ;\
+$BOWTIE2 -x [PATH-TO-SILVA-BT2-INDEXES]
+ -U $i'.unalign.T2T.fastq' -p 80 -S $i'_rRNA.sam'\
+ --end-to-end --very-sensitive --un $i'.unalign.rRNA.fastq' ;\
+rm $i'_rRNA.sam' ;\
+[PATH-TO]/VIRGOrunMapping.step1.sh]\
+ -r $i'.unalign.rRNA.fastq'\
+ -p $i\
+ -d [PATH-TO-VIRGO-DIRECTORY] ;\
+rm *.fastq ; done
+------------------------------------- END COPY ABOVE THIS LINE -------------------------------------
+
+
+(NOTE1: virgo step1 script assumes bowtie is in your path, which might not be the case. 'master_qc_mapping_virgo1.sh' adds
+        the bowtie directory to the path for the current session, so that the shell can find the program)
+
+(NOTE2: 'master_qc_mapping_virgo1.sh' creates two environment variables pointing to the trimmomatic and bowtie2 executables)
+
+(NOTE3: trimmomatic and bowtie2 calls use 80 threads. Change this based on your machine and desired number of threads)
+
+(NOTE4: for the three mapping steps, the path required is an absolute path to the directory containing the '.bt2' index files)
+
+
+- Run this script in the background with no hang-up signal (will take several days for London/Europe dataset; several weeks 
+  for Virginia dataset!). If you run into issues with VIRGO entering an infinite loop on some samples, contact Scott Dos Santos
+  at sdossa5@uwo.ca, or Gregory Gloor at ggloor@uwo.ca for additional help. There is documentation detailing how to get around
+  this- it was a huge pain in the arse.
+
+nohup bash master_qc_mapping_virgo1.sh >> outputLog_mapping.txt &
+
+
+================== Generating feature tables from VIRGO-mapped reads ==================
+
+- After this mapping script has run successfully, all files required for step2 of VIRGO pipeline will be in a directory called
+  'temp_mapping'. We separated these '.out' files by dataset and ran VIRGO step 2 separately on each dataset, then merged them\
+  together as required in R. 
+
+
+- Create a second script for running step2 of VIRGO (open nano and paste the indicated code):
+
+nano master_virgoStep2.sh
+
+
+------------------------------------ START COPY BELOW THIS LINE ------------------------------------
+[PATH-TO]/VIRGO/3_run_VIRGO/runMapping.step2.sh\
+ -p [PATH-TO-DIRECTORY-WITH-'.out'-FILES]\
+ -d [PATH-TO]/VIRGO/ 
+------------------------------------- END COPY ABOVE THIS LINE -------------------------------------
+
+
+- Made environment for running virgo step 2 (installed all listed dependencies on VIRGO website: blast >2.2.3, bowtie >1.1,
+  GNU awk >3.1, seqtk <1.0 ; see https://virgo.igs.umaryland.edu/tutorial.php) 
+
+conda create -n virgo
+conda activate virgo
+mamba install -c bioconda -c conda-forge blast bowtie gawk seqtk
+conda deactivate
+
+- Run VIRGO step 2 in the background with no hang-up signal on the '.out' files 
+
+nohup bash master_virgoStep2.sh >> outputLog_virgoStep2.txt &
+
+(NOTE5: if the script exits within a few seconds and the output log contains several lines that say something like 
+        'awk: line 2: function asorti never defined', you have the wrong version of Awk installed. Make sure it's
+        GNU awk!)
+
+- The feature table containing the read counts for each non-redundant VIRGO gene (vNumber) per sample is called
+  'summary.NR.abundance.txt'. These are used in the R script, 'merge_feature_tables.R' to generate the merged
+  London/Europe, Virginia, and Pregnant/Non-pregnant feature tables used in our analyses. 
+
+##################################################################### END #####################################################################
