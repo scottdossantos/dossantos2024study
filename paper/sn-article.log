@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.30)  24 APR 2024 11:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.30)  24 APR 2024 13:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1505,9 +1505,6 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.985pt have occurred.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `sn-article.out' has not changed.
 (rerunfilecheck)             Checksum: FD17B2CF7AE28B210E82DC3C83CA57B1;7779.
  ) 
@@ -1542,7 +1539,7 @@ f-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2023/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2023/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2023/texmf-dis
 t/fonts/type1/public/cbfonts/grmn1000.pfb>
-Output written on sn-article.pdf (42 pages, 28371191 bytes).
+Output written on sn-article.pdf (42 pages, 28371205 bytes).
 PDF statistics:
  816 PDF objects out of 1000 (max. 8388607)
  687 compressed objects within 7 object streams
