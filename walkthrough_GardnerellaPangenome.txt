@@ -1,6 +1,6 @@
 ######################## README for identifying genes unique to each named Gardnerella species ########################
 
-- If you have any questions about the content of this walkthough, please contact Dr. Scott Dos Santos (sdossa5@uwo.ca)
+- If you have any questions about the content of this walkthrough, please contact Dr. Scott Dos Santos (sdossa5@uwo.ca)
   or Dr. Gregory Gloor (ggloor@uwo.ca) and they can help you out. 
 
 ===================================== Genome annotation and pangenome analysis =====================================
