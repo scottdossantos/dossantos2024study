@@ -130,7 +130,11 @@
 %% sample for unstructured abstract %%
 %%==================================%%
 
-\abstract{The application of `-omics' technologies to study bacterial vaginosis (BV) has uncovered vast differences in composition and scale between the vaginal microbiomes of healthy and BV patients. Compared to amplicon sequencing and shotgun metagenomic approaches focusing on a single or few species, investigating the transcriptome of the vaginal microbiome at a system-wide level can provide insight into the functions which are actively expressed and differential between states of health and disease. We conducted a meta-analysis of vaginal metatranscriptomes from three studies, split into exploratory (\textit{n} = 44) and validation (\textit{n} = 297) datasets, accounting for the compositional nature of sequencing data and differences in scale between healthy and BV microbiomes. Conducting differential abundance analyses on the exploratory dataset, we identified a multitude of strategies employed by microbes associated with states of health and BV to evade host cationic antimicrobial peptides (CAMPs); putative mechanisms used by BV-associated species to resist and counteract the low vaginal pH; and potential approaches to disrupt vaginal epithelial integrity so as to establish sites for adherence and biofilm formation. Moreover, we identified several distinct functional subgroups within the BV population, distinguished by genes involved in motility, chemotaxis, biofilm formation and co-factor biosynthesis. After defining molecular states of health and BV in the validation dataset using KEGG orthology terms rather than community state types, differential abundance analysis confirmed earlier observations regarding CAMP resistance and compromising epithelial barrier integrity in healthy and BV microbiomes, and also supported the existence of motile vs. non-motile subgroups in the BV population. Our findings highlight a need to focus on functional rather than taxonomic differences when considering the role of microbiomes in disease and identify pathways for further research as potential BV treatment targets.}
+\abstract{\textbf{Background:} The application of `-omics' technologies to study bacterial vaginosis (BV) has uncovered vast differences in composition and scale between the vaginal microbiomes of healthy and BV patients. Compared to amplicon sequencing and shotgun metagenomic approaches focusing on a single or few species, investigating the transcriptome of the vaginal microbiome at a system-wide level can provide insight into the functions which are actively expressed and differential between states of health and disease.\newline
+
+\textbf{Results:} We conducted a meta-analysis of vaginal metatranscriptomes from three studies, split into exploratory (\textit{n} = 44) and validation (\textit{n} = 297) datasets, accounting for the compositional nature of sequencing data and differences in scale between healthy and BV microbiomes. Conducting differential abundance analyses on the exploratory dataset, we identified a multitude of strategies employed by microbes associated with states of health and BV to evade host cationic antimicrobial peptides (CAMPs); putative mechanisms used by BV-associated species to resist and counteract the low vaginal pH; and potential approaches to disrupt vaginal epithelial integrity so as to establish sites for adherence and biofilm formation. Moreover, we identified several distinct functional subgroups within the BV population, distinguished by genes involved in motility, chemotaxis, biofilm formation and co-factor biosynthesis. After defining molecular states of health and BV in the validation dataset using KEGG orthology terms rather than community state types, differential abundance analysis confirmed earlier observations regarding CAMP resistance and compromising epithelial barrier integrity in healthy and BV microbiomes, and also supported the existence of motile vs. non-motile subgroups in the BV population.\newline
+
+\textbf{Conclusions:} Our findings highlight a need to focus on functional rather than taxonomic differences when considering the role of microbiomes in disease and identify pathways for further research as potential BV treatment targets.\newline}
 
 %%================================%%
 %% Sample for structured abstract %%
@@ -152,7 +156,7 @@
 
 \maketitle
 
-\section{Introduction}\label{sec:secIntro}
+\section{Background}\label{sec:secIntro}
 Bacterial vaginosis (BV) is a polymicrobial condition of poorly-understood aetiology and is the most common cause of vaginal concern worldwide \citep{Srinivasan:2008}. Prevalence rates vary by country and are typically between 20-30 \% \citep{peebles_2019}, though reported rates exceed 50 \% in some rural populations of developing nations \citep{kenyon_global_2013}. Symptoms of the condition include a thin and potentially malodorous discharge, vaginal itching or irritation, pain on urination and/or sexual intercourse, and elevated vaginal pH; however many cases can be asymptomatic. Untreated, BV can have profound consequences, including higher acquisition rates of sexually-transmitted infections \citep{Allsworth:2011aa,Chacra:2023aa} (including HIV and oncogenic HPV), in addition to a marked negative impact on patients' self-esteem, feelings of shame or anxiety, reduced intimacy and relationship problems \citep{adolfsson_how_2016} and an increased incidence of pre-term birth \citep{Fettweis:2019aa}. Recommended treatment with oral or intravaginal metronidazole or clindamycin often achieves symptom resolution in the short term, but is associated with high recurrence rates of 50-80 \% within a year \citep{Oduyebo:2009}.
 
 Vaginal microbiome dysbiosis is a hallmark of BV and typically manifests as a depletion of \textit{Lactobacilllus} spp., with a corresponding overgrowth of various obligate anaerobic species \citep{lev-sagie_vaginal_2022}. Typically, total bacterial loads in BV are one to two orders of magnitude higher than in healthy patients \citep{Zozaya:2010}, and species from the genera \textit{Gardnerella}, \textit{Prevotella}, \textit{Atopobium}, \textit{Megasphaera}, \textit{Sneathia}, and \textit{Mobiluncus}-- among others-- predominate. Landmark studies of the vaginal microbiome using amplicon sequencing defined five canonical `community state types' (CSTs), with CST IV showing a significant correlation with BV \citep{Ravel:2010}. This finding has since been extensively replicated, including studies employing alternative molecular barcoding genes \citep{albert_study_2015, dossantos_2023} and shotgun metagenomic methods \citep{symul_sub-communities_2023}.
@@ -543,29 +547,43 @@ Signature functions were identified for groups of metatranscriptomes (healthy vs
 \subsection{Correlation of metatranscriptome features with gestational age at delivery}
 Data regarding pre-term birth and gestational age at delivery for the Virginia dataset were obtained directly from the MOMS-PI study authors. The filtered Virginia dataset was first aggregated at the species or functional (KO) level and gestational age at delivery was converted into decimal format. The `aldex.corr' function was used to determine significant correlations of species or KO terms with gestational age at delivery using Spearman, Pearson, and Kendall co-efficients (all Benjamini-Hochberg-corrected \textit{P}-values reported were $\leq$0.01).
 
-\subsection{Data availability and code}\label{subsec:subsecDataAvail}
-Raw FASTQ files are available for each of the datasets used. London and European datasets are immediately available from the European Nucleotide Archive under the accession numbers PRJEB31833 and PRJEB21446, respectively.
-
-The Virginia dataset was obtained from the Database of Genotypes and Phenotypes (dbGaP; accession no. phs001523.v1.p1) after a successful data access request, following the conditions of the data access policy under the University of Western Ontario Research Ethics Board approval \#123506. Pre-term birth data is not hosted on dbGaP and must be obtained by contacting the MOMS-PI study authors directly.
-
-Whole genome sequences of \textit{Gardnerella} spp. type strains used in this study can be found under BioProject accession PRJNA474758 on NCBI. Whole genome sequences for the additional \textit{Gardnerella} strains used in this study can be found under the following BioProject accessions: \textit{G. leopoldii} UMB6774, PRJNA970254; \textit{G. piotii} JNFY15, PRJNA761238; \textit{G. swidsinskii} JNFY3, PRJNA761238; and \textit{G. vaginalis} NR001, PRJNA394757.
-
-All code used for the re-processing of FASTQ files at the command line and data analysis in R is available as a code stable release at: \url{https://github.com/scottdossantos/dossantos2024study}. Clinical metadata from dbGaP for the Virginia dataset are intentionally not included in this repository.
-
 \subsection{Re-assigning pathways}\label{subsec:subsecPathways}
 All gene function assignments were performed automatically using the Kyoto Encyclopedia of Genes and Genomes \cite{Kanehisa:2010}. However, due to the unique environment and somewhat generic annotation in KEGG, several assignments were clearly incorrect. Each function was individually investigated and re-assigned using the Kyoto Encyclopedia of Genes and Genomes. First the KO numbers were identified, then each function was investigated looking at the pathway, enzymatic function, chemical reaction, location, and which species was expressing it in our samples. Using that knowledge, as well as knowledge of the vaginal environment, the most probable function was inferred. KO terms that were modified, including the rationale for each, are in the `Supplement' directory under `pathway-changes.xlsx' and in `lon\_eur\_health\_vs\_BV.R' and `virginia\_definingMolecularBV.R' in the `code' directory of the GitHub repository for this study. The latter two R scripts also contain DOIs linking to peer-reviewed literature supporting the KO term changes at the end of the files.
 
-\subsection{Author contributions}\label{subsec:subsecContribs}
+\section{Declarations}\label{sec:secDeclare}
+
+\subsection{Ethics approval and consent to participate}\label{subsec:subsecEthics}
+A data access request was submitted to the NCBI Database of Genotypes and Phenotypes (dbGaP) to obtain the FASTQ files associated with vaginal metatranscriptome samples from the MOMS-PI study (dbGaP; accession no. phs001523.v1.p1). Access was authorised by dbGaP following the conditions of the data access policy under the University of Western Ontario Research Ethics Board approval \#123506.
+
+\subsection{Consent for publication}\label{subsec:subsecPubConsent}
+Not applicable.
+
+\subsection{Availability of data and materials}\label{subsec:subsecDataAvail}
+Raw FASTQ files are available for each of the datasets used. London and European datasets are immediately available from the European Nucleotide Archive under the accession numbers PRJEB31833 and PRJEB21446, respectively. FASTQ files and clinical metadata for the Virginia dataset are hosted on dbGaP and are only accessible following an authorised access request. Data regarding pre-term birth and gestational age at delivery for the Virginia dataset is not hosted on dbGaP and must be obtained by contacting the MOMS-PI study authors directly.
+
+Whole genome sequences of \textit{Gardnerella} spp. type strains used in this study can be found under BioProject accession PRJNA474758 on NCBI. Whole genome sequences for the additional \textit{Gardnerella} strains used in this study can be found under the following BioProject accessions: \textit{G. leopoldii} UMB6774, PRJNA970254; \textit{G. piotii} JNFY15, PRJNA761238; \textit{G. swidsinskii} JNFY3, PRJNA761238; and \textit{G. vaginalis} NR001, PRJNA394757.
+
+All code used for the re-processing of FASTQ files at the command line and data analysis in R is available as a code stable release at: \url{https://github.com/scottdossantos/dossantos2024study}. Clinical metadata corresponding to the Virginia dataset are hosted on dbGaP and are intentionally omitted from this repository.
+
+\subsection{Competing interests}\label{subsec:subsecCompInt}
+The authors declare that they have no competing interests.
+
+\subsection{Funding}\label{subsec:subsecFunding}
+SJDS and JMM were supported by an internal grant from the Schulich School of Medicine \& Dentistry at Western University, awarded to GG. CC was supported by an award from the Weston Family foundation (award no. 20170705). GR held a grant from the Natural Sciences and Engineering Research Council of Canada (NSERC).
+
+\subsection{Authors' contributions}\label{subsec:subsecContribs}
 Author contributions are listed below, according to the CRediT taxonomy:
-\\
-\newline
-\textbf{Funding acquisition:} GR, GBG\newline
-\textbf{Conceptualisation:} GR, GBG\newline
-\textbf{Data curation:} SJDS, CC, JMM\newline
-\textbf{Formal analysis:} SJDS, CC, JMM, GG\newline
-\textbf{Writing- original draft:} SJDS, CC, GBG\newline
-\textbf{Writing- review \& editing:} All authors
-\newpage
+\begin{itemize}
+\item Funding acquisition: GR, GBG
+\item Conceptualisation: GR, GBG
+\item Data curation: SJDS, CC, JMM
+\item Formal analysis: SJDS, CC, JMM, GG
+\item Writing- original draft: SJDS, CC, GBG
+\item Writing- review \& editing: All authors
+\end{itemize}
+
+\subsection{Acknowledgements}\label{subsec:subsecAcknowl}
+The authors would like to thank Dr. Jeremy Burton and Wongsakorn Kiattiburut for their helpful discussions regarding cationic antimicrobial peptides, and Amy McMillan for her assistance with data collection.\newpage
 
 \section{Supplementary figures} \label{sec:secSupplFigs}
 % the next four commands do the following: 1) resets the figure counter at this point to 0; 2) changes the figure names (bolded) after this point to "Supplementary Fig."; 3) appends "S[fig #]" after "Supplementary Figure"; 4) makes sure that the figure hyperlinks for supplementary figures point to the supplementary figures and NOT the main figures (NOTE: may have to typeset twice for this to work properly!).
@@ -682,21 +700,6 @@ Author contributions are listed below, according to the CRediT taxonomy:
 % Acknowledgments are not compulsory. Where included they should be brief. Grant or contribution numbers may be acknowledged.
 
 % Please refer to Journal-level guidance for any specific requirements.
-
-% \section*{Declarations}
-
-% Some journals require declarations to be submitted in a standardised format. Please check the Instructions for Authors of the journal to which you are submitting to see if you need to complete this section. If yes, your manuscript must contain the following sections under the heading `Declarations':
-
-% \begin{itemize}
-% \item Funding
-% \item Conflict of interest/Competing interests (check journal-specific guidelines for which heading to use)
-% \item Ethics approval 
-% \item Consent to participate
-% \item Consent for publication
-% \item Availability of data and materials
-% \item Code availability 
-% \item Authors' contributions
-% \end{itemize}
 
 % \noindent
 % If any of the sections are not relevant to your manuscript, please include the heading and write `Not applicable' for that section. 

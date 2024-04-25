@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.30)  24 APR 2024 13:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.30)  25 APR 2024 15:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1045,63 +1045,73 @@ Package hyperref Info: Link coloring ON on input line 98.
 \openout3 = `sn-article.out'.
 
 \c@lstlisting=\count333
-LaTeX Font Info:    Calculating math sizes for size <12.045> on input line 154.
+LaTeX Font Info:    Calculating math sizes for size <12.045> on input line 158.
 
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <8.43146> not available
-(Font)              size <8> substituted on input line 154.
+(Font)              size <8> substituted on input line 158.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <8.43146> not available
-(Font)              size <8> substituted on input line 154.
+(Font)              size <8> substituted on input line 158.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <8.43146> not available
-(Font)              size <8> substituted on input line 154.
+(Font)              size <8> substituted on input line 158.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 154
+LaTeX Font Info:    Trying to load font information for U+msa on input line 158
 .
 (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 154
+LaTeX Font Info:    Trying to load font information for U+msb on input line 158
 .
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for U+rsfs on input line 15
-4.
+8.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 
 LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <8.43146> not available
-(Font)              size <8> substituted on input line 154.
+(Font)              size <8> substituted on input line 158.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <8.43146> not available
-(Font)              size <8> substituted on input line 154.
+(Font)              size <8> substituted on input line 158.
 
 LaTeX Font Info:    Calculating math sizes for size <11.04124> on input line 15
-4.
+8.
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <5.52061> not available
-(Font)              size <6> substituted on input line 154.
+(Font)              size <6> substituted on input line 158.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <5.52061> not available
-(Font)              size <6> substituted on input line 154.
+(Font)              size <6> substituted on input line 158.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <5.52061> not available
-(Font)              size <6> substituted on input line 154.
+(Font)              size <6> substituted on input line 158.
 
 
 LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <5.52061> not available
-(Font)              size <6> substituted on input line 154.
+(Font)              size <6> substituted on input line 158.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--158
+  
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--158
+  
+ []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1109,8 +1119,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [1
 
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 158--158
+  
+ []
+
 LaTeX Font Info:    Calculating math sizes for size <10.03749> on input line 15
-4.
+8.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1118,28 +1132,28 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
-LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 176.
+LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 180.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.015> not available
-(Font)              size <5> substituted on input line 176.
+(Font)              size <5> substituted on input line 180.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.015> not available
-(Font)              size <5> substituted on input line 176.
+(Font)              size <5> substituted on input line 180.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.015> not available
-(Font)              size <5> substituted on input line 176.
+(Font)              size <5> substituted on input line 180.
 
 
 LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <4.015> not available
-(Font)              size <5> substituted on input line 176.
+(Font)              size <5> substituted on input line 180.
 
-<3_Workflow.png, id=188, 858.20625pt x 571.53525pt>
+<3_Workflow.png, id=212, 858.20625pt x 571.53525pt>
 File: 3_Workflow.png Graphic file (type png)
 <use 3_Workflow.png>
-Package pdftex.def Info: 3_Workflow.png  used on input line 191.
+Package pdftex.def Info: 3_Workflow.png  used on input line 195.
 (pdftex.def)             Requested size: 343.27641pt x 228.61005pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1149,7 +1163,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
  been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.194 
+l.198 
       ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1158,12 +1172,12 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.199 
+l.203 
        <./3_Workflow.png>]
-<0_multipanel_fig2.png, id=226, 450.0012pt x 573.46245pt>
+<0_multipanel_fig2.png, id=250, 450.0012pt x 573.46245pt>
 File: 0_multipanel_fig2.png Graphic file (type png)
 <use 0_multipanel_fig2.png>
-Package pdftex.def Info: 0_multipanel_fig2.png  used on input line 207.
+Package pdftex.def Info: 0_multipanel_fig2.png  used on input line 211.
 (pdftex.def)             Requested size: 360.00143pt x 458.77058pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1179,15 +1193,15 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.211 
+l.215 
        <./0_multipanel_fig2.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
-<0_multipanel_fig3.png, id=276, 307.8702pt x 322.22096pt>
+<0_multipanel_fig3.png, id=300, 307.8702pt x 322.22096pt>
 File: 0_multipanel_fig3.png Graphic file (type png)
 <use 0_multipanel_fig3.png>
-Package pdftex.def Info: 0_multipanel_fig3.png  used on input line 232.
+Package pdftex.def Info: 0_multipanel_fig3.png  used on input line 236.
 (pdftex.def)             Requested size: 369.44237pt x 386.6632pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1200,15 +1214,15 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.238 
+l.242 
        <./0_multipanel_fig3.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [11]
-<0_multipanel_fig4.png, id=319, 296.42744pt x 424.82715pt>
+<0_multipanel_fig4.png, id=343, 296.42744pt x 424.82715pt>
 File: 0_multipanel_fig4.png Graphic file (type png)
 <use 0_multipanel_fig4.png>
-Package pdftex.def Info: 0_multipanel_fig4.png  used on input line 257.
+Package pdftex.def Info: 0_multipanel_fig4.png  used on input line 261.
 (pdftex.def)             Requested size: 340.8889pt x 488.54742pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1224,15 +1238,15 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.261 
+l.265 
        <./0_multipanel_fig4.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [14]
-<0_multipanel_fig5.png, id=350, 441.93105pt x 472.164pt>
+<0_multipanel_fig5.png, id=374, 441.93105pt x 472.164pt>
 File: 0_multipanel_fig5.png Graphic file (type png)
 <use 0_multipanel_fig5.png>
-Package pdftex.def Info: 0_multipanel_fig5.png  used on input line 278.
+Package pdftex.def Info: 0_multipanel_fig5.png  used on input line 282.
 (pdftex.def)             Requested size: 369.01447pt x 394.25914pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1242,15 +1256,15 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.284 
+l.288 
        <./0_multipanel_fig5.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [16]
-<2_Summary.png, id=374, 858.20625pt x 604.659pt>
+<2_Summary.png, id=398, 858.20625pt x 604.659pt>
 File: 2_Summary.png Graphic file (type png)
 <use 2_Summary.png>
-Package pdftex.def Info: 2_Summary.png  used on input line 297.
+Package pdftex.def Info: 2_Summary.png  used on input line 301.
 (pdftex.def)             Requested size: 364.73938pt x 256.98128pt.
 
 
@@ -1267,7 +1281,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.306 
+l.310 
        <./2_Summary.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1284,124 +1298,123 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [23]
-Underfull \hbox (badness 10000) in paragraph at lines 559--568
-
- []
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [24]
-<0_supplFig0.png, id=478, 418.4433pt x 196.47116pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.e
+nc}]
+<0_supplFig0.png, id=509, 418.4433pt x 196.47116pt>
 File: 0_supplFig0.png Graphic file (type png)
 <use 0_supplFig0.png>
-Package pdftex.def Info: 0_supplFig0.png  used on input line 580.
+Package pdftex.def Info: 0_supplFig0.png  used on input line 598.
 (pdftex.def)             Requested size: 368.23123pt x 172.89514pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25
+ [26
 pdfTeX warning (ext4): destination with the same identifier (name{figure.S1}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.583 \newpage
+l.601 \newpage
                <./0_supplFig0.png>]
-<0_supplFig1.png, id=485, 458.4327pt x 446.50815pt>
+<0_supplFig1.png, id=515, 458.4327pt x 446.50815pt>
 File: 0_supplFig1.png Graphic file (type png)
 <use 0_supplFig1.png>
-Package pdftex.def Info: 0_supplFig1.png  used on input line 587.
+Package pdftex.def Info: 0_supplFig1.png  used on input line 605.
 (pdftex.def)             Requested size: 372.47563pt x 362.78697pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [26
+ [27
 pdfTeX warning (ext4): destination with the same identifier (name{figure.S2}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.590 \newpage
+l.608 \newpage
                <./0_supplFig1.png>]
-<0_supplFig2.png, id=491, 467.94826pt x 498.4221pt>
+<0_supplFig2.png, id=521, 467.94826pt x 498.4221pt>
 File: 0_supplFig2.png Graphic file (type png)
 <use 0_supplFig2.png>
-Package pdftex.def Info: 0_supplFig2.png  used on input line 594.
+Package pdftex.def Info: 0_supplFig2.png  used on input line 612.
 (pdftex.def)             Requested size: 372.01709pt x 396.24368pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [27
+ [28
 pdfTeX warning (ext4): destination with the same identifier (name{figure.S3}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.597 \newpage
+l.615 \newpage
                <./0_supplFig2.png>]
-<0_supplFig3.png, id=497, 351.11176pt x 389.65575pt>
+<0_supplFig3.png, id=527, 351.11176pt x 389.65575pt>
 File: 0_supplFig3.png Graphic file (type png)
 <use 0_supplFig3.png>
-Package pdftex.def Info: 0_supplFig3.png  used on input line 601.
+Package pdftex.def Info: 0_supplFig3.png  used on input line 619.
 (pdftex.def)             Requested size: 280.88977pt x 311.725pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [28
+ [29
 pdfTeX warning (ext4): destination with the same identifier (name{figure.S4}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.604 \newpage
+l.622 \newpage
                <./0_supplFig3.png>]
-<0_supplFig4.png, id=503, 409.7709pt x 621.7629pt>
+<0_supplFig4.png, id=533, 409.7709pt x 621.7629pt>
 File: 0_supplFig4.png Graphic file (type png)
 <use 0_supplFig4.png>
-Package pdftex.def Info: 0_supplFig4.png  used on input line 608.
+Package pdftex.def Info: 0_supplFig4.png  used on input line 626.
 (pdftex.def)             Requested size: 297.08566pt x 450.78079pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [29
+ [30
 pdfTeX warning (ext4): destination with the same identifier (name{figure.S5}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.611 \newpage
+l.629 \newpage
                <./0_supplFig4.png>]
-<0_supplFig5.png, id=509, 391.34206pt x 359.4228pt>
+<0_supplFig5.png, id=539, 391.34206pt x 359.4228pt>
 File: 0_supplFig5.png Graphic file (type png)
 <use 0_supplFig5.png>
-Package pdftex.def Info: 0_supplFig5.png  used on input line 615.
+Package pdftex.def Info: 0_supplFig5.png  used on input line 633.
 (pdftex.def)             Requested size: 371.77284pt x 341.44972pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [30
+ [31
 pdfTeX warning (ext4): destination with the same identifier (name{figure.S6}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.618 \newpage
+l.636 \newpage
                <./0_supplFig5.png>]
-<0_supplFig6.png, id=516, 472.52534pt x 358.33875pt>
+<0_supplFig6.png, id=547, 472.52534pt x 358.33875pt>
 File: 0_supplFig6.png Graphic file (type png)
 <use 0_supplFig6.png>
-Package pdftex.def Info: 0_supplFig6.png  used on input line 622.
+Package pdftex.def Info: 0_supplFig6.png  used on input line 640.
 (pdftex.def)             Requested size: 368.56828pt x 279.5031pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [31
+ [32
 pdfTeX warning (ext4): destination with the same identifier (name{figure.S7}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.625 \newpage
+l.643 \newpage
                <./0_supplFig6.png>]
-<0_virginia_coda4microbiome_fig.png, id=523, 438.79935pt x 576.35326pt>
+<0_virginia_coda4microbiome_fig.png, id=553, 438.79935pt x 576.35326pt>
 File: 0_virginia_coda4microbiome_fig.png Graphic file (type png)
 <use 0_virginia_coda4microbiome_fig.png>
 Package pdftex.def Info: 0_virginia_coda4microbiome_fig.png  used on input line
- 629.
+ 647.
 (pdftex.def)             Requested size: 368.58894pt x 484.13344pt.
 
 Overfull \vbox (11.24422pt too high) has occurred while \output is active []
@@ -1409,46 +1422,46 @@ Overfull \vbox (11.24422pt too high) has occurred while \output is active []
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [32
+ [33
 pdfTeX warning (ext4): destination with the same identifier (name{figure.S8}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.632 \newpage
+l.650 \newpage
                <./0_virginia_coda4microbiome_fig.png>]
-<0_supplFig7.png, id=530, 424.10445pt x 235.3593pt>
+<0_supplFig7.png, id=560, 424.10445pt x 235.3593pt>
 File: 0_supplFig7.png Graphic file (type png)
 <use 0_supplFig7.png>
-Package pdftex.def Info: 0_supplFig7.png  used on input line 636.
+Package pdftex.def Info: 0_supplFig7.png  used on input line 654.
 (pdftex.def)             Requested size: 371.09047pt x 205.93886pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [33
+ [34
 pdfTeX warning (ext4): destination with the same identifier (name{figure.S9}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.639 \newpage
+l.657 \newpage
                <./0_supplFig7.png>]
-<0_supplFig8.png, id=536, 482.64314pt x 464.2143pt>
+<0_supplFig8.png, id=566, 482.64314pt x 464.2143pt>
 File: 0_supplFig8.png Graphic file (type png)
 <use 0_supplFig8.png>
-Package pdftex.def Info: 0_supplFig8.png  used on input line 643.
+Package pdftex.def Info: 0_supplFig8.png  used on input line 661.
 (pdftex.def)             Requested size: 371.63635pt x 357.4461pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34
+ [35
 pdfTeX warning (ext4): destination with the same identifier (name{figure.S10}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.646 \newpage
+l.664 \newpage
                <./0_supplFig8.png>] (./sn-article.bbl
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [35]
+ [36]
 Underfull \hbox (badness 1142) in paragraph at lines 309--336
 \OT1/cmr/m/n/10 Hodg-son, Z.G., Lyons, J., Mitchell-Foster, S.M., Gantt, S., Jo
 seph, K.S.,
@@ -1457,7 +1470,7 @@ seph, K.S.,
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [36]
+ [37]
 Underfull \hbox (badness 2134) in paragraph at lines 553--568
 []\OT1/cmr/m/n/10 Deng, Z.-L., Gottschick, C., Bhuju, S., Masur, C., Abels, C.,
  Wagner-
@@ -1478,9 +1491,6 @@ Underfull \hbox (badness 1215) in paragraph at lines 553--568
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [37]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [38]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1491,6 +1501,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [41]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [42]
 Underfull \hbox (badness 1009) in paragraph at lines 1386--1402
 []\OT1/cmr/m/n/10 Chegini, Z., Noei, M., Hem-mati, J., Arabestani, M.R., Sharia
 ti, A.: The
@@ -1499,21 +1512,30 @@ ti, A.: The
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [42]
+ [43]
 (./sn-article.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.985pt have occurred.
 
-Package rerunfilecheck Info: File `sn-article.out' has not changed.
-(rerunfilecheck)             Checksum: FD17B2CF7AE28B210E82DC3C83CA57B1;7779.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `sn-article.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `sn-article.out':
+(rerunfilecheck)             Before: 2A73F2CB87FF70F374801BC72B91F6DE;8621
+(rerunfilecheck)             After:  F4A12FC11012012BC95D84C5924507F4;8768.
  ) 
 Here is how much of TeX's memory you used:
- 16263 strings out of 476025
- 256362 string characters out of 5790017
+ 16287 strings out of 476025
+ 256737 string characters out of 5790017
  1865388 words of memory out of 5000000
- 36261 multiletter control sequences out of 15000+600000
- 533988 words of font info for 119 fonts, out of 8000000 for 9000
+ 36276 multiletter control sequences out of 15000+600000
+ 534323 words of font info for 120 fonts, out of 8000000 for 9000
  1151 hyphenation exceptions out of 8191
  90i,11n,90p,2145b,736s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -1538,11 +1560,12 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2023/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2023/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2023/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2023/texmf-dis
-t/fonts/type1/public/cbfonts/grmn1000.pfb>
-Output written on sn-article.pdf (42 pages, 28371205 bytes).
+t/fonts/type1/public/cbfonts/grmn1000.pfb></usr/local/texlive/2023/texmf-dist/f
+onts/type1/public/cm-super/sfrm1000.pfb>
+Output written on sn-article.pdf (43 pages, 28375669 bytes).
 PDF statistics:
- 816 PDF objects out of 1000 (max. 8388607)
- 687 compressed objects within 7 object streams
- 157 named destinations out of 1000 (max. 500000)
- 273 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 855 PDF objects out of 1000 (max. 8388607)
+ 722 compressed objects within 8 object streams
+ 164 named destinations out of 1000 (max. 500000)
+ 321 words of extra memory for PDF output out of 10000 (max. 10000000)
 
