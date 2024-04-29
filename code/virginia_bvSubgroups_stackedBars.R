@@ -12,8 +12,8 @@ library(glue) # for interpreting expressions as R code
 # set path to the github repository
 user <- "sds/cc"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 # load in filtered virginia feature table, virginia taxa vector, virginia
 # bv subgroup vector and taxa colours df

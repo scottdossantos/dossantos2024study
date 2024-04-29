@@ -7,8 +7,8 @@ library(dplyr) # for data cleaning
 # set path to github
 user <- "sds/cc"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 # NOTE: The files imported into R as part of this script are not provided on the
 #       study's github repo as they contain data hosted on the NCBI Database of
@@ -23,9 +23,7 @@ path.to.github <- switch(user,
 ########################## merge: clinical & SRA data ##########################
 
 # read in clinical sample metadata
-clinical<-read.csv(paste(path.to.github,
-                         "Rdata/meta_1_clinicalPhenotype_phs001523.v1.pht007510.v1.p1.c1.phenotype_clinical.DS-PREG-COM-IRB-PUB-MDS.csv",
-                         sep = ""))
+clinical<-read.csv("[LOCAL-PATH-TO]/meta_1_clinicalPhenotype_phs001523.v1.pht007510.v1.p1.c1.phenotype_clinical.DS-PREG-COM-IRB-PUB-MDS.csv")
 
 # convert 'Visit_ID' and 'vaginal_pH' to factor
 clinical$visit_num <- as.numeric(gsub("Visit_", "", clinical$visit_num))
@@ -48,9 +46,7 @@ clinical <- clinical %>%
   arrange(dbGaP_Subject_ID, visit_num)
 
 # read in SRA sample sheet, remove unnecessary columns and re-order columns
-sra <- read.csv(paste(path.to.github,
-                      "Rdata/meta_7_SraRunTable.csv",
-                      sep = ""))
+sra <- read.csv("[LOCAL-PATH-TO]/meta_7_SraRunTable.csv")
 sra.filt <- sra %>% 
   dplyr::select(-c(analyte_type:biospecimen_repository,
             body_site:study_name)) %>% 
@@ -71,9 +67,8 @@ merged.virginia.1 <- left_join(sra.filt, clinical, by= "visit_ID")
 
 # read in health history data (this table has 'NA' values as text, with several
 # blank cells, so need to specify 'na.strings' argument)
-health <- read.csv(paste(path.to.github,
-                         "Rdata/meta_5_healthHistory_phs001523.v1.pht007512.v1.p1.c1.phenotype_healthHistorySurvey.DS-PREG-COM-IRB-PUB-MDS.csv",
-                         sep = ""), na.strings = c("", "NA"))
+health <- read.csv("[LOCAL-PATH-TO]/meta_5_healthHistory_phs001523.v1.pht007512.v1.p1.c1.phenotype_healthHistorySurvey.DS-PREG-COM-IRB-PUB-MDS.csv",
+                   na.strings = c("", "NA"))
 
 # remove unnecessary columns from health history survey data
 health.filt <- health %>% 
@@ -214,9 +209,8 @@ colnames(merged.virginia.2)[7] <- "vaginal_ph"
 
 # read in review of systems data (this table has 'NA' values as text, with 
 # several blank cells, so need to specify 'na.strings' argument)
-review <- read.csv(paste(path.to.github,
-                         "Rdata/meta_4_reviewOfSystems_phs001523.v1.pht007511.v1.p1.c1.phenotype_reviewOfSystemsSurvey.DS-PREG-COM-IRB-PUB-MDS.csv",
-                         sep = ""), na.strings = c("", "NA"))
+review <- read.csv("[LOCAL-PATH-TO]/meta_4_reviewOfSystems_phs001523.v1.pht007511.v1.p1.c1.phenotype_reviewOfSystemsSurvey.DS-PREG-COM-IRB-PUB-MDS.csv",
+                   na.strings = c("", "NA"))
 
 # remove unnecessary columns from review of systems survey data
 review.filt <- review %>% 
@@ -334,6 +328,5 @@ merged.virginia.3$otc_yeast_meds_since_last_visit <- gsub("Uncertain",
                                                              merged.virginia.3$otc_yeast_meds_since_last_visit)
 
 # rename merged metadata file and save as .Rda object
-virginia.meta <- merged.virginia.3
-# save(virginia.meta, 
-#      file = paste(path.to.github, "Rdata/virginia.meta.Rda", sep = ""))
+# virginia.meta <- merged.virginia.3
+# save(virginia.meta, file = "[LOCAL-PATH-TO]/virginia.meta.Rda")

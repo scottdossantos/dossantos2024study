@@ -9,8 +9,8 @@ library(dendextend) # for dendrogram plotting
 
 user <- "sds/cc"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 # run 'setup.R'
 source(paste(path.to.github,"code/setup.R", sep = ""))
@@ -54,7 +54,9 @@ pathway.table <- read.table(paste(path.to.github,
                             sep="\t", header=T, row.names=1, fill=TRUE)
 
 # load in virginia metadata (output of 'Rdata/processing_virginia_metadata.R')
-load(paste(path.to.github,"Rdata/virginia.meta.Rda", sep = ""))
+# NOTE: This is one of the files omitted from the repo as it contains clinical 
+#       metadata hosted on dbGaP.
+load("[LOCAL-PATH-TO]/virginia.meta.Rda")
 
 # sanity check on feature table colnames vs. metadata 'sra.id' for equality
 length(which(colnames(virginia.data) == virginia.meta$sra_id))  # all TRUE

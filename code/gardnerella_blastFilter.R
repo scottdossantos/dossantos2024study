@@ -11,8 +11,8 @@ library(dplyr) # for data manipulation
 # set path to github directory
 user <- "sds/cc"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 # define column headers (for more info on what these are exactly, see
 # https://www.metagenomics.wiki/tools/blast/blastn-output-format-6)

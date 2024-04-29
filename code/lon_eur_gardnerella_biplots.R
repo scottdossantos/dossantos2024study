@@ -9,8 +9,8 @@ library(CoDaSeq)
 # set path to the github repository
 user <- "sds/cc"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 # load in following .Rda objects (all created in 'lon_eur_species_biplots.R'):
 #    - new.both.filt.bv (BV-only vNumber feature table, without entry 17852)

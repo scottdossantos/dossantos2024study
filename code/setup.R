@@ -1,18 +1,18 @@
 # load the minimum analysis tools
 
 library(zCompositions)
-library(ALDEx2) # v19.4 -biocDev
-library(CoDaSeq) # v0.99.7 github.com/ggloor/CoDaSeq
+library(ALDEx2)
+library(CoDaSeq)
 
 # set the user when you run this code
 # gg sets path for greg
-# cc sets path for clara
+# cc sets path for scott/clara
 
 user <- 'cc'
 if(user=='gg'){
-	locn <- "~/Documents/0_git/projects/metatranscriptome/"
+	locn <- "~/Documents/0_git/projects/dossantos2024study/"
 }else if(user=='cc'){
-	locn <- "~/Documents/GitHub/metatranscriptome/"
+	locn <- "~/Documents/GitHub/dossantos2024study/"
 }
 # load in the lookup tables
 # data tables are loaded in merge_table.R
@@ -24,8 +24,6 @@ tax.colors <- read.table(paste(locn,"code/species_colors.txt", sep=""), sep="\t"
 # VIRGO taxon table
 tax.table <- read.table(paste(locn,'1_VIRGO/1.taxon.tbl.txt', sep=""),
     header=F, row.names=2)
-
-# to do make a master look up table
 
 # load eggnog / EC / KO lookup tables
 egg <- read.table(paste(locn,"1_VIRGO/3.eggnog.NOG.txt", sep=""),
@@ -78,7 +76,7 @@ KO <- read.table(paste(locn,"1_VIRGO/8.A.kegg.ortholog.txt", sep=""),
 # default is to load precomputed data
 
 scratch <- FALSE 
-# keep this false as GG will generate the .Rda files
+# keep this false as GG/SDS will generate the .Rda files
 
 
 if(file.exists(paste(locn,'Rdata/d.24.Rda',sep = ""))){
@@ -116,13 +114,6 @@ if(file.exists(paste(locn,'Rdata/d.24.Rda',sep = ""))){
   load(paste(locn,'Rdata/ko.both.Rda',sep = ""))         # ---- .Rda
   load(paste(locn,'Rdata/ko.both.all.Rda',sep = ""))     # ---- objects
 } 
-
-# TO DO FOR GG
-# included code to aggregate counts by EC number
-# 
-# need a re-think for reaction and pathway since these
-# are not 1:1 relationships
-#
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -191,7 +182,7 @@ if(scratch == TRUE){ #get the data from source
 
 names.all <- (unique(c(rownames(nr.ena), rownames(d.24))))
 
-# note merge() runs out of memory
+# NOTE: merge() runs out of memory
 #both <- merge(d.24, nr.ena, incomparables=0)
 
 #this works and is simple to understand
@@ -283,4 +274,3 @@ ko.both.all$Group.1 <- NULL
 save(ko.both.all, file='Rdata/ko.both.all.Rda')
 
 }
-

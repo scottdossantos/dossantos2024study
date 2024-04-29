@@ -1,17 +1,7 @@
----
-title: "PCA-plots-spp-distance-to-centroid"
-author: "Scott Dos Santos"
-date: "2023-07-13"
-output:
-  pdf_document: default
-  html_document: default
----
+# calculating distance of each pathway to species centroids
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,warning = FALSE)
-
+############# steup
 # load packages 
-
 library(dplyr)
 library(zCompositions)
 library(CoDaSeq)
@@ -21,25 +11,22 @@ library(ggplot2)
 # set path to github directory
 user <- "sds/cc"
 if(user=="sds/cc"){
-  path.to.github<-"~/Documents/GitHub/metatranscriptome/"
+  path.to.github<-"~/Documents/GitHub/dossantos2024study/"
 }else if(user=="gg"){
-  path.to.github<-"~/Documents/0_git/projects/metatranscriptome/"
+  path.to.github<-"~/Documents/0_git/projects/dossantos2024study/"
 }
 
 # load feature table from github for combined dataset, change name and clean-up
-
 load(paste(path.to.github,"Rdata/both.data.Rda",sep = ""))
 data.all.both<-both.data
 rm(both.data)
 
 # split dataframe into bv only, europe bv only and europe bv only subsets
-
 data.bv.london<-data.all.both[,c(9:22)]
 data.bv.europe<-data.all.both[,c(23:36)]
 data.bv.both<-cbind(data.all.both[,c(9:22)],data.all.both[,c(23:36)])
 
 # filter data subsets for genes present in >30% samples comprising >0.005% RA
-
 filt.bv.london<-codaSeq.filter(data.bv.london,
                                min.occurrence = 0.30,
                                min.prop = 0.00005,
@@ -51,32 +38,29 @@ filt.bv.europe<-codaSeq.filter(data.bv.europe,
                                samples.by.row = FALSE)
 
 filt.bv.both<-codaSeq.filter(data.bv.both,
-                               min.occurrence = 0.30,
-                               min.prop = 0.00005,
-                               samples.by.row = FALSE)
+                             min.occurrence = 0.30,
+                             min.prop = 0.00005,
+                             samples.by.row = FALSE)
 
 # load pre-computed taxa table and colours
-
 tax.table <- read.table(paste(path.to.github,'1_VIRGO/1.taxon.tbl.txt', sep=""),
-    header=F, row.names=2)
+                        header=F, row.names=2)
 
 tax.colors <- read.table(paste(path.to.github,"code/species_colors.txt", sep=""), sep="\t",
-    header=T, row.names=1, stringsAsFactors=F)
+                         header=T, row.names=1, stringsAsFactors=F)
 
 # load pre-computed pathway table and colours
-
 pathway.table <- read.table(paste(path.to.github,'1_VIRGO/8.C.kegg.pathway.copy.txt', sep=""),
-                         sep="\t",header=T, row.names=1, fill=TRUE)
+                            sep="\t",header=T, row.names=1, fill=TRUE)
 
 pathway.colors <- read.table(paste(path.to.github,"code/pathway_colors_table3.txt",sep = ""),
                              sep="\t", header=F, row.names = 2 ,stringsAsFactors=F)
-```
 
-```{r biplot rotations}
+
+############# biplot rotations
 
 # zero replacement using count multiplicative replacement from zCompositions package
 # note: input transposed due to calculation of abundance across rows
-
 london.bv.clr.input<-cmultRepl(t(filt.bv.london), method = "CZM",label = 0)
 europe.bv.clr.input<-cmultRepl(t(filt.bv.europe), method = "CZM",label = 0)
 both.bv.clr.input<-cmultRepl(t(filt.bv.both), method = "CZM",label = 0)
@@ -84,29 +68,23 @@ both.bv.clr.input<-cmultRepl(t(filt.bv.both), method = "CZM",label = 0)
 # centre log-ratio transformation of zero-replaced data
 # note: input transposed to reverse transposition introduced above
 # note2: log(x/y) is equal to log(x) - log(y)
-
 london.bv.clr<- as.data.frame(apply(t(london.bv.clr.input), 2, function(x) log(x) - mean(log(x))))
 europe.bv.clr<- as.data.frame(apply(t(europe.bv.clr.input), 2, function(x) log(x) - mean(log(x))))
 both.bv.clr<- as.data.frame(apply(t(both.bv.clr.input), 2, function(x) log(x) - mean(log(x))))
 
 # perform pca on clr-transformed data
-
 london.bv.pca<-prcomp(t(london.bv.clr))
 europe.bv.pca<-prcomp(t(europe.bv.clr))
 both.bv.pca<-prcomp(t(both.bv.clr))
 
 # get rotation matrices from pca objects
-
 london.bv.rotation<-as.data.frame(london.bv.pca$rotation[,c(1:3)])
 europe.bv.rotation<-as.data.frame(europe.bv.pca$rotation[,c(1:3)])
 both.bv.rotation<-as.data.frame(both.bv.pca$rotation[,c(1:3)])
 
-```
-
-```{r london centroids}
+############# london centroids
 
 # make a vector of taxa and pathways for london dataset
-
 london.bv.tax.vec <- tax.table[rownames(filt.bv.london),2]
 london.bv.path.vec <- pathway.table[rownames(filt.bv.london),2]
 
@@ -115,7 +93,6 @@ names(london.bv.tax.vec) <- rownames(filt.bv.london)
 names(london.bv.path.vec) <- rownames(filt.bv.london)
 
 # get number of genes corresponding to each taxon and pathway 
-
 london.bv.no.genes.tax<-vector()
 for (i in levels(factor(london.bv.tax.vec))) {
   london.bv.no.genes.tax[i]<-length(which(london.bv.tax.vec==i))
@@ -127,13 +104,11 @@ for (j in levels(factor(london.bv.path.vec))) {
 }
 
 # pull all species represented by >100 genes and top 20 pathways (desc. order)
-
 london.bv.no.genes.100<-names(which(london.bv.no.genes.tax >100))
 london.bv.no.genes.20<-names(head(sort(london.bv.no.genes.path,decreasing = TRUE),20))
 
 # create a list of named vectors containing indices of all v numbers corresponding
 # to each taxa represented by >100 genes
-
 london.bv.taxa.indices<-list()
 for (spp in 1:length(london.bv.no.genes.100)) {
   london.bv.taxa.indices[[london.bv.no.genes.100[spp]]]<-which(london.bv.tax.vec==london.bv.no.genes.100[spp])
@@ -141,7 +116,6 @@ for (spp in 1:length(london.bv.no.genes.100)) {
 
 # create a list of named vectors containing indices of all v numbers corresponding
 # to each of the top 20 pathways
-
 london.bv.pathway.indices<-list()
 for (path in 1:length(london.bv.no.genes.20)) {
   london.bv.pathway.indices[[london.bv.no.genes.20[path]]]<-which(london.bv.path.vec==london.bv.no.genes.20[path])
@@ -149,19 +123,16 @@ for (path in 1:length(london.bv.no.genes.20)) {
 
 # finds the V number indices present in the london bv feature table that are not
 # present in the list of species represented by >100 genes (i.e. all other genes)
-
 london.bv.taxa.indices[["Other"]]<-setdiff(c(1:nrow(filt.bv.london)),
-                                              unlist(london.bv.taxa.indices))
+                                           unlist(london.bv.taxa.indices))
 
 # finds the V number indices present in the london bv feature table that are not
 # present in the list of top 20 pathways (i.e. all other pathways)
-
 london.bv.pathway.indices[["Other"]]<-setdiff(c(1:nrow(filt.bv.london)),
                                               unlist(london.bv.pathway.indices))
 
 # for each species, get the indices of all the V numbers with pathway = "Ribosome"
 # in the london.bv.taxa vector (i.e. genes we want to use to calculate 'centroid')
-
 london.bv.centroid.indices<-list()
 for (tax in 1:(length(names(london.bv.taxa.indices))-1)) {
   vec.indices<-which(london.bv.taxa.indices[[tax]] %in% london.bv.pathway.indices[["Ribosome"]])
@@ -174,7 +145,6 @@ for (tax in 1:(length(names(london.bv.taxa.indices))-1)) {
 
 # make a list of dataframes containing the rotation values for the corresponding
 # species centroids (i.e. ribosomal genes for each species)
-
 london.bv.taxa.centroids<-list()
 for(tax in 1:length(names(london.bv.centroid.indices))){
   london.bv.taxa.centroids[[names(london.bv.centroid.indices)[[tax]]]]<-
@@ -183,7 +153,6 @@ for(tax in 1:length(names(london.bv.centroid.indices))){
 
 # make a blank dataframe containing median PC1/PC2/PC3 values for each taxon
 # (i.e. taxon centroids on the PCA plot)
-
 london.bv.centroid.summary<-as.data.frame(cbind(med_PC1=c(rep(NA,length(london.bv.taxa.centroids))),
                                                 med_PC2=c(rep(NA,length(london.bv.taxa.centroids))),
                                                 med_PC3=c(rep(NA,length(london.bv.taxa.centroids)))),
@@ -191,7 +160,6 @@ london.bv.centroid.summary<-as.data.frame(cbind(med_PC1=c(rep(NA,length(london.b
 
 # fill in summary dataframe with values from the list of rotation dataframes
 # for each taxon
-
 for (tax in 1:length(rownames(london.bv.centroid.summary))) {
   df.tax<-as.data.frame(london.bv.taxa.centroids[[tax]])
   med.PC1<-median(london.bv.taxa.centroids[[tax]]$PC1)
@@ -203,7 +171,6 @@ for (tax in 1:length(rownames(london.bv.centroid.summary))) {
 }
 
 # make list of dataframes containing rotations for all V numbers in each pathway
-
 london.bv.pathway.rotations<-list()
 for(tax in 2:20){
   london.bv.pathway.rotations[[names(london.bv.pathway.indices)[[tax]]]]<-
@@ -214,7 +181,6 @@ for(tax in 2:20){
 # difference between PC1 rotation of each V number and PC1 taxon centroid (i.e.
 # median PC1 value for that taxon). Note: values raised to power of 2 and sq.
 # rooted to get around +/- values
-
 london.bv.cent.dif.PC1<-list()
 for (t in 1:length(names(london.bv.pathway.rotations))) {
   df.rot<-as.data.frame(london.bv.pathway.rotations[[t]])
@@ -236,13 +202,11 @@ for (t in 1:length(names(london.bv.pathway.rotations))) {
 
 # collapse list into large dataframe with new column to identify list element
 # origin (i.e. which pathway each v number corresponds to)
-
 london.bv.cent.dif.PC1.all<-bind_rows(london.bv.cent.dif.PC1,.id = "pathway")
 
 # transform data into 'tidy' format for ggplot faceting & make boxplots of
 # difference between PC1 taxon centroid and PC1 pathway centroids, for each 
 # taxon
-
 london.bv.plot.PC1<-london.bv.cent.dif.PC1.all%>%
   pivot_longer(cols = -pathway,
                names_to = "species",
@@ -256,12 +220,11 @@ london.bv.plot.PC1<-london.bv.cent.dif.PC1.all%>%
   scale_y_continuous(limits = c(0,0.035),expand = c(0,0))+
   theme_bw()+theme(axis.text.x = element_blank())+theme(legend.text = element_text(size = 10))
 
-png("london_bv_PC1_difference.png",units = "in",height = 6,width = 15,res = 400)
+# png("london_bv_PC1_difference.png",units = "in",height = 6,width = 15,res = 400)
 london.bv.plot.PC1
-dev.off()
+# dev.off()
 
 # same for PC 2 
-
 london.bv.cent.dif.PC2<-list()
 for (t in 1:length(names(london.bv.pathway.rotations))) {
   df.rot<-as.data.frame(london.bv.pathway.rotations[[t]])
@@ -296,11 +259,11 @@ london.bv.plot.PC2<-london.bv.cent.dif.PC2.all%>%
   scale_y_continuous(limits = c(0,0.035),expand = c(0,0))+
   theme_bw()+theme(axis.text.x = element_blank())+theme(legend.text = element_text(size = 10))
 
-png("london_bv_PC2_difference.png",units = "in",height = 6,width = 15,res = 400)
+# png("london_bv_PC2_difference.png",units = "in",height = 6,width = 15,res = 400)
 london.bv.plot.PC2
-dev.off()
-# same for PC3
+# dev.off()
 
+# same for PC3
 london.bv.cent.dif.PC3<-list()
 for (t in 1:length(names(london.bv.pathway.rotations))) {
   df.rot<-as.data.frame(london.bv.pathway.rotations[[t]])
@@ -335,18 +298,13 @@ london.bv.plot.PC3<-london.bv.cent.dif.PC3.all%>%
   scale_y_continuous(limits = c(0,0.035),expand = c(0,0))+
   theme_bw()+theme(axis.text.x = element_blank())+theme(legend.text = element_text(size = 10))
 
-png("london_bv_PC3_difference.png",units = "in",height = 6,width = 15,res = 400)
+# png("london_bv_PC3_difference.png",units = "in",height = 6,width = 15,res = 400)
 london.bv.plot.PC3
-dev.off()
+# dev.off()
 
-
-
-```
-
-```{r europe centroids}
+############# europe centroids
 
 # make a vector of taxa and pathways for europe dataset
-
 europe.bv.tax.vec <- tax.table[rownames(filt.bv.europe),2]
 europe.bv.path.vec <- pathway.table[rownames(filt.bv.europe),2]
 
@@ -354,8 +312,7 @@ europe.bv.path.vec <- pathway.table[rownames(filt.bv.europe),2]
 names(europe.bv.tax.vec) <- rownames(filt.bv.europe)
 names(europe.bv.path.vec) <- rownames(filt.bv.europe)
 
-# get number of genes corresponding to each taxon and pathway 
-
+# get number of genes corresponding to each taxon and pathway
 europe.bv.no.genes.tax<-vector()
 for (i in levels(factor(europe.bv.tax.vec))) {
   europe.bv.no.genes.tax[i]<-length(which(europe.bv.tax.vec==i))
@@ -367,13 +324,11 @@ for (j in levels(factor(europe.bv.path.vec))) {
 }
 
 # pull all species represented by >100 genes and top 20 pathways (desc. order)
-
 europe.bv.no.genes.100<-names(which(europe.bv.no.genes.tax >100))
 europe.bv.no.genes.20<-names(head(sort(europe.bv.no.genes.path,decreasing = TRUE),20))
 
 # create a list of named vectors containing indices of all v numbers corresponding
 # to each taxa represented by >100 genes
-
 europe.bv.taxa.indices<-list()
 for (spp in 1:length(europe.bv.no.genes.100)) {
   europe.bv.taxa.indices[[europe.bv.no.genes.100[spp]]]<-which(europe.bv.tax.vec==europe.bv.no.genes.100[spp])
@@ -381,7 +336,6 @@ for (spp in 1:length(europe.bv.no.genes.100)) {
 
 # create a list of named vectors containing indices of all v numbers corresponding
 # to each of the top 20 pathways
-
 europe.bv.pathway.indices<-list()
 for (path in 1:length(europe.bv.no.genes.20)) {
   europe.bv.pathway.indices[[europe.bv.no.genes.20[path]]]<-which(europe.bv.path.vec==europe.bv.no.genes.20[path])
@@ -389,19 +343,16 @@ for (path in 1:length(europe.bv.no.genes.20)) {
 
 # finds the V number indices present in the europe bv feature table that are not
 # present in the list of species represented by >100 genes (i.e. all other genes)
-
 europe.bv.taxa.indices[["Other"]]<-setdiff(c(1:nrow(filt.bv.europe)),
-                                              unlist(europe.bv.taxa.indices))
+                                           unlist(europe.bv.taxa.indices))
 
 # finds the V number indices present in the europe bv feature table that are not
 # present in the list of top 20 pathways (i.e. all other pathways)
-
 europe.bv.pathway.indices[["Other"]]<-setdiff(c(1:nrow(filt.bv.europe)),
                                               unlist(europe.bv.pathway.indices))
 
 # for each species, get the indices of all the V numbers with pathway = "Ribosome"
 # in the europe.bv.taxa vector (i.e. genes we want to use to calculate 'centroid')
-
 europe.bv.centroid.indices<-list()
 for (tax in 1:(length(names(europe.bv.taxa.indices))-1)) {
   vec.indices<-which(europe.bv.taxa.indices[[tax]] %in% europe.bv.pathway.indices[["Ribosome"]])
@@ -414,7 +365,6 @@ for (tax in 1:(length(names(europe.bv.taxa.indices))-1)) {
 
 # make a list of dataframes containing the rotation values for the corresponding
 # species centroids (i.e. ribosomal genes for each species)
-
 europe.bv.taxa.centroids<-list()
 for(tax in 1:length(names(europe.bv.centroid.indices))){
   europe.bv.taxa.centroids[[names(europe.bv.centroid.indices)[[tax]]]]<-
@@ -423,7 +373,6 @@ for(tax in 1:length(names(europe.bv.centroid.indices))){
 
 # make a blank dataframe containing median PC1/PC2/PC3 values for each taxon
 # (i.e. taxon centroids on the PCA plot)
-
 europe.bv.centroid.summary<-as.data.frame(cbind(med_PC1=c(rep(NA,length(europe.bv.taxa.centroids))),
                                                 med_PC2=c(rep(NA,length(europe.bv.taxa.centroids))),
                                                 med_PC3=c(rep(NA,length(europe.bv.taxa.centroids)))),
@@ -431,7 +380,6 @@ europe.bv.centroid.summary<-as.data.frame(cbind(med_PC1=c(rep(NA,length(europe.b
 
 # fill in summary dataframe with values from the list of rotation dataframes
 # for each taxon
-
 for (tax in 1:length(rownames(europe.bv.centroid.summary))) {
   df.tax<-as.data.frame(europe.bv.taxa.centroids[[tax]])
   med.PC1<-median(europe.bv.taxa.centroids[[tax]]$PC1)
@@ -443,7 +391,6 @@ for (tax in 1:length(rownames(europe.bv.centroid.summary))) {
 }
 
 # make list of dataframes containing rotations for all V numbers in each pathway
-
 europe.bv.pathway.rotations<-list()
 for(tax in 2:20){
   europe.bv.pathway.rotations[[names(europe.bv.pathway.indices)[[tax]]]]<-
@@ -454,7 +401,6 @@ for(tax in 2:20){
 # difference between PC1 rotation of each V number and PC1 taxon centroid (i.e.
 # median PC1 value for that taxon). Note: values raised to power of 2 and sq.
 # rooted to get around +/- values
-
 europe.bv.cent.dif.PC1<-list()
 for (t in 1:length(names(europe.bv.pathway.rotations))) {
   df.rot<-as.data.frame(europe.bv.pathway.rotations[[t]])
@@ -476,13 +422,11 @@ for (t in 1:length(names(europe.bv.pathway.rotations))) {
 
 # collapse list into large dataframe with new column to identify list element
 # origin (i.e. which pathway each v number corresponds to)
-
 europe.bv.cent.dif.PC1.all<-bind_rows(europe.bv.cent.dif.PC1,.id = "pathway")
 
 # transform data into 'tidy' format for ggplot faceting & make boxplots of
 # difference between PC1 taxon centroid and PC1 pathway centroids, for each 
 # taxon
-
 europe.bv.plot.PC1<-europe.bv.cent.dif.PC1.all%>%
   pivot_longer(cols = -pathway,
                names_to = "species",
@@ -497,12 +441,11 @@ europe.bv.plot.PC1<-europe.bv.cent.dif.PC1.all%>%
   scale_y_continuous(limits = c(0,0.036),expand = c(0,0))+
   theme_bw()+theme(axis.text.x = element_blank())+theme(legend.text = element_text(size = 10))
 
-png("europe_bv_PC1_difference.png",units = "in",height = 6,width = 15,res = 400)
+# png("europe_bv_PC1_difference.png",units = "in",height = 6,width = 15,res = 400)
 europe.bv.plot.PC1
-dev.off()
+# dev.off()
 
 # same for PC 2 
-
 europe.bv.cent.dif.PC2<-list()
 for (t in 1:length(names(europe.bv.pathway.rotations))) {
   df.rot<-as.data.frame(europe.bv.pathway.rotations[[t]])
@@ -537,12 +480,11 @@ europe.bv.plot.PC2<-europe.bv.cent.dif.PC2.all%>%
   scale_y_continuous(limits = c(0,0.036),expand = c(0,0))+
   theme_bw()+theme(axis.text.x = element_blank())+theme(legend.text = element_text(size = 10))
 
-png("europe_bv_PC2_difference.png",units = "in",height = 6,width = 15,res = 400)
+# png("europe_bv_PC2_difference.png",units = "in",height = 6,width = 15,res = 400)
 europe.bv.plot.PC2
-dev.off()
+# dev.off()
 
 # same for PC3
-
 europe.bv.cent.dif.PC3<-list()
 for (t in 1:length(names(europe.bv.pathway.rotations))) {
   df.rot<-as.data.frame(europe.bv.pathway.rotations[[t]])
@@ -577,15 +519,13 @@ europe.bv.plot.PC3<-europe.bv.cent.dif.PC3.all%>%
   scale_y_continuous(limits = c(0,0.036),expand = c(0,0))+
   theme_bw()+theme(axis.text.x = element_blank())+theme(legend.text = element_text(size = 10))
 
-png("europe_bv_PC3_difference.png",units = "in",height = 6,width = 15,res = 400)
+# png("europe_bv_PC3_difference.png",units = "in",height = 6,width = 15,res = 400)
 europe.bv.plot.PC3
-dev.off()
+# dev.off()
 
-```
+############# both centroids
 
-```{r both centroids}
 # make a vector of taxa and pathways for both datasets
-
 both.bv.tax.vec <- tax.table[rownames(filt.bv.both),2]
 both.bv.path.vec <- pathway.table[rownames(filt.bv.both),2]
 
@@ -594,7 +534,6 @@ names(both.bv.tax.vec) <- rownames(filt.bv.both)
 names(both.bv.path.vec) <- rownames(filt.bv.both)
 
 # get number of genes corresponding to each taxon and pathway 
-
 both.bv.no.genes.tax<-vector()
 for (i in levels(factor(both.bv.tax.vec))) {
   both.bv.no.genes.tax[i]<-length(which(both.bv.tax.vec==i))
@@ -606,13 +545,11 @@ for (j in levels(factor(both.bv.path.vec))) {
 }
 
 # pull all species represented by >100 genes and top 20 pathways (desc. order)
-
 both.bv.no.genes.100<-names(which(both.bv.no.genes.tax >100))
 both.bv.no.genes.20<-names(head(sort(both.bv.no.genes.path,decreasing = TRUE),21))
 
 # create a list of named vectors containing indices of all v numbers corresponding
 # to each taxa represented by >100 genes
-
 both.bv.taxa.indices<-list()
 for (spp in 1:length(both.bv.no.genes.100)) {
   both.bv.taxa.indices[[both.bv.no.genes.100[spp]]]<-which(both.bv.tax.vec==both.bv.no.genes.100[spp])
@@ -620,7 +557,6 @@ for (spp in 1:length(both.bv.no.genes.100)) {
 
 # create a list of named vectors containing indices of all v numbers corresponding
 # to each of the top 20 pathways
-
 both.bv.pathway.indices<-list()
 for (path in 1:length(both.bv.no.genes.20)) {
   both.bv.pathway.indices[[both.bv.no.genes.20[path]]]<-which(both.bv.path.vec==both.bv.no.genes.20[path])
@@ -628,19 +564,16 @@ for (path in 1:length(both.bv.no.genes.20)) {
 
 # finds the V number indices present in the both bv feature table that are not
 # present in the list of species represented by >100 genes (i.e. all other genes)
-
 both.bv.taxa.indices[["Other"]]<-setdiff(c(1:nrow(filt.bv.both)),
-                                              unlist(both.bv.taxa.indices))
+                                         unlist(both.bv.taxa.indices))
 
 # finds the V number indices present in the both bv feature table that are not
 # present in the list of top 20 pathways (i.e. all other pathways)
-
 both.bv.pathway.indices[["Other"]]<-setdiff(c(1:nrow(filt.bv.both)),
-                                              unlist(both.bv.pathway.indices))
+                                            unlist(both.bv.pathway.indices))
 
 # for each species, get the indices of all the V numbers with pathway = "Ribosome"
 # in the both.bv.taxa vector (i.e. genes we want to use to calculate 'centroid')
-
 both.bv.centroid.indices<-list()
 for (tax in 1:(length(names(both.bv.taxa.indices))-1)) {
   vec.indices<-which(both.bv.taxa.indices[[tax]] %in% both.bv.pathway.indices[["Ribosome"]])
@@ -653,7 +586,6 @@ for (tax in 1:(length(names(both.bv.taxa.indices))-1)) {
 
 # make a list of dataframes containing the rotation values for the corresponding
 # species centroids (i.e. ribosomal genes for each species)
-
 both.bv.taxa.centroids<-list()
 for(tax in 1:length(names(both.bv.centroid.indices))){
   both.bv.taxa.centroids[[names(both.bv.centroid.indices)[[tax]]]]<-
@@ -662,7 +594,6 @@ for(tax in 1:length(names(both.bv.centroid.indices))){
 
 # make a blank dataframe containing median PC1/PC2/PC3 values for each taxon
 # (i.e. taxon centroids on the PCA plot)
-
 both.bv.centroid.summary<-as.data.frame(cbind(med_PC1=c(rep(NA,length(both.bv.taxa.centroids))),
                                               med_PC2=c(rep(NA,length(both.bv.taxa.centroids))),
                                               med_PC3=(rep(NA,length(both.bv.taxa.centroids)))),
@@ -670,7 +601,6 @@ both.bv.centroid.summary<-as.data.frame(cbind(med_PC1=c(rep(NA,length(both.bv.ta
 
 # fill in summary dataframe with values from the list of rotation dataframes
 # for each taxon
-
 for (tax in 1:length(rownames(both.bv.centroid.summary))) {
   df.tax<-as.data.frame(both.bv.taxa.centroids[[tax]])
   med.PC1<-median(both.bv.taxa.centroids[[tax]]$PC1)
@@ -682,7 +612,6 @@ for (tax in 1:length(rownames(both.bv.centroid.summary))) {
 }
 
 # make list of dataframes containing rotations for all V numbers in each pathway
-
 both.bv.pathway.rotations<-list()
 for(tax in 2:21){
   both.bv.pathway.rotations[[names(both.bv.pathway.indices)[[tax]]]]<-
@@ -693,7 +622,6 @@ for(tax in 2:21){
 # difference between PC1 rotation of each V number and PC1 taxon centroid (i.e.
 # median PC1 value for that taxon). Note: values raised to power of 2 and sq.
 # rooted to get around +/- values
-
 both.bv.cent.dif.PC1<-list()
 for (t in 1:length(names(both.bv.pathway.rotations))) {
   df.rot<-as.data.frame(both.bv.pathway.rotations[[t]])
@@ -715,13 +643,11 @@ for (t in 1:length(names(both.bv.pathway.rotations))) {
 
 # collapse list into large dataframe with new column to identify list element
 # origin (i.e. which pathway each v number corresponds to)
-
 both.bv.cent.dif.PC1.all<-bind_rows(both.bv.cent.dif.PC1,.id = "pathway")
 
 # transform data into 'tidy' format for ggplot faceting & make boxplots of
 # difference between PC1 taxon centroid and PC1 pathway centroids, for each 
 # taxon
-
 both.bv.plot.PC1<-both.bv.cent.dif.PC1.all%>%
   pivot_longer(cols = -pathway,
                names_to = "species",
@@ -736,12 +662,11 @@ both.bv.plot.PC1<-both.bv.cent.dif.PC1.all%>%
   scale_y_continuous(limits = c(0,0.032),expand = c(0,0))+
   theme_bw()+theme(axis.text.x = element_blank())+theme(legend.text = element_text(size = 10))
 
-png("both_bv_PC1_difference.png",units = "in",height = 6,width = 15,res = 400)
+# png("both_bv_PC1_difference.png",units = "in",height = 6,width = 15,res = 400)
 both.bv.plot.PC1
-dev.off()
+# dev.off()
 
 # same for PC 2 
-
 both.bv.cent.dif.PC2<-list()
 for (t in 1:length(names(both.bv.pathway.rotations))) {
   df.rot<-as.data.frame(both.bv.pathway.rotations[[t]])
@@ -776,12 +701,11 @@ both.bv.plot.PC2<-both.bv.cent.dif.PC2.all%>%
   scale_y_continuous(limits = c(0,0.032),expand = c(0,0))+
   theme_bw()+theme(axis.text.x = element_blank())+theme(legend.text = element_text(size = 10))
 
-png("both_bv_PC2_difference.png",units = "in",height = 6,width = 15,res = 400)
+# png("both_bv_PC2_difference.png",units = "in",height = 6,width = 15,res = 400)
 both.bv.plot.PC2
-dev.off()
+# dev.off()
 
 # same for PC3
-
 both.bv.cent.dif.PC3<-list()
 for (t in 1:length(names(both.bv.pathway.rotations))) {
   df.rot<-as.data.frame(both.bv.pathway.rotations[[t]])
@@ -816,8 +740,6 @@ both.bv.plot.PC3<-both.bv.cent.dif.PC3.all%>%
   scale_y_continuous(limits = c(0,0.032),expand = c(0,0))+
   theme_bw()+theme(axis.text.x = element_blank())+theme(legend.text = element_text(size = 10))
 
-png("both_bv_PC3_difference.png",units = "in",height = 6,width = 15,res = 400)
+# png("both_bv_PC3_difference.png",units = "in",height = 6,width = 15,res = 400)
 both.bv.plot.PC3
-dev.off()
-
-```
+# dev.off()

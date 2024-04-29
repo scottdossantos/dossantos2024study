@@ -16,8 +16,8 @@ library(CoDaSeq) # for pca plots
 # set user and path to github
 user <- "sds/cc"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 # load in filtered merged dataset (lon/eur/vir) and corresponding taxa vector,
 # health/BV group info for virginia samples, and taxa colour table

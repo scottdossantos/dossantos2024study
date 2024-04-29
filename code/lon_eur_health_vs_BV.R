@@ -13,8 +13,8 @@ library(ALDEx2) # MUST be version >1.35 for scale simulation (see note below)
 # set path to github directory (edit 'path.to.github' to reflect your machine!)
 user <- "sds/cc"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 # run 'setup.R' to load feature tables etc.
 source(paste(path.to.github, "code/setup.R", sep = ""))

@@ -1,9 +1,9 @@
 # Making a heatmap
 ################################ Setup #######################################
-user <- "sds/cc"
+user <- "cc"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 #since we need to go "back" a folder to metatranscriptome I had to re-assign working directory
 # you will need to change this to your computer

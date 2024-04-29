@@ -10,8 +10,8 @@ library(vegan) # for rearranging dendrogram
 # set path to the github repository
 user <- "sds/cc"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 # run setup code to get batch-corrected feature tables and taxa vector
 source(paste(path.to.github, "code/setup.R", sep=""))

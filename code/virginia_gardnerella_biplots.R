@@ -9,8 +9,8 @@ library(CoDaSeq)
 # set path to the github repository
 user <- "sds/cc"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 # load in following .Rda objects (all created in 'lon_eur_species_biplots.R'):
 #    - virginia.filt (BV-only vNumber feature table for virginia dataset)
@@ -109,6 +109,11 @@ for (i in 1:length(tax.vec.virginia)) {
     tax.vec.virginia[i] <- tax.gardnerella.rn$taxon[vnum.tax]
   }
 }
+
+# rename object containing edited virginia taxa vector and save as .Rda
+tax.vec.virginia.gv <- tax.vec.virginia
+save(tax.vec.virginia.gv,
+     file = paste0(path.to.github, "Rdata/tax.vec.virginia.gv.Rda"))
 
 # pull the indices of the V numbers corresponding to the Gardnerella genus and
 # each named species in the virginia dataset (for colouring species)

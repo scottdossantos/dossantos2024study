@@ -3,7 +3,7 @@
 # This script is run as part of the process to identify genes unique to each
 # gardnerella species, using two publicly available genomes per species. For
 # detailed info about the genomes used and their processing, see:
-# /[GitHubPath]/metatranscriptome/code/gardnerella_unique_genes_what_i_did.txt
+# /[GitHubPath]/dossantos2024study/code/gardnerella_unique_genes_what_i_did.txt
 
 #################################### setup ####################################
 
@@ -13,14 +13,14 @@ library(dplyr)
 # set path to github directory
 user <- "sds/cc"
 if(user=="sds/cc"){
-  path.to.github<-"~/Documents/GitHub/metatranscriptome/"
+  path.to.github<-"~/Documents/GitHub/dossantos2024study/"
 }else if(user=="gg"){
-  path.to.github<-"~/Documents/0_git/projects/metatranscriptome/"
+  path.to.github<-"~/Documents/0_git/projects/dossantos2024study/"
 }
 
 # load panaroo output (see 'gardnerella_unique_genes_what_i_did.txt' for info)
 gene.pres.abs<-read.csv(paste(path.to.github,
-                              "/Rdata/gene_presence_absence.csv", sep = ""))
+                              "Rdata/gene_presence_absence.csv", sep = ""))
 
 ################################ data clean-up ################################
 

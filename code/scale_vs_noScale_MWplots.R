@@ -12,8 +12,8 @@ library(ALDEx2) # v1.35 (bioconductor v3.19)
 # set path to github repository (change to match your machine)
 user <- "gg"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 # load in KO-aggregated lon/eur feature table and KO to pathway table
 load(paste0(path.to.github, "Rdata/ko.both.Rda"))

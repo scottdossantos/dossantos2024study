@@ -3,10 +3,8 @@
 ############################ Input data description ############################
 
 # Europe reads downloaded from ENA
-# London reads stored on agrajag at: 
-#     /Volumes/data/twntyfr_2018/Project_G._GLOOR/Sample_[ID]
-# Virginia (MOMS-PI) reads downloaded from dbGaP and stored on agrajag at:
-#     /Volumes/bin/dbgap/sra/[ID]_1.fastq.gz
+# London reads stored on Gloor lab server (human/rRNA-depleted files only)
+# Virginia (MOMS-PI) reads downloaded from dbGaP
 
 # note: the London reads in this location have been mapped to HG38 and SILVA,
 # but NOT T2T (complete human genome produced by long read sequencing). Final
@@ -32,8 +30,8 @@ library(CoDaSeq)
 # set user and path to github
 user <- "sds/cc"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 # load feature tables from VIRGO step 2 (have to use unz() on the virginia table
 # as it is a .zip archive)

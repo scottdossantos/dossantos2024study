@@ -20,12 +20,12 @@ library(ALDEx2) # for CLR transformations and correlation
 
 user <- "sds/cc"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 # load in virginia metadata, grouping object, KO-aggregated and vNumber feature
 # tables, virginia taxa vector, and VIRGO taxa table
-load(paste(path.to.github, "Rdata/virginia.meta.Rda", sep = ""))
+load("[LOCAL-PATH-TO]//virginia.meta.Rda")
 load(paste(path.to.github, "Rdata/virginia.groups.Rda", sep = ""))
 load(paste(path.to.github, "Rdata/ko.virginia.filt.Rda", sep = ""))
 load(paste(path.to.github, "Rdata/virginia.filt.Rda", sep = ""))
@@ -36,7 +36,7 @@ tax.table <- read.table(paste0(path.to.github, "1_VIRGO/1.taxon.tbl.txt"),
                         header = FALSE, sep = "\t", quote = "", row.names = 2)
 
 # load in PTB data from local machine
-virginia.ptb <- read.table("~/Documents/PostDoc_Western/Data/VaginalMetatranscriptome/R_work/virginia_PTBdata.txt",
+virginia.ptb <- read.table("[LOCAL-PATH-TO]/virginia_PTBdata.txt",
                            header = TRUE, sep = "\t", quote = "")
 
 ################################ assigning PTB ################################

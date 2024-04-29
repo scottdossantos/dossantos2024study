@@ -12,8 +12,8 @@ library(dplyr) # for data manipulation
 # set path to github directory (edit 'path.to.github' to reflect your machine!)
 user <- "sds/cc"
 path.to.github <- switch(user,
-                         "sds/cc" = "~/Documents/GitHub/metatranscriptome/",
-                         "gg" = "~/Documents/0_git/projects/metatranscriptome/")
+                         "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
+                         "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
 # load filtered feature tables for lon/eur, virginia and all 3 datasets
 load(paste0(path.to.github, "Rdata/new.both.filt.Rda")) # london/europe
@@ -44,8 +44,8 @@ vnum.all.3 <-rownames(filt.all.3)
 
 # write headers to .txt file (note: output for lon/eur follows different naming
 # convention as the gardnerella analysis was performed on this dataset first,
-# and the companion '0_README_Gardnerella.txt' file uses this 
+# and the companion 'walkthrough_GardnerellaPangenome.txt' file uses this 
 # name)
-write(vnum.lon.eur, "vnumbers_to_search_lon_eur.txt")
-write(vnum.virginia, "vnumbers_to_search_virginia.txt")
-write(vnum.all.3, "vnumbers_to_search_all3.txt")
+# write(vnum.lon.eur, "vnumbers_to_search_lon_eur.txt")
+# write(vnum.virginia, "vnumbers_to_search_virginia.txt")
+# write(vnum.all.3, "vnumbers_to_search_all3.txt")
