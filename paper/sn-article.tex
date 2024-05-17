@@ -130,11 +130,7 @@
 %% sample for unstructured abstract %%
 %%==================================%%
 
-\abstract{\textbf{Background:} The application of `-omics' technologies to study bacterial vaginosis (BV) has uncovered vast differences in composition and scale between the vaginal microbiomes of healthy and BV patients. Compared to amplicon sequencing and shotgun metagenomic approaches focusing on a single or few species, investigating the transcriptome of the vaginal microbiome at a system-wide level can provide insight into the functions which are actively expressed and differential between states of health and disease.\newline
-
-\textbf{Results:} We conducted a meta-analysis of vaginal metatranscriptomes from three studies, split into exploratory (\textit{n} = 44) and validation (\textit{n} = 297) datasets, accounting for the compositional nature of sequencing data and differences in scale between healthy and BV microbiomes. Conducting differential abundance analyses on the exploratory dataset, we identified a multitude of strategies employed by microbes associated with states of health and BV to evade host cationic antimicrobial peptides (CAMPs); putative mechanisms used by BV-associated species to resist and counteract the low vaginal pH; and potential approaches to disrupt vaginal epithelial integrity so as to establish sites for adherence and biofilm formation. Moreover, we identified several distinct functional subgroups within the BV population, distinguished by genes involved in motility, chemotaxis, biofilm formation and co-factor biosynthesis. After defining molecular states of health and BV in the validation dataset using KEGG orthology terms rather than community state types, differential abundance analysis confirmed earlier observations regarding CAMP resistance and compromising epithelial barrier integrity in healthy and BV microbiomes, and also supported the existence of motile vs. non-motile subgroups in the BV population.\newline
-
-\textbf{Conclusions:} Our findings highlight a need to focus on functional rather than taxonomic differences when considering the role of microbiomes in disease and identify pathways for further research as potential BV treatment targets.\newline}
+\abstract{The application of `-omics' technologies to study bacterial vaginosis (BV) has uncovered vast differences in composition and scale between the vaginal microbiomes of healthy and BV patients. Compared to amplicon sequencing and shotgun metagenomic approaches focusing on a single or few species, investigating the transcriptome of the vaginal microbiome at a system-wide level can provide insight into the functions which are actively expressed and differential between states of health and disease. We conducted a meta-analysis of vaginal metatranscriptomes from three studies, split into exploratory (\textit{n} = 44) and validation (\textit{n} = 297) datasets, accounting for the compositional nature of sequencing data and differences in scale between healthy and BV microbiomes. Conducting differential abundance analyses on the exploratory dataset, we identified a multitude of strategies employed by microbes associated with states of health and BV to evade host cationic antimicrobial peptides (CAMPs); putative mechanisms used by BV-associated species to resist and counteract the low vaginal pH; and potential approaches to disrupt vaginal epithelial integrity so as to establish sites for adherence and biofilm formation. Moreover, we identified several distinct functional subgroups within the BV population, distinguished by genes involved in motility, chemotaxis, biofilm formation and co-factor biosynthesis. After defining molecular states of health and BV in the validation dataset using KEGG orthology terms rather than community state types, differential abundance analysis confirmed earlier observations regarding CAMP resistance and compromising epithelial barrier integrity in healthy and BV microbiomes, and also supported the existence of motile vs. non-motile subgroups in the BV population. Our findings highlight a need to focus on functional rather than taxonomic differences when considering the role of microbiomes in disease and identify pathways for further research as potential BV treatment targets.}
 
 %%================================%%
 %% Sample for structured abstract %%
@@ -156,7 +152,7 @@
 
 \maketitle
 
-\section{Background}\label{sec:secIntro}
+\section{Introduction}\label{sec:secIntro}
 Bacterial vaginosis (BV) is a polymicrobial condition of poorly-understood aetiology and is the most common cause of vaginal concern worldwide \citep{Srinivasan:2008}. Prevalence rates vary by country and are typically between 20-30 \% \citep{peebles_2019}, though reported rates exceed 50 \% in some rural populations of developing nations \citep{kenyon_global_2013}. Symptoms of the condition include a thin and potentially malodorous discharge, vaginal itching or irritation, pain on urination and/or sexual intercourse, and elevated vaginal pH; however many cases can be asymptomatic. Untreated, BV can have profound consequences, including higher acquisition rates of sexually-transmitted infections \citep{Allsworth:2011aa,Chacra:2023aa} (including HIV and oncogenic HPV), in addition to a marked negative impact on patients' self-esteem, feelings of shame or anxiety, reduced intimacy and relationship problems \citep{adolfsson_how_2016} and an increased incidence of pre-term birth \citep{Fettweis:2019aa}. Recommended treatment with oral or intravaginal metronidazole or clindamycin often achieves symptom resolution in the short term, but is associated with high recurrence rates of 50-80 \% within a year \citep{Oduyebo:2009}.
 
 Vaginal microbiome dysbiosis is a hallmark of BV and typically manifests as a depletion of \textit{Lactobacilllus} spp., with a corresponding overgrowth of various obligate anaerobic species \citep{lev-sagie_vaginal_2022}. Typically, total bacterial loads in BV are one to two orders of magnitude higher than in healthy patients \citep{Zozaya:2010}, and species from the genera \textit{Gardnerella}, \textit{Prevotella}, \textit{Atopobium}, \textit{Megasphaera}, \textit{Sneathia}, and \textit{Mobiluncus}-- among others-- predominate. Landmark studies of the vaginal microbiome using amplicon sequencing defined five canonical `community state types' (CSTs), with CST IV showing a significant correlation with BV \citep{Ravel:2010}. This finding has since been extensively replicated, including studies employing alternative molecular barcoding genes \citep{albert_study_2015, dossantos_2023} and shotgun metagenomic methods \citep{symul_sub-communities_2023}.
@@ -192,7 +188,7 @@ The three study populations analysed exhibited considerable variation, suggestin
 
 \begin{figure}[H]%
     \centering
-    \includegraphics[scale=0.4]{3_Workflow.png}
+    \includegraphics[scale=0.4]{0_fig1.png}
     \caption{\textbf{Study workflow:} Raw FASTQ files were downloaded from their respective repositories and were trimmed for quality and length. Reads mapping to GRCh38 and T2T human reference genomes were discarded as presumptive human contamination; the remainder were mapped to v138.1 of the SILVA rRNA database, and any aligned reads were also discarded. The remaining reads were mapped against the VIRGO catalogue of $\sim$1 million non-redundant, microbial genes from the human vagina \cite{Ma:2020aa}. Feature tables for each dataset were constructed separately and batch-corrected \cite{Zhang:2020ab} when used in combination. These data tables served as input for all downstream analyses using the scale reliant inference (SRI) approach to normalisation \cite{nixon2023scale} and the expected values of Bayesian posterior models of the data were used as starting points for all exploratory data analysis and statistical methods.} \label{fig:figWorkflow}
 \end{figure}
 
@@ -254,8 +250,6 @@ Prior to validating any previous observations, we investigated if pregnancy intr
 
 After processing the three datasets together, we compared the post-SRI SLR values returned by ALDEx2 for all features from the species represented by at least 75 genes, stratified by dataset and BV status (Figure~\ref{fig:figViolinGardnerella}A). \textit{Lactobacillus} depletion and anaerobic overgrowth in BV metatranscriptomes of all datasets was evident, and the effect of recent antimicrobial therapy for symptomatic BV within the Europe dataset was clear, manifesting as lower abundances of non-\textit{L. iners} lactobacilli and higher abundances of BV-associated taxa even among healthy samples. However the most striking differences between pregnancy states lay in the abundances of \textit{Sneathia amnii}, \textit{Sneathia sanguinegens}, and \textit{Gardnerella vaginalis} in BV samples. Abundances of the two \textit{Sneathia} species were lower in the Virginia dataset than in London or Europe-- particularly \textit{S. sanguinegens}-- with a larger proportion of samples with extremely low abundances of reads corresponding to these taxa. Concomitantly, \textit{Gardnerella vaginalis} abundances and to a lesser degree, those of \textit{Atopobium vaginae}, were higher within the Virginia dataset than either non-pregnant dataset.
 
-Given that the Virginia dataset was collected as part of an study into the aetiology of pre-term birth, we also tested the correlation of vaginal metatranscriptome features at the functional and species level with gestational age at the time of delivery. Using the same FDR threshold as in previous analyses and three separate measures of correlation (Pearson/Spearman/Kendall coefficients), we identified only a single KO term that was significantly correlated with gestational age at delivery. K03771 (peptidyl-prolyl cis-trans isomerase; SurA) exhibited a weak negative correlation with gestational age according to Spearman's coefficient only ($\rho$ = -0.23, FDR $<$1\%). At the species level, five species were significantly correlated with gestational age at delivery across all three measures: we observed a positive correlation with \textit{Lactobacillus crispatus}, and negative correlations with BVAB1, \textit{Sneathia amnii}, \textit{Prevotella timonensis}, and \textit{Prevotella amnii} (Supplementary Figure~\ref{fig:sfigPTBcorr}). None of these species associations replicated when healthy samples were excluded from the dataset, suggesting that this finding is not particularly robust.
-
 \begin{figure}[H]
     \centering
     \includegraphics[scale=1.15]{0_multipanel_fig4.png}
@@ -288,17 +282,17 @@ Almost all KO terms over-represented among BV metatranscriptomes in the discover
 
 As in the discovery dataset, the initial clustering of Virginia metatranscriptomes at the functional level revealed multiple sub-populations of BV metatranscriptomes. Focusing on the two largest subgroups (BV1, \textit{n} = 57; BV2, \textit{n} = 56), we tested whether the same differences between BV subgroups identified in the London/Europe dataset could be observed among Virginia BV samples. Differences in expression of genes involved in flagellar assembly, chemotaxis, and exopolysaccharide biosynthesis were again the among the largest drivers of subgroup separation (Figure~\ref{fig:figValidation}B), with flagellar assembly identified as the sole contributor to the functional signature of one subgroup (AUC = 0.994, Supplementary Figure~\ref{fig:sfigVirgCoda4Mfigs}D-F). All KO terms from flagellar assembly and chemotaxis pathways identified as differential within the discovery dataset were again differentially expressed between BV subgroups in the validation dataset. Additionally, several KO terms from these pathways not identified as differential previously were among the differentially expressed KOs in the validation dataset, including the flagellar basal body rod protein, FlgD (K2389), the sigma factor regulating transcription of flagellar genes, FliA (K02405), the chemotaxis response regulator that interacts with the flagellar motor switch, CheY (K03413), and the heme-based aerotactic oxygen sensor, HemA/T (K06595). Exopolysaccharide biosynthesis was represented by a singular KO term (K11936) corresponding to the same poly-$\beta$-1,6-acetyl-\textsc{d}-glucosamine synthase identified in the discovery dataset. The only major difference between BV subgroup analyses in the discovery and validation datasets concerned porphyrin metabolism. Only a single KO term from this pathway was differentially expressed between subgroups: the porphobillinogen synthase, HemB.
 
-All previous species-specific associations were recapitulated among BV subgroups: BVAB1/\textit{L. iners}/\textit{Mobiluncus} spp. with flagellar assembly and chemotaxis, and BVAB1/\textit{P.amnii} with exopolysaccharide biosynthesis. In fact, the presence of BVAB1 in BV1 but not BV2 samples again appeared to be responsible for a large degree of the separation of these subgroups (Supplementary Figure~\ref{fig:sfigVirgBVstackedBars}). We did however note that the expression of flagellar genes between BV1 and BV2 groups appeared to be strain-specific, such that the difference in the total number of reads which were assigned to this pathway and originated from \textit{L. iners} spanned three orders of magnitude (1,211,315 reads vs. 2,344 reads).
+All previous species-specific associations were recapitulated among BV subgroups: BVAB1/\textit{L. iners}/\textit{Mobiluncus} spp. with flagellar assembly and chemotaxis, and BVAB1/\textit{P.amnii} with exopolysaccharide biosynthesis. In fact, the presence of BVAB1 in BV1 but not BV2 samples again appeared to be responsible for a large degree of the separation of these subgroups (Supplementary Figure~\ref{fig:sfigVirgBVstackedBars}). We did however note that the expression of flagellar genes between BV1 and BV2 groups appeared to be strain-specific, such that the difference in the total number of reads which were assigned to this pathway and originated from \textit{L. iners} spanned three orders of magnitude (1,211,315 reads vs. 2,344 reads). Critically, we were able to replicate all of the above findings when genes were aggregated by function using the eggNOG classification system (Supplementary Figure~\ref{fig:sfigEggNOGvirginia}). EggNOG terms corresponding to flagellar components, chemotactic signalling machinery and exopolysaccharide biosynthesis/biofilm formation were among the most differential functions when comparing the same BV subgroups.
 
 Finally, the size of the validation cohort allowed us to investigate the clear separation among metatranscriptomes within the molecular health group which appeared to be due to dominance by either \textit{L. crispatus} or \textit{L. iners}. Differentially expressed functions generally reflected metabolic differences between these two taxa (Figure~\ref{fig:figValidation}C \& Supplementary Figure~\ref{fig:sfigVirgHsubgroups}). Of interest, expression levels of genes involved in flagellar assembly among \textit{L. iners}-dominant samples were significantly higher, while those encoding a putative polyamine transport system specific for putrescine and spermidine were among the most differentially expressed transcripts for \textit{L. crispatus}-dominant samples. Previous work has demonstrated that vaginal isolates of \textit{L. crispatus} are capable of producing or degrading biogenic amines, including putrescine, depending on the strain \citep{puebla_barragan_amines_2021}. Moreover, this transport system was also detected in a recent RNA-seq study of the vaginal environment \citep{France:2022aa}. Equally of note was a single KO term assigned to `dioxin degradation' (K01821; PraC/XylH); of all reads in the validation dataset assigned to this KO term, 99.9\% originated from lactobacilli (74.6\% from \textit{L. crispatus}). That dioxins are classed as persistent chemical pollutants generated as industrial by-products makes it highly unlikely that they are truly metabolised within the vaginal environment \citep{hutzinger_sources_1985}. We note that this KO term corresponds to 2-hydroxymuconate tautomerase activity and that 2-hydroxymuconate and catechol are the products of enzymatic reactions involving enzymes of the EC class 3.7.1 (hydrolases acting on C-C bonds in ketonic substances). Furthermore, 2-hydroxymuconate can be metabolised to pyruvate via $\gamma$-oxalocrotonate and 4-hydroxy-2-oxopentanoate. Though entirely speculative, this could theoretically represent a mechanism by which vaginal estrogen may be used as an energy source by \textit{L. crispatus}.
 
 \section{Discussion}\label{sec:secDisc}
 
-Overall, our meta-analysis of three independent vaginal metatranscriptome datasets identified differing mechanisms by which species associated with health and BV evade local host immune responses and persist within the vaginal niche. We also observed distinct functional subgroups within the BV population of all datasets, largely driven by the presence of BVAB1 and differing in expression of pathways potentially of relevance to BV pathogenesis, including motility and biofilm formation. Critically, these findings were robust to the different methodological approaches employed by the original study authors, including the large discrepancy between study population demographics. Our findings, together with other known host-microbe interactions in the vaginal environment, are summarised in Figure~\ref{fig:figMechSummary}.
+Overall, our meta-analysis of three independent vaginal metatranscriptome datasets identified differing mechanisms by which species associated with health and BV evade local host immune responses and persist within the vaginal niche. We also observed distinct functional subgroups within the BV population of all datasets, largely driven by the presence of BVAB1 and differing in expression of pathways potentially of relevance to BV pathogenesis, including motility and biofilm formation. Critically, these findings were robust to the different methodological approaches employed by the original study authors, including the large discrepancy between study population demographics, as well as different functional classification systems employed in our analyses. Our findings, together with other known host-microbe interactions in the vaginal environment, are summarised in Figure~\ref{fig:figMechSummary}.
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.425]{2_Summary.png}
+\includegraphics[scale=0.425]{0_fig6.png}
 \caption{\textbf{Summary of microbial persistence mechanisms and host-microbe interactions in the vaginal environment:} All functions assigned according to the Kyoto Encyclopedia of Genes and Genomes. Yellow triangles indicate putative mechanisms. \textbf{1.} Resistance to host cationic antimicrobial peptides (CAMPs; see Figure~\ref{fig:figLonEurSummary}D) involves reducing net negative surface charge or direct CAMP degradation. \textbf{2.} Low vaginal pH triggers the opening of the inner membrane acid-activated urea channel, UreI (K03191). Cytoplasmic and/or surface-adsorbed UreA/B urease may then serve to raise local pH. \textbf{3.} Low vaginal pH also triggers opening of the acid-activated periplasmic iron channel, EfeU, permitting transport of iron across the periplasm by FbpA (K02012) and its intracellular accumulation by the non-heme ferritin, FtnA (K02217). \textbf{4.} Production of a U32-family peptidase orthologous to PrtC (K08303) found in vaginal \textit{Porphyromonas} isolates may degrade collagen in the extracellular matrix of the vaginal mucosa. \textbf{5.} Production of the biogenic amines, putrescine and spermidine, from arginine. These polyamines, along with the liberation of ammonia during their synthesis, raise vaginal pH and can promote the growth of BV-associated taxa. \textbf{6.} Subgroups of BV are delineated by biofilm formation, motility and co-factor biosynthesis; BVAB1 and \textit{Prevotella amnii} synthesise poly-$\beta$-1,6-acetyl-\textsc{d}-glucosamine via PgaC (K11936). BVAB1, \textit{Mobiluncus} spp., and \textit{L. iners} express various flagellar and chemotaxis genes as part of the `motile' BV genotype. \textbf{7.} Induction of LL-37 production and secretion by \textit{Gardnerella} spp., as occurs at the urothelium during urinary tract infections. Similar mechanisms may be employed by \textit{Gardnerella} spp. in the vagina to out-compete lactobacilli or other taxa. Created with BioRender.}\label{fig:figMechSummary}
 \end{figure}
 
@@ -312,216 +306,22 @@ Many surveys of the vaginal microbiome employing amplicon sequencing have attemp
 
 Differences in the expression of genes involved in iron uptake and storage is not particularly surprising, given that lactobacilli are not dependent on iron for growth. Although sensitivity to iron levels may depend on nucleotide availability in some lactobacilli \citep{elli_iron_2000}, most others are unaffected and instead rely on manganese and cobalt as co-factors in their essential redox enzymes \citep{weinberg_lactobacillus_1997}. It is noteworthy then that some BV subgroups express enzymes involved in cobalamin biosynthesis which, by definition, requires uptake of cobamide or other forms of cobalt. This may represent a strategy employed by BV-associated species to out-compete lactobacilli through the sequestration of a valuable resource. Likewise, expression of pH-dependent urea channels at the higher levels noted among BV metatranscriptomes compared to their healthy counterparts could reflect attempts by BV-associated taxa to counteract the low vaginal pH. Although detected at low levels, both urease subunits were also detected in our meta-analysis; this enzyme is central to similar pH-raising mechanisms that underpin virulence in pathogens such as \textit{Helicobacter pylori} \citep{strugatsky_structure_2013}.
 
-The identification of a collagenase present in several BV-associated species raises questions about the role played by collagen degradation BV pathogenesis, particularly regarding the cause vs. effect of dysbiosis. Several reviews \citep{onderdonk_human_2020,africa_anaerobes_2014} point to the production of ``collagenases and fibrinolysins" by various species of \textit{Sneathia} and \textit{Prevotella}, citing the work of Al-Mushrif \textit{et al.}; however this work investigated the \textit{in vitro} effects of organic acids on monocytes and only stated the fact that several pathogenic \textit{Prevotella} produce these enzymes \citep{al-mushrif_inhibition_2000}. In the chain of papers cited, Hofstad ultimately demonstrated in 1984 the collagen- and fibrin-degrading activities of various \textit{Prevotella} species (then classified as \textit{Bacteroides}), though vaginal \textit{Prevotella} were not studied \citep{hofstad_pathogenicity_1984}. More recently, preliminary work by Lithgow and colleagues confirmed that vaginal isolates of \textit{Porphyromonas uenonis}, \textit{{Porphyromonas asaccharolytica}} \textit{Prevotella bivia} and \textit{Sneathia amnii} all possess secretory collagenase activity \citep{lithgow_collagenase_2022}. While it remains to be experimentally proven how these enzymes access collagen within the extracellular matrix of the vaginal mucosa, damage to the epithelial barrier could favour bacterial attachment and influence biofilm formation, as is the case in the respiratory tract \citep{boase_bacterial-induced_2013,chegini_destruction_2023}. Collagenase expression may also contribute to the production of the detached `clue cells' \citep{simoes2006clinical} observed during clinical diagnosis, as these biofilm-covered epithelial cells could be released upon degradation of the extracellular matrix.
-
-Finally, we identified several taxa exhibiting significant correlations with pre-term birth. Our findings overlap well with the original findings of the MOMS-PI study: we identified several BV-associated species within metatranscriptomes which were negatively correlated with gestational age at delivery, as well as a positive correlation between the latter and \textit{Lactobacillus crispatus}. Fettweis \textit{et al.} conducted their analyses using 16S rRNA gene profiles as well as shotgun metagenomic and metatranscriptomic samples, reporting significantly higher abundances of \textit{S. amnii}, \textit{P. amnii}, and BVAB1 (among other species) in vaginal microbiomes of mothers delivering prior to 37 weeks gestation \citep{Fettweis:2019aa}. Likewise, they observed higher abundances of \textit{L. crispatus} and other vaginal lactobacilli among women delivering at term. While they further correlated vaginal levels of several pro-inflammatory cytokines previously implicated in pre-term birth with the abundances of the BV-associated taxa among pre-term deliveries, BV status was not formally determined as part of this study. Furthermore, a fully quantitative, clinical measure of BV does not yet exist, precluding a complementary correlation analysis at the taxonomic or functional level in the present meta-analysis.
+Finally, the identification of a collagenase present in several BV-associated species raises questions about the role played by collagen degradation BV pathogenesis, particularly regarding the cause vs. effect of dysbiosis. Several reviews \citep{onderdonk_human_2020,africa_anaerobes_2014} point to the production of ``collagenases and fibrinolysins" by various species of \textit{Sneathia} and \textit{Prevotella}, citing the work of Al-Mushrif \textit{et al.}; however this work investigated the \textit{in vitro} effects of organic acids on monocytes and only stated the fact that several pathogenic \textit{Prevotella} produce these enzymes \citep{al-mushrif_inhibition_2000}. In the chain of papers cited, Hofstad ultimately demonstrated in 1984 the collagen- and fibrin-degrading activities of various \textit{Prevotella} species (then classified as \textit{Bacteroides}), though vaginal \textit{Prevotella} were not studied \citep{hofstad_pathogenicity_1984}. More recently, preliminary work by Lithgow and colleagues confirmed that vaginal isolates of \textit{Porphyromonas uenonis}, \textit{{Porphyromonas asaccharolytica}} \textit{Prevotella bivia} and \textit{Sneathia amnii} all possess secretory collagenase activity \citep{lithgow_collagenase_2022}. While it remains to be experimentally proven how these enzymes access collagen within the extracellular matrix of the vaginal mucosa, damage to the epithelial barrier could favour bacterial attachment and influence biofilm formation, as is the case in the respiratory tract \citep{boase_bacterial-induced_2013,chegini_destruction_2023}. Collagenase expression may also contribute to the production of the detached `clue cells' \citep{simoes2006clinical} observed during clinical diagnosis, as these biofilm-covered epithelial cells could be released upon degradation of the extracellular matrix.
 
 \section{Conclusion} \label{sec:secConc}
 
 Overall, we have demonstrated the advantages of incorporating tools such as SRI into `omics analyses, showing how it can be used to identify differentially expressed functions which are robust to replication even across independent and highly divergent datasets. Our application of these tools to vaginal metatranscriptomic datasets opens several avenues of investigation in relation to potential therapeutic targets for BV which require further investigation to confirm their involvement in pathogenesis. The inclusion  of SRI into the ALDEx2 platform should be of general use when examining multiple other metatranscriptomes and other problematic high throughput sequencing datasets.
 
-% \section{Algorithms, Program codes and Listings}\label{sec7}
-
-% Packages \verb+algorithm+, \verb+algorithmicx+ and \verb+algpseudocode+ are used for setting algorithms in \LaTeX\ using the format:
-
-% %%=============================================%%
-% %% For presentation purpose, we have included  %%
-% %% \bigskip command. please ignore this.       %%
-% %%=============================================%%
-% \bigskip
-% \begin{verbatim}
-% \begin{algorithm}
-% \caption{<alg-caption>}\label{<alg-label>}
-% \begin{algorithmic}[1]
-% . . .
-% \end{algorithmic}
-% \end{algorithm}
-% \end{verbatim}
-% \bigskip
-% %%=============================================%%
-% %% For presentation purpose, we have included  %%
-% %% \bigskip command. please ignore this.       %%
-% %%=============================================%%
-
-% You may refer above listed package documentations for more details before setting \verb+algorithm+ environment. For program codes, the ``verbatim'' package is required and the command to be used is \verb+\begin{verbatim}+ \verb+...+ \verb+\end{verbatim}+. 
-
-% Similarly, for \verb+listings+, use the \verb+listings+ package. \verb+\begin{lstlisting}+ \verb+...+ \verb+\end{lstlisting}+ is used to set environments similar to \verb+verbatim+ environment. Refer to the \verb+lstlisting+ package documentation for more details.
-
-% A fast exponentiation procedure:
-
-% \lstset{texcl=true,basicstyle=\small\sf,commentstyle=\small\rm,mathescape=true,escapeinside={(*}{*)}}
-% \begin{lstlisting}
-% begin
-%   for $i:=1$ to $10$ step $1$ do
-%       expt($2,i$);  
-%       newline() od                (*\textrm{Comments will be set flush to the right margin}*)
-% where
-% proc expt($x,n$) $\equiv$
-%   $z:=1$;
-%   do if $n=0$ then exit fi;
-%      do if odd($n$) then exit fi;                 
-%         comment: (*\textrm{This is a comment statement;}*)
-%         $n:=n/2$; $x:=x*x$ od;
-%      { $n>0$ };
-%      $n:=n-1$; $z:=z*x$ od;
-%   print($z$). 
-% end
-% \end{lstlisting}
-
-% \begin{algorithm}
-% \caption{Calculate $y = x^n$}\label{algo1}
-% \begin{algorithmic}[1]
-% \Require $n \geq 0 \vee x \neq 0$
-% \Ensure $y = x^n$ 
-% \State $y \Leftarrow 1$
-% \If{$n < 0$}\label{algln2}
-%         \State $X \Leftarrow 1 / x$
-%         \State $N \Leftarrow -n$
-% \Else
-%         \State $X \Leftarrow x$
-%         \State $N \Leftarrow n$
-% \EndIf
-% \While{$N \neq 0$}
-%         \If{$N$ is even}
-%             \State $X \Leftarrow X \times X$
-%             \State $N \Leftarrow N / 2$
-%         \Else[$N$ is odd]
-%             \State $y \Leftarrow y \times X$
-%             \State $N \Leftarrow N --1$
-%         \EndIf
-% \EndWhile
-% \end{algorithmic}
-% \end{algorithm}
-
-% %%=============================================%%
-% %% For presentation purpose, we have included  %%
-% %% \bigskip command. please ignore this.       %%
-% %%=============================================%%
-% \bigskip
-% \begin{minipage}{\hsize}%
-% \lstset{frame=single,framexleftmargin=-1pt,framexrightmargin=-17pt,framesep=12pt,linewidth=0.98\textwidth,language=pascal}% Set your language (you can change the language for each code-block optionally)
-% %%% Start your code-block
-% \begin{lstlisting}
-% for i:=maxint to 0 do
-% begin
-% { do nothing }
-% end;
-% Write('Case insensitive ');
-% Write('Pascal keywords.');
-% \end{lstlisting}
-% \end{minipage}
-
-% \section{Cross referencing}\label{sec8}
-
-% Environments such as figure, table, equation and align can have a label
-% declared via the \verb+\label{#label}+ command. For figures and table
-% environments use the \verb+\label{}+ command inside or just
-% below the \verb+\caption{}+ command. You can then use the
-% \verb+\ref{#label}+ command to cross-reference them. As an example, consider
-% the label declared for Figure~\ref{fig1} which is
-% \verb+\label{fig1}+. To cross-reference it, use the command 
-% \verb+Figure \ref{fig1}+, for which it comes up as
-% ``Figure~\ref{fig1}''. 
-
-% To reference line numbers in an algorithm, consider the label declared for the line number 2 of Algorithm~\ref{algo1} is \verb+\label{algln2}+. To cross-reference it, use the command \verb+\ref{algln2}+ for which it comes up as line~\ref{algln2} of Algorithm~\ref{algo1}.
-
-% \subsection{Details on reference citations}\label{subsec7}
-
-% Standard \LaTeX\ permits only numerical citations. To support both numerical and author-year citations this template uses \verb+natbib+ \LaTeX\ package. For style guidance please refer to the template user manual.
-
-% Here is an example for \verb+\cite{...}+: \cite{bib1}. Another example for \verb+\citep{...}+: \citep{bib2}. For author-year citation mode, \verb+\cite{...}+ prints Jones et al. (1990) and \verb+\citep{...}+ prints (Jones et al., 1990).
-
-% All cited bib entries are printed at the end of this article: \cite{bib3}, \cite{bib4}, \cite{bib5}, \cite{bib6}, \cite{bib7}, \cite{bib8}, \cite{bib9}, \cite{bib10}, \cite{bib11}, \cite{bib12} and \cite{bib13}.
-
-% \section{Examples for theorem like environments}\label{sec10}
-
-% For theorem like environments, we require \verb+amsthm+ package. There are three types of predefined theorem styles exists---\verb+thmstyleone+, \verb+thmstyletwo+ and \verb+thmstylethree+ 
-
-% %%=============================================%%
-% %% For presentation purpose, we have included  %%
-% %% \bigskip command. please ignore this.       %%
-% %%=============================================%%
-% \bigskip
-% \begin{tabular}{|l|p{19pc}|}
-% \hline
-% \verb+thmstyleone+ & Numbered, theorem head in bold font and theorem text in italic style \\\hline
-% \verb+thmstyletwo+ & Numbered, theorem head in roman font and theorem text in italic style \\\hline
-% \verb+thmstylethree+ & Numbered, theorem head in bold font and theorem text in roman style \\\hline
-% \end{tabular}
-% \bigskip
-% %%=============================================%%
-% %% For presentation purpose, we have included  %%
-% %% \bigskip command. please ignore this.       %%
-% %%=============================================%%
-
-% For mathematics journals, theorem styles can be included as shown in the following examples:
-
-% \begin{theorem}[Theorem subhead]\label{thm1}
-% Example theorem text. Example theorem text. Example theorem text. Example theorem text. Example theorem text. 
-% Example theorem text. Example theorem text. Example theorem text. Example theorem text. Example theorem text. 
-% Example theorem text. 
-% \end{theorem}
-
-% Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text.
-
-% \begin{proposition}
-% Example proposition text. Example proposition text. Example proposition text. Example proposition text. Example proposition text. 
-% Example proposition text. Example proposition text. Example proposition text. Example proposition text. Example proposition text. 
-% \end{proposition}
-
-% Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text.
-
-% \begin{example}
-% Phasellus adipiscing semper elit. Proin fermentum massa
-% ac quam. Sed diam turpis, molestie vitae, placerat a, molestie nec, leo. Maecenas lacinia. Nam ipsum ligula, eleifend
-% at, accumsan nec, suscipit a, ipsum. Morbi blandit ligula feugiat magna. Nunc eleifend consequat lorem. 
-% \end{example}
-
-% Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text.
-
-% \begin{remark}
-% Phasellus adipiscing semper elit. Proin fermentum massa
-% ac quam. Sed diam turpis, molestie vitae, placerat a, molestie nec, leo. Maecenas lacinia. Nam ipsum ligula, eleifend
-% at, accumsan nec, suscipit a, ipsum. Morbi blandit ligula feugiat magna. Nunc eleifend consequat lorem. 
-% \end{remark}
-
-% Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text.
-
-% \begin{definition}[Definition sub head]
-% Example definition text. Example definition text. Example definition text. Example definition text. Example definition text. Example definition text. Example definition text. Example definition text. 
-% \end{definition}
-
-% Additionally a predefined ``proof'' environment is available: \verb+\begin{proof}+ \verb+...+ \verb+\end{proof}+. This prints a ``Proof'' head in italic font style and the ``body text'' in roman font style with an open square at the end of each proof environment. 
-
-% \begin{proof}
-% Example for proof text. Example for proof text. Example for proof text. Example for proof text. Example for proof text. Example for proof text. Example for proof text. Example for proof text. Example for proof text. Example for proof text. 
-% \end{proof}
-
-% Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text. Sample body text.
-
-% \begin{proof}[Proof of Theorem~{\upshape\ref{thm1}}]
-% Example for proof text. Example for proof text. Example for proof text. Example for proof text. Example for proof text. Example for proof text. Example for proof text. Example for proof text. Example for proof text. Example for proof text. 
-% \end{proof}
-
-% \noindent
-% For a quote environment, use \verb+\begin{quote}...\end{quote}+
-% \begin{quote}
-% Quoted text example. Aliquam porttitor quam a lacus. Praesent vel arcu ut tortor cursus volutpat. In vitae pede quis diam bibendum placerat. Fusce elementum
-% convallis neque. Sed dolor orci, scelerisque ac, dapibus nec, ultricies ut, mi. Duis nec dui quis leo sagittis commodo.
-% \end{quote}
-
-% Sample body text. Sample body text. Sample body text. Sample body text. Sample body text (refer Figure~\ref{fig1}). Sample body text. Sample body text. Sample body text (refer Table~\ref{tab3}). 
-
 \section{Methods}\label{sec:secMethods}
 
 \subsection{Meta-analysis datasets} \label{subsec:subsecDatasets}
-Three previously published vaginal metatranscriptome datasets were included in our meta-analysis: Macklaim \textit{et al.} (London \cite{Macklaim:2018aa}), Deng \textit{et al.} (European \cite{Denge00262-18}), and Fettweiss \textit{et al.} (Virginia \cite{Fettweis:2019aa}) (see "Data availability" section for access information). 
+Three previously published vaginal metatranscriptome datasets were included in our meta-analysis: Macklaim \textit{et al.} (London \cite{Macklaim:2018aa}), Deng \textit{et al.} (European \cite{Denge00262-18}), and Fettweiss \textit{et al.} (Virginia \cite{Fettweis:2019aa}) (see "Data availability and code" section for access information). 
 
 The London dataset was produced from vaginal swabs of the posterior fornix and mid-vaginal wall, collected from 22 women in 2013. Total RNA was extracted from swab fluid using a standard workflow \citep{Macklaim:2018aa} and RNA libraries were sequenced on an Illumina HiSeq 2000 instrument. 
 
-The European dataset was produced from vaginal lavage samples (2 mL saline) collected from 22 women between April 2014 and September 2015. Total RNA was extracted from 1 mL of vaginal fluid suspension using a Mo Bio PowerMicrobiome RNA Isolation kit and rRNA was depleted using a Ribo-Zero Gold rRNA Removal kit. Paired-end RNA libraries were constructed with an Illumina ScriptSeq kit (2 x 110 bp reads) and sequenced on a HiSeq 2500 instrument.
+The European dataset was produced from vaginal lavage samples (2 mL saline) collected from 22 women between April 2014 and September 2015. Total RNA was extracted from 1 mL of vaginal fluid suspension using a Mo Bio PowerMicrobiome RNA Isolation kit and rRNA was depleted using a Ribo-Zero Gold rRNA Removal kit \citep{Denge00262-18}. Paired-end RNA libraries were constructed with an Illumina ScriptSeq kit (2 x 110 bp reads) and sequenced on a HiSeq 2500 instrument.
 
-The Virginia dataset was produced from vaginal swabs of the mid-vaginal wall, collected from pregnant women as part of the MOMS-PI study. Total RNA was extracted using a Mo Bio PowerMicrobiome RNA Isolation kit and rRNA was depleted using an Epicentre/ Illumina Ribo-Zero Magnetic Epidemiology Kit. Paired-end RNA libraries were constructed with a KAPA Biosystems KAPA RNA HyperPrep Kit (2 x 150 bp reads) and sequenced on an Illumina HiSeq4000 instrument.
+The Virginia dataset was produced from vaginal swabs of the mid-vaginal wall, collected from pregnant women as part of the MOMS-PI study. Total RNA was extracted using a Mo Bio PowerMicrobiome RNA Isolation kit and rRNA was depleted using an Epicentre/ Illumina Ribo-Zero Magnetic Epidemiology Kit \citep{Fettweis:2019aa}. Paired-end RNA libraries were constructed with a KAPA Biosystems KAPA RNA HyperPrep Kit (2 x 150 bp reads) and sequenced on an Illumina HiSeq4000 instrument.
 
 \subsection{Re-processing of raw data}\label{subsec:subsecReprocessing}
 All FASTQ files were re-processed in the same manner to minimise differences across datasets due to bioinformatic pipelines. Raw reads were trimmed for quality (minimum Q20 across a 4bp sliding window) and length (cropped to 75 bp) using Trimmomatic (v0.39). Trimmed reads were then sequentially mapped to two different human genome assemblies (GRCh38 and T2T-CHM13) and all mapped reads were discarded. The remaining non-human reads were then mapped to the SILVA rRNA database (release 138) and all putative rRNA reads were discarded. All mapping steps were performed using Bowtie2 (v2.5.1) with the high accuracy option. Finally, non-human, rRNA-filtered reads were mapped to the VIRGO database--a non-redundant catalogue of genes from the human vagina \cite{Ma:2020aa} for taxonomic and functional assignment, and feature tables for each dataset were constructed separately, using scripts provided by the maintainers of VIRGO. Data were generated for gene-level, eggNOG \cite{Huerta-Cepas:2019uf} and KEGG \cite{Kanehisa:2010} level analyses. 
@@ -539,51 +339,34 @@ To differentiate the named species of the genus, \textit{Gardnerella}, we obtain
 \subsection{Differential abundance analysis with ALDEx2 using scale-reliant inference}
 Differentially expressed genes and pathways were identified using the ALDEx2 package in R using scale simulated random variable methods \cite{fernandes:2013, gloorScale, nixon2023scale}. The underlying scale was estimated by running the `aldex.clr' function with gamma set to 1e$^{-3}$ (i.e. nearly 0). The scale values for the two conditions can be determined as the average of the rows of the `\texttt{@}scaleSamps' slot in the resulting `clr` class object. We observed that the mean scale values differed by approximately 8-fold ($\sim 2^{2.95}$), and that this resulted in the housekeeping functions being offset from the line of no difference (Supplementary Figure~\ref{fig:sfigScaleMWplots}. Examining the scale of just the housekeeping functions in the same manner suggested that a scale difference of $\sim0.15$ would be more appropriate. Accordingly, all differential abundance analyses performed with the updated ALDEx2 package implemented a 15 \% scale difference between groups, and a scale uncertainty of 0.5 standard deviations (as recommended previously \citep{gloorScale, nixon2023scale}). All feature tables were log$_2$-transformed across 128 Monte-Carlo instances with these parameters.
 
-All values calculated by ALDEx2 and used for analysis are the median values of the posterior distribution for each gene or function in each sample. Median scaled log-ratio (SLR) values, absolute effect sizes and expected \textit{P}-values from Benjamini-Hochberg-corrected Welch's t-test were calculated across all Monte-Carlo replicates. and were accessed using the `include.sample.summary = TRUE' parameter within the `aldex.effect' function. Appropriate effect size thresholds were assessed using the `aldex.plot' function, and KO terms with an absolute effect size $\leq$-1 or $\geq$1 were considered differentially abundant. Note that all parts with these effect sizes also had an FDR of $\leq$1 \%. Normalised Z-scores of effect size were calculated per-sample for pathways represented by differentially expressed KO terms ($\frac{x-\mu}{\sigma}$), where $x$ is the median effect size, $\mu$ is the per-sample mean effect size and $\sigma$ is the per-sample effect size standard deviation. Normalised Z-scores were then plotted per-pathway using the pheatmap package.
+All values calculated by ALDEx2 and used for analysis are the median values of the posterior distribution for each gene or function in each sample. Median scaled log-ratio (SLR) values, absolute effect sizes and expected \textit{P}-values from Benjamini-Hochberg-corrected Welch's t-test were calculated across all Monte-Carlo replicates. and were accessed using the `include.sample.summary = TRUE' parameter within the `aldex.effect' function. Appropriate effect size thresholds were assessed using the `aldex.plot' function, and KO or EggNOG terms with an absolute effect size $\leq$-1 or $\geq$1 were considered differentially abundant. Note that all parts with these effect sizes also had an FDR of $\leq$1 \%. Normalised Z-scores of effect size were calculated per-sample for pathways represented by differentially expressed KO/EggNOG terms ($\frac{x-\mu}{\sigma}$), where $x$ is the median effect size, $\mu$ is the per-sample mean effect size and $\sigma$ is the per-sample effect size standard deviation. Normalised Z-scores were then plotted per-pathway using the pheatmap package.
 
 \subsection{Identification of signature functions between groups} \label{subsec:subsecCoda4Micro}
 Signature functions were identified for groups of metatranscriptomes (healthy vs. BV and BV subgroups 1 vs. 2) using the `coda4microbiome' R package. Feature tables were aggregated by KEGG pathway and subject to SLR transformation using `aldex.clr', calculating the geometric mean using only the low-variance, high-abundance features. Pathways with a median within-group dispersion $\leq$4 and effect score $\geq$0.5 were passed to the `coda\_glmnet' function to identify signature functions.
 
-\subsection{Correlation of metatranscriptome features with gestational age at delivery}
-Data regarding pre-term birth and gestational age at delivery for the Virginia dataset were obtained directly from the MOMS-PI study authors. The filtered Virginia dataset was first aggregated at the species or functional (KO) level and gestational age at delivery was converted into decimal format. The `aldex.corr' function was used to determine significant correlations of species or KO terms with gestational age at delivery using Spearman, Pearson, and Kendall co-efficients (all Benjamini-Hochberg-corrected \textit{P}-values reported were $\leq$0.01).
+\subsection{Data availability and code}\label{subsec:subsecDataAvail}
+Raw FASTQ files are available for each of the datasets used. London and European datasets are immediately available from the European Nucleotide Archive under the accession numbers PRJEB31833 and PRJEB21446, respectively.
+
+The Virginia dataset was obtained from the Database of Genotypes and Phenotypes (dbGaP; accession no. phs001523.v1.p1) after a successful data access request, following the conditions of the data access policy under the University of Western Ontario Research Ethics Board approval \#123506.
+
+Whole genome sequences of \textit{Gardnerella} spp. type strains used in this study can be found under BioProject accession PRJNA474758 on NCBI. Whole genome sequences for the additional \textit{Gardnerella} strains used in this study can be found under the following BioProject accessions: \textit{G. leopoldii} UMB6774, PRJNA970254; \textit{G. piotii} JNFY15, PRJNA761238; \textit{G. swidsinskii} JNFY3, PRJNA761238; and \textit{G. vaginalis} NR001, PRJNA394757.
+
+All code used for the re-processing of FASTQ files at the command line and data analysis in RStudio is available as a code stable release at: \url{https://github.com/scottdossantos/dossantos2024study}.
 
 \subsection{Re-assigning pathways}\label{subsec:subsecPathways}
 All gene function assignments were performed automatically using the Kyoto Encyclopedia of Genes and Genomes \cite{Kanehisa:2010}. However, due to the unique environment and somewhat generic annotation in KEGG, several assignments were clearly incorrect. Each function was individually investigated and re-assigned using the Kyoto Encyclopedia of Genes and Genomes. First the KO numbers were identified, then each function was investigated looking at the pathway, enzymatic function, chemical reaction, location, and which species was expressing it in our samples. Using that knowledge, as well as knowledge of the vaginal environment, the most probable function was inferred. KO terms that were modified, including the rationale for each, are in the `Supplement' directory under `pathway-changes.xlsx' and in `lon\_eur\_health\_vs\_BV.R' and `virginia\_definingMolecularBV.R' in the `code' directory of the GitHub repository for this study. The latter two R scripts also contain DOIs linking to peer-reviewed literature supporting the KO term changes at the end of the files.
 
-\section{Declarations}\label{sec:secDeclare}
-
-\subsection{Ethics approval and consent to participate}\label{subsec:subsecEthics}
-A data access request was submitted to the NCBI Database of Genotypes and Phenotypes (dbGaP) to obtain the FASTQ files associated with vaginal metatranscriptome samples from the MOMS-PI study (dbGaP; accession no. phs001523.v1.p1). Access was authorised by dbGaP following the conditions of the data access policy under the University of Western Ontario Research Ethics Board approval \#123506.
-
-\subsection{Consent for publication}\label{subsec:subsecPubConsent}
-Not applicable.
-
-\subsection{Availability of data and materials}\label{subsec:subsecDataAvail}
-Raw FASTQ files are available for each of the datasets used. London and European datasets are immediately available from the European Nucleotide Archive under the accession numbers PRJEB31833 and PRJEB21446, respectively. FASTQ files and clinical metadata for the Virginia dataset are hosted on dbGaP and are only accessible following an authorised access request. Data regarding pre-term birth and gestational age at delivery for the Virginia dataset is not hosted on dbGaP and must be obtained by contacting the MOMS-PI study authors directly.
-
-Whole genome sequences of \textit{Gardnerella} spp. type strains used in this study can be found under BioProject accession PRJNA474758 on NCBI. Whole genome sequences for the additional \textit{Gardnerella} strains used in this study can be found under the following BioProject accessions: \textit{G. leopoldii} UMB6774, PRJNA970254; \textit{G. piotii} JNFY15, PRJNA761238; \textit{G. swidsinskii} JNFY3, PRJNA761238; and \textit{G. vaginalis} NR001, PRJNA394757.
-
-All code used for the re-processing of FASTQ files at the command line and data analysis in R is available as a code stable release at: \url{https://github.com/scottdossantos/dossantos2024study}. Clinical metadata corresponding to the Virginia dataset are hosted on dbGaP and are intentionally omitted from this repository.
-
-\subsection{Competing interests}\label{subsec:subsecCompInt}
-The authors declare that they have no competing interests.
-
-\subsection{Funding}\label{subsec:subsecFunding}
-SJDS and JMM were supported by an internal grant from the Schulich School of Medicine \& Dentistry at Western University, awarded to GG. CC was supported by an award from the Weston Family foundation (award no. 20170705). GR held a grant from the Natural Sciences and Engineering Research Council of Canada (NSERC).
-
-\subsection{Authors' contributions}\label{subsec:subsecContribs}
+\subsection{Author contributions}\label{subsec:subsecContribs}
 Author contributions are listed below, according to the CRediT taxonomy:
-\begin{itemize}
-\item Funding acquisition: GR, GBG
-\item Conceptualisation: GR, GBG
-\item Data curation: SJDS, CC, JMM
-\item Formal analysis: SJDS, CC, JMM, GG
-\item Writing- original draft: SJDS, CC, GBG
-\item Writing- review \& editing: All authors
-\end{itemize}
-
-\subsection{Acknowledgements}\label{subsec:subsecAcknowl}
-The authors would like to thank Dr. Jeremy Burton and Wongsakorn Kiattiburut for their helpful discussions regarding cationic antimicrobial peptides, and Amy McMillan for her assistance with data collection.\newpage
+\\
+\newline
+\textbf{Funding acquisition:} GR, GBG\newline
+\textbf{Conceptualisation:} GR, GBG\newline
+\textbf{Data curation:} SJDS, CC, JMM\newline
+\textbf{Formal analysis:} SJDS, CC, JMM, GG\newline
+\textbf{Writing- original draft:} SJDS, CC, GBG\newline
+\textbf{Writing- review \& editing:} All authors
+\newpage
 
 \section{Supplementary figures} \label{sec:secSupplFigs}
 % the next four commands do the following: 1) resets the figure counter at this point to 0; 2) changes the figure names (bolded) after this point to "Supplementary Fig."; 3) appends "S[fig #]" after "Supplementary Figure"; 4) makes sure that the figure hyperlinks for supplementary figures point to the supplementary figures and NOT the main figures (NOTE: may have to typeset twice for this to work properly!).
@@ -595,29 +378,22 @@ The authors would like to thank Dr. Jeremy Burton and Wongsakorn Kiattiburut for
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.88]{0_supplFig0.png}
+	\includegraphics[scale = 0.88]{0_supplFig1.png}
 	\caption{\textbf{Using a between-group scale offset of 15 \% is sufficient to centre a vaginal metatranscriptomic dataset:} MW effect plots were produced for the London/Europe discovery dataset normalised using (\textbf{A}) ALDEx2 without scale simulation, (\textbf{B}) ALDEx2 operating with the default scale model (gamma = 0.5) or (\textbf{C}) ALDEx2 running with a full scale model (gamma = 0.5, 15 \% scale offset between healthy and BV groups). Not accounting for scale results in a large number of false-positive results (\textbf{A}) and a clear error in the centre-point of the data which is, by definition, determined by the housekeeping features. Adding a small amount of scale uncertainty (\textbf{B}) increases within-group dispersion of all features such that many housekeeping genes are no longer differential; however, only the full scale model (\textbf{C}) correctly centres the housekeeping genes around the point of no difference between groups and corrects the large number of false-positive and -negative results. Colouring of data points as follows: non-significant features = grey (\textit{P} $\geq$0.01), non-significant, rare features = black (median SLR abundance <0), housekeeping features = orange (KO terms corresponding to 'Glycolysis', 'Ribosome' or 'Aminoacyl-tRNA biosynthesis'), significant features based on \textit{P}-value alone = red (\textit{P} $\leq$0.01) and significant features based on \textit{P}-value and effect size = red with blue outline (\textit{P} $\leq$0.01, absolute effect size $\geq$1). Grey dashed lines indicate equivalence of between- and within- group difference; blue dashed line indicates no difference between groups.} \label{fig:sfigScaleMWplots}
 \end{figure}
 \newpage
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.8125]{0_supplFig1.png}
+    \includegraphics[scale = 0.8125]{0_supplFig2.png}
     \caption{\textbf{Differentially expressed pathways between health and BV --London/Europe dataset:} Gene assignments were grouped by KEGG identifiers regardless of species for each sample and all differentially abundant KEGG pathways between healthy and BV metatranscriptomes in the London/Europe dataset are shown. All post-SRI absolute effect sizes and expected false discovery rates calculated by ALDEx2 are $>$1 and $<$0.01, respectively. CST, BV status and dataset indicated by colour bars.} \label{fig:sfigDifAbLonEurAll}
 \end{figure}
 \newpage
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.795]{0_supplFig2.png}
+    \includegraphics[scale = 0.795]{0_supplFig3.png}
     \caption{\textbf{Definition of molecular states of health and BV by clustering of metatranscriptomes at the functional level:} All reads from the Virginia dataset were aggregated by species (relative abundance; \textbf{A}) or function (KO term; \textbf{B}), prior to hierarchical clustering of Euclidean distances using Ward's method. Colour bars indicate vaginal pH, CST, clinical metadata, and ethnicity. (\textbf{A}) Relative abundances of metatranscriptome reads with known taxonomy; species represented by $\geq$75 genes are shown. (\textbf{B}) Dendrogram of SLR-transformed, post-SRI metatranscriptome profiles aggregated by KO term, regardless of taxonomy.} \label{sig:sfigVirgDendro}
-\end{figure}
-\newpage
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale = 0.8]{0_supplFig3.png}
-    \caption{\textbf{Specific species are correlated with gestational age at delivery:} Vaginal metatranscriptome profiles from the Virginia dataset were aggregated by species and subject to SLR transformation with SRI in the ALDEx2 package. The resulting SLR values were correlated with gestational age at delivery using three different methods (Pearson/Spearman/Kendall. Significantly correlated taxa are listed, along with the respective coefficients. All Benjamini-Hochberg-corrected \textit{P}-values $\leq$0.01.} \label{fig:sfigPTBcorr}
 \end{figure}
 \newpage
 
@@ -644,115 +420,31 @@ The authors would like to thank Dr. Jeremy Burton and Wongsakorn Kiattiburut for
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.84]{0_virginia_coda4microbiome_fig.png}
+    \includegraphics[scale = 0.84]{0_supplFig7.png}
     \caption{\textbf{Prediction of signature functions complements differential abundance analyses:} Prediction of signature functions for health vs. BV (A-C) and BV subgroups (D-F) by the 'coda4microbiome' R package. Sets of functions identified in signature plots (A,D) exhibit high AUC values of 0.9975 and 0.9947, respectively, and are indicated on ALDEx2 effect plots in blue. Prediction plots (C,F) demonstrate a high degree of separation by group for these signatures, indicating that they define the respective groups with a high degree of accuracy. These results should be interpreted with caution, given that calculating the geometric mean from low-variance, high-abundance features does not eliminate the problematic data asymmetry shown in Suppl. Fig~\ref{fig:sfigScaleMWplots}.} \label{fig:sfigVirgCoda4Mfigs}
 \end{figure}
 \newpage
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.875]{0_supplFig7.png}
+    \includegraphics[scale = 0.875]{0_supplFig8.png}
     \caption{\textbf{BVAB1 abundance distinguishes the two main molecular BV subgroups within the Virginia dataset:} Metatranscriptome profiles of samples belonging to the two main BV subgroups within the Virginia dataset are expressed as relative abundance. Reads of known taxonomy, corresponding to species represented by $\geq$75 genes are included. Subgroup membership indicated below plot.} \label{fig:sfigVirgBVstackedBars}
 \end{figure}
 \newpage
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.77]{0_supplFig8.png}
-    \caption{\textbf{Differentially expressed pathways between molecular health subgroups --Virginia dataset:} Metatranscriptome profiles from the Virginia dataset were aggregated by KO term prior to SLR-transformation and SRI using ALDEx2. Analysis was stratified by membership of molecular health subgroups and Z-scores of mean SLR values per pathway are plotted. Colour bars indicate group and CST. All post-SRI effect sizes and BH-corrected \textit{P}-values calculated by ALDEx2 are $\leq$0.01 and $<$1 \%, respectively.} \label{fig:sfigVirgHsubgroups}
+    \includegraphics[scale = 0.81]{0_supplFig9.png}
+    \caption{\textbf{Functional differences between BV subgroups are not dependent on enzyme classification systems:} Metatranscriptome profiles from the Virginia dataset were aggregated by KO term prior to SLR-transformation and SRI using ALDEx2. Analysis was stratified by membership of molecular BV subgroups and Z-scores of mean SLR values per pathway are plotted. Red asterisks indicate functions identified in the corresponding KEGG KO term analysis. Colour bars indicate group and CST. All post-SRI effect sizes and BH-corrected \textit{P}-values calculated by ALDEx2 are $\leq$0.01 and $<$1 \%, respectively.} \label{fig:sfigEggNOGvirginia}
 \end{figure}
 \newpage
 
-% \newline\newline\newline
-
-% Topical subheadings are allowed. Authors must ensure that their Methods section includes adequate experimental and characterization data necessary for others in the field to reproduce their work. Authors are encouraged to include RIIDs where appropriate. 
-
-% \textbf{Ethical approval declarations} (only required where applicable) Any article reporting experiment/s carried out on (i)~live vertebrate (or higher invertebrates), (ii)~humans or (iii)~human samples must include an unambiguous statement within the methods section that meets the following requirements: 
-
-% \begin{enumerate}[1.]
-% 	\item Approval: a statement which confirms that all experimental protocols were approved by a named institutional and/or licensing committee. Please identify the approving body in the methods section
-% 	\item Accordance: a statement explicitly saying that the methods were carried out in accordance with the relevant guidelines and regulations
-% 	\item Informed consent (for experiments involving humans or human tissue samples): include a statement confirming that informed consent was obtained from all participants and/or their legal guardian/s
-% \end{enumerate}
-
-% \section{Discussion}\label{sec12}
-
-% Discussions should be brief and focused. In some disciplines use of Discussion or `Conclusion' is interchangeable. It is not mandatory to use both. Some journals prefer a section `Results and Discussion' followed by a section `Conclusion'. Please refer to Journal-level guidance for any specific requirements. 
-
-% \section{Conclusion}\label{sec13}
-
-% Conclusions may be used to restate your hypothesis or research question, restate your major findings, explain the relevance and the added value of your work, highlight any limitations of your study, describe future directions for research and recommendations. 
-
-% In some disciplines use of Discussion or 'Conclusion' is interchangeable. It is not mandatory to use both. Please refer to Journal-level guidance for any specific requirements. 
-
-% \backmatter
-
-% \bmhead{Supplementary information}
-
-% If your article has accompanying supplementary file/s please state so here. 
-
-% Authors reporting data from electrophoretic gels and blots should supply the full unprocessed scans for key as part of their Supplementary information. This may be requested by the editorial team/s if it is missing.
-
-% Please refer to Journal-level guidance for any specific requirements.
-
-% \bmhead{Acknowledgments}
-
-% Acknowledgments are not compulsory. Where included they should be brief. Grant or contribution numbers may be acknowledged.
-
-% Please refer to Journal-level guidance for any specific requirements.
-
-% \noindent
-% If any of the sections are not relevant to your manuscript, please include the heading and write `Not applicable' for that section. 
-
-% %%===================================================%%
-% %% For presentation purpose, we have included        %%
-% %% \bigskip command. please ignore this.             %%
-% %%===================================================%%
-% \bigskip
-% \begin{flushleft}%
-% Editorial Policies for:
-
-% \bigskip\noindent
-% Springer journals and proceedings: \url{https://www.springer.com/gp/editorial-policies}
-
-% \bigskip\noindent
-% Nature Portfolio journals: \url{https://www.nature.com/nature-research/editorial-policies}
-
-% \bigskip\noindent
-% \textit{Scientific Reports}: \url{https://www.nature.com/srep/journal-policies/editorial-policies}
-
-% \bigskip\noindent
-% BMC journals: \url{https://www.biomedcentral.com/getpublished/editorial-policies}
-% \end{flushleft}
-
-% \begin{appendices}
-
-% \section{Section title of first appendix}\label{secA1}
-
-% An appendix contains supplementary information that is not an essential part of the text itself but which may be helpful in providing a more comprehensive understanding of the research problem or it is information that is too cumbersome to be included in the body of the paper.
-
-% %%=============================================%%
-% %% For submissions to Nature Portfolio Journals %%
-% %% please use the heading ``Extended Data''.   %%
-% %%=============================================%%
-
-% %%=============================================================%%
-% %% Sample for another appendix section			       %%
-% %%=============================================================%%
-
-% %% \section{Example of another appendix section}\label{secA2}%
-% %% Appendices may be used for helpful, supporting or essential material that would otherwise 
-% %% clutter, break up or be distracting to the text. Appendices can consist of sections, figures, 
-% %% tables and equations etc.
-
-% \end{appendices}
-
-% %%===========================================================================================%%
-% %% If you are submitting to one of the Nature Portfolio journals, using the eJP submission   %%
-% %% system, please include the references within the manuscript file itself. You may do this  %%
-% %% by copying the reference list from your .bbl file, paste it into the main manuscript .tex %%
-% %% file, and delete the associated \verb+\bibliography+ commands.                            %%
-% %%===========================================================================================%%
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.77]{0_supplFig10.png}
+    \caption{\textbf{Differentially expressed pathways between molecular health subgroups --Virginia dataset:} Metatranscriptome profiles from the Virginia dataset were aggregated by KO term prior to SLR-transformation and SRI using ALDEx2. Analysis was stratified by membership of molecular health subgroups and Z-scores of mean SLR values per pathway are plotted. Colour bars indicate group and CST. All post-SRI effect sizes and BH-corrected \textit{P}-values calculated by ALDEx2 are $\leq$0.01 and $<$1 \%, respectively.} \label{fig:sfigVirgHsubgroups}
+\end{figure}
+\newpage
 
 \bibliography{sn-bibliography}% common bib file
 %% if required, the content of .bbl file can be included here once bbl is generated
