@@ -10,15 +10,9 @@ path.to.github <- switch(user,
                          "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
                          "gg" = "~/Documents/0_git/projects/dossantos2024study/")
 
-# NOTE: The files imported into R as part of this script are not provided on the
-#       study's github repo as they contain data hosted on the NCBI Database of
-#       Genotypes and Phenotypes. For transparency, we share the following code
-#       describing how these data were used. The corresponding .Rda objects are
-#       also intentionally omitted from the study's github repo for the same 
-#       reason. The only information shown below are several column names for
-#       multiple metadata files, and some possible values containing within the
-#       columns, all of which are also shown on the MOMS-PI study dbGaP page, 
-#       under the 'Variables' tab.
+# NOTE: The .csv files imported into R as part of this script are hosted on the
+#        NCBI Database of Genotypes and Phenotypes under accession number
+#        phs001523.v1.p1.
 
 ########################## merge: clinical & SRA data ##########################
 

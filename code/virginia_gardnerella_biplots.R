@@ -112,8 +112,8 @@ for (i in 1:length(tax.vec.virginia)) {
 
 # rename object containing edited virginia taxa vector and save as .Rda
 tax.vec.virginia.gv <- tax.vec.virginia
-save(tax.vec.virginia.gv,
-     file = paste0(path.to.github, "Rdata/tax.vec.virginia.gv.Rda"))
+# save(tax.vec.virginia.gv,
+#      file = paste0(path.to.github, "Rdata/tax.vec.virginia.gv.Rda"))
 
 # pull the indices of the V numbers corresponding to the Gardnerella genus and
 # each named species in the virginia dataset (for colouring species)

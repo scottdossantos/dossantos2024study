@@ -54,8 +54,7 @@ pathway.table <- read.table(paste(path.to.github,
                             sep="\t", header=T, row.names=1, fill=TRUE)
 
 # load in virginia metadata (output of 'Rdata/processing_virginia_metadata.R')
-# NOTE: This is one of the files omitted from the repo as it contains clinical 
-#       metadata hosted on dbGaP.
+# NOTE: This is a dbGaP file
 load("[LOCAL-PATH-TO]/virginia.meta.Rda")
 
 # sanity check on feature table colnames vs. metadata 'sra.id' for equality

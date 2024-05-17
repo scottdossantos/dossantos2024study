@@ -1,6 +1,6 @@
 # Code and study data for Dos Santos et al. (2024) 
 
-Last updated: 24th April 2024.
+Last updated: 16th May 2024
 
 This repository contains step-by-step walkthroughs and R code to reproduce all data collection, processing, analyses and visualisation carried out by the authors. Below is a description of all sub-directories and their contents, as well as a summary of what R scripts were used to create the main and supplementary figures.
 
@@ -30,7 +30,7 @@ This repository contains step-by-step walkthroughs and R code to reproduce all d
 	- Directory exported from Overleaf, containing all files used for compilation of the manuscript .tex file as well as the resulting manuscript .pdf file.
 
 - **RData:**
-	- Directory containing .Rda /.txt /.tsv /.csv files imported into R for use in the analysis and/or visualisation of study data (<u>NOTE:</u> several .csv and .Rda files have been intentionally omitted from this repository as the underlying data is locked behind an authorised access request through the NCBI Database of Genotypes and Phenotypes).
+	- Directory containing .Rda /.txt /.tsv /.csv files imported into R for use in the analysis and/or visualisation of study data.
 	- **virginia_output:**
 		- Directory containing .txt files containing information on quality control and mapping of raw FASTQ files to various databases during data processing, as well as an R script for summarising these files.
 
@@ -69,43 +69,44 @@ All R scripts are located in the `code/` directory. All figures were edited in i
 <br>
 
 ##### <u>Supplementary figures</u>
-Naming of the supplementary figure files does not follow a numerical order. The file name corresponding to each supplementary figure in the manuscript is indicated below, along with the R script used to produce it.
+Naming of the supplementary figure files follows a numerical order. The file name corresponding to each supplementary figure in the manuscript is indicated below, along with the R script used to produce it.
 
 - **Suppl. Fig. 1:**
-  - `supplFig0.png`
+  - `supplFig1.png`
   - `scale_vs_noScale_MWplots.R`
 
 - **Suppl. Fig. 2:**
-  - `supplFig1.png`
+  - `supplFig2.png`
   - `lon_eur_health_vs_BV.R`
 
 - **Suppl. Fig. 3:**
-  - `supplFig2.png`
+  - `supplFig3.png`
   - `virginia_definingMolecularBV.R`
 
 - **Suppl. Fig. 4:**
-  - `supplFig3.png`
-  - `virginia_pretermBirth.R` (table created in Inkscape)
-
-- **Suppl. Fig. 5:**
   - `supplFig4.png`
   - `lon_eur_gardnerella_biplots.R` (A) and `virginia_gardnerella_biplots.R` (B)
 
-- **Suppl. Fig. 6:**
+- **Suppl. Fig. 5:**
   - `supplFig5.png`
   - `virginia_definingMolecularBV.R`
 
-- **Suppl. Fig. 7:**
+- **Suppl. Fig. 6:**
   - `supplFig6.png`
   - `virginia_validating.R`
 
-- **Suppl. Fig. 8:**
-  - `supplFigvirginia_coda4microbiome_fig.png`
+- **Suppl. Fig. 7:**
+  - `supplFig7.png`
   - `virginia_coda4microbiome.R`
 
-- **Suppl. Fig. 9:**
-  - `supplFig7.png`
+- **Suppl. Fig. 8:**
+  - `supplFig8.png`
   - `virginia_bvSubgroups_stackedBars.R`
+
+- **Suppl. Fig. 9:**
+  - `supplFig9.png`
+  - `virginia_validating_eggNOG.R`
+
 
 - **Suppl. Fig. 10:**
   - `supplFig8.png`

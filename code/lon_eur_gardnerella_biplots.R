@@ -158,6 +158,10 @@ for (i in 1:length(new.tax.vec.bv)) {
   }
 }
 
+# rename and save renamed taxa vector
+loneur.tax.vec.gvag <- new.tax.vec.bv
+save(loneur.tax.vec.gvag, file = paste0(path.to.github, "Rdata/loneur.tax.vec.gvag.Rda"))
+
 # pull the indices of the V numbers corresponding to the Gardnerella genus and
 # each named species in the london/europe dataset (for colouring species)
 ind.gard <- list()

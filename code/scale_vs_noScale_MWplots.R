@@ -10,7 +10,7 @@ library(ALDEx2) # v1.35 (bioconductor v3.19)
 #        devtools::install_github("ggloor/ALDEx_bioc")
 
 # set path to github repository (change to match your machine)
-user <- "gg"
+user <- "sds/cc"
 path.to.github <- switch(user,
                          "sds/cc" = "~/Documents/GitHub/dossantos2024study/",
                          "gg" = "~/Documents/0_git/projects/dossantos2024study/")

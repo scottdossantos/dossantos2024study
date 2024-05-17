@@ -17,7 +17,7 @@ source(paste(path.to.github,"code/setup.R", sep = ""))
 # load in following .Rda objects:
 #    - filtered and unfiltered virginia feature tables (297 samples)
 #    - taxa vector corresponding to the filtered virginia feature table
-#    - clinical and demographic metadata for 297 virginia samples (omitted from GH)
+#    - CST and Health vs. BV groupings for 297 virginia samples
 #    - hclust output for 297 virginia samples clustered by K0 numbers
 #    - cutree output for 297 virginia samples clustered by K0 numbers
 #    - grouping variables (healthy subgroups 1 & 2 vs. molecular BV )
@@ -27,7 +27,7 @@ source(paste(path.to.github,"code/setup.R", sep = ""))
 load(paste(path.to.github, "Rdata/virginia.data.Rda", sep = ""))
 load(paste(path.to.github, "Rdata/virginia.filt.Rda", sep = ""))
 load(paste(path.to.github, "Rdata/tax.vec.virginia.Rda", sep = ""))
-load("[LOCAL-PATH-TO]/virginia.meta.Rda") # this object contains dbGaP metadata and is omitted from the github repo
+load(paste(path.to.github, "Rdata/virginia.hm.meta.Rda", sep = ""))
 load(paste(path.to.github, "Rdata/virginia.hclust.Rda", sep = ""))
 load(paste(path.to.github, "Rdata/virginia.cst.Rda", sep = ""))
 load(paste(path.to.github, "Rdata/virginia.groups.Rda", sep = ""))
@@ -384,25 +384,34 @@ bv.virginia.cutree$group <- case_when(bv.virginia.cutree$group == 2 ~ "BV Subgro
 sub.virginia.ko <- ko.virginia.bv[,rownames(bv.virginia.cutree)]
 any(rowSums(sub.virginia.ko) == 0) # returns FALSE
 
-# make scale matrix using sd of 0.5 and difference of 15%
-mu.matrix <- aldex.makeScaleMatrix(gamma = 0.5, mu = c(1, 1.15),
-                                   conditions = bv.virginia.cutree$group)
+# CLR transform data, or load final object if it has already been made
 
-# CLR transform K0-aggregated virgina bv-only feature table using scale sim
-sub.virginia.ko.clr <- aldex.clr(reads = sub.virginia.ko, mc.samples = 128,
-                                 conds = bv.virginia.cutree$group,
-                                 gamma = mu.matrix, verbose = TRUE)
-
-# rename aldex.clr object as .Rda for network analysis later
-graph.clr <- sub.virginia.ko.clr
-
-# calculate effect sizes, run t-tests and combine data frames
-sub.virginia.ko.clr.e <- aldex.effect(sub.virginia.ko.clr, verbose = TRUE,
-                                      include.sample.summary = TRUE)
-sub.virginia.ko.clr.t <- aldex.ttest(sub.virginia.ko.clr,
-                                     verbose = TRUE)
-sub.virginia.ko.clr.all <- as.data.frame(cbind(sub.virginia.ko.clr.e,
-                                               sub.virginia.ko.clr.t))
+if(file.exists(paste0(path.to.github,"Rdata/sub.virginia.ko.clr.all.Rda"))){
+  load(paste0(path.to.github,"Rdata/sub.virginia.ko.clr.all"))
+} else{
+  
+  # make scale matrix using sd of 0.5 and difference of 15%
+  mu.matrix <- aldex.makeScaleMatrix(gamma = 0.5, mu = c(1, 1.15),
+                                     conditions = bv.virginia.cutree$group)
+  
+  # CLR transform K0-aggregated virgina bv-only feature table using scale sim
+  sub.virginia.ko.clr <- aldex.clr(reads = sub.virginia.ko, mc.samples = 128,
+                                   conds = bv.virginia.cutree$group,
+                                   gamma = mu.matrix, verbose = TRUE)
+  
+  # rename aldex.clr object as .Rda for network analysis later
+  graph.clr <- sub.virginia.ko.clr
+  
+  # calculate effect sizes, run t-tests and combine data frames
+  sub.virginia.ko.clr.e <- aldex.effect(sub.virginia.ko.clr, verbose = TRUE,
+                                        include.sample.summary = TRUE)
+  sub.virginia.ko.clr.t <- aldex.ttest(sub.virginia.ko.clr,
+                                       verbose = TRUE)
+  sub.virginia.ko.clr.all <- as.data.frame(cbind(sub.virginia.ko.clr.e,
+                                                 sub.virginia.ko.clr.t))
+  save(sub.virginia.ko.clr.all,
+       file = paste0(path.to.github,"Rdata/sub.virginia.ko.clr.all.Rda"))
+  }
 
 # get names of K0 terms aligning to 'Aminoacyl-tRNA biosynthesis', Ribosome'
 # and 'Glycolysis / Gluconeogenesis' for checking centering on the MW plot
@@ -442,8 +451,6 @@ legend("bottomleft", pch = 19, cex = 0.75,
                   "Ribosome", "Aminoacyl-tRNA biosynthesis", "Glycolysis / Gluconeogenesis"))
 
 # dev.off()
-
-# looks like there aren't any K0s up in subgroup 2, but several in subgroup 1
 
 # get pathways associated with K0s showing absolute effect size >1
 sub.virginia.sig.ko <- virginia.ko.path.filt[which(abs(sub.virginia.ko.clr.all$effect) >1), , drop = FALSE]
@@ -676,8 +683,8 @@ for(i in levels(factor(bv.virginia.cutree$group))){
 
 # make vector for colouring pathways
 sub.pca.path.cols <- c("olivedrab2","tomato3","dodgerblue3","purple3",
-                       "brown4","bisque2","yellow4","yellow2","black",
-                       "cyan3",rgb(0,0,0,0.035))
+                       "brown4","bisque2","yellow4","yellow2","orange",
+                       "black", "cyan3",rgb(0,0,0,0.035))
 
 # draw pca plots for Virginia dataset: all K0s and differential K0s
 # png(paste(path.to.github,
@@ -688,7 +695,7 @@ codaSeq.PCAplot(pca.virginia.bv.sub, plot.groups = TRUE, plot.loadings = TRUE,
                 plot.ellipses = NULL, plot.density = "groups", PC = c(1,2),
                 grp = sub.pca.grp.ind, grp.col = c("goldenrod2", "goldenrod4"), 
                 grp.sym = "text", grp.cex = 0.5, load.grp = sub.pca.path.ind,
-                load.col = sub.pca.path.cols, load.sym = rep(19, 11), 
+                load.col = sub.pca.path.cols, load.sym = rep(19, 12), 
                 load.cex = 0.5, plot.legend = "loadings", 
                 leg.position = "bottomright", leg.cex = 0.65, leg.columns = 3,
                 title = "Virginia - K0 terms: BV subgroups (all K0 numbers)")
@@ -753,6 +760,8 @@ for(i in levels(factor(bv.sig.vnum.taxa))){
 # get colours corresponding to taxa in the list of vNumbers corresponding to 
 # significantly different KO terms, plus transparent grey for 'Other'
 pca.load.cols.vnum <- c(tax.colors[names(bv.ind.sig.vnum),], rgb(0,0,0,0.1))
+pca.load.cols.vnum[2] <- "olivedrab2"
+pca.load.cols.vnum[6] <- "chocolate4"
 
 #add vNumbers with unknown taxa to 'Other'
 bv.ind.sig.vnum[["Other"]] <- setdiff(1:nrow(bv.virginia.filt.clr.df),
@@ -762,8 +771,8 @@ bv.ind.sig.vnum[["Other"]] <- setdiff(1:nrow(bv.virginia.filt.clr.df),
 codaSeq.PCAplot(pca.bv.sig.vnum, plot.groups = FALSE, plot.loadings = TRUE,
                 plot.ellipses = NULL, plot.density = NULL, grp.cex = 0.3,
                 load.grp = bv.ind.sig.vnum, load.col = pca.load.cols.vnum,
-                load.sym = rep(19,5), load.cex = 1, PC = c(1,2),
-                plot.legend = NULL, leg.position = "topleft", 
+                load.sym = rep(19,10), load.cex = 1, PC = c(1,2),
+                plot.legend = "loadings", leg.position = "bottomright", 
                 leg.cex = 0.85, leg.columns = 2,
                 title = "PCA - Virginia BV subgroups: significantly different vNumbers")
 
@@ -853,15 +862,15 @@ graph.layout.3<- layout_with_gem(graph.sub.d[[3]])
 
 # make vector of colours for decomposed graph vertices
 graph.vert.cols.3 <- as.character(factor(names(graph.vert.pathways.3),
-                                         labels = colorRampPalette(rev(RColorBrewer::brewer.pal(n = 7, name ="RdYlBu")))(16)))
+                                         labels = colorRampPalette(rev(RColorBrewer::brewer.pal(n = 7, name ="RdYlBu")))(15)))
 
 # make character vector of pathways for legend and add two-letter abbreviations
 graph.path.abr <- levels(factor(V(graph.sub.d[[3]])$pathway))
 
-graph.path.abr <- paste(graph.path.abr, sep = " ",c("(At)","(Ap)","(Cr)","(Dd)",
-                                                    "(Fa)","(Ly)","(Nm)","(Os)",
-                                                    "(Op)","(Pp)","(Pg)","(Pu)",
-                                                    "(Py)","(Sd)","(Tp)","(Tc)"))
+graph.path.abr <- paste(graph.path.abr, sep = " ",c("(At)","(Ap)","(Cr)","(Fa)",
+                                                    "(Ly)","(Nm)","(Os)","(Op)",
+                                                    "(Pp)","(Pg)","(Pu)","(Py)",
+                                                    "(Sd)","(Tp)","(Tc)"))
 
 # plot correlation network for the largest, non-ribosomal graph
 # png(paste(path.to.github,
@@ -890,24 +899,32 @@ health.groups <- virginia.groups %>%
 health.ko.filt <- ko.virginia.filt[,rownames(health.groups)]
 any(rowSums(health.ko.filt)==0) # FALSE
 
-# set seed again to ensure consistency of results
-set.seed(2023)
-
-# make matrix of scale distributions for healthy samples: sd of 0.5 and
-# difference of 1: 1.15
-mu.matrix.h <- aldex.makeScaleMatrix(gamma = 0.5, mu = c(1, 1.15), 
-                                     conditions = health.groups$groups.3)
-
-# CLR-transform healthy-only virginia K0 dataset with scale sim
-health.ko.filt.clr <- aldex.clr(health.ko.filt, conds = health.groups$groups.3,
-                                gamma = mu.matrix.h, verbose = TRUE)
-
-# calculate effect size and t-test statistics, then merge dataframes
-health.ko.filt.clr.e <- aldex.effect(health.ko.filt.clr, verbose = TRUE,
-                                     include.sample.summary = TRUE)
-health.ko.filt.clr.t <- aldex.ttest(health.ko.filt.clr,
-                                    verbose = TRUE)
-health.ko.filt.clr.c <- cbind(health.ko.filt.clr.e, health.ko.filt.clr.t)
+# clr transform health subgroup data or load final object if it already exists
+if(file.exists(paste0(path.to.github,"Rdata/health.ko.filt.clr.c.Rda"))){
+  load(paste0(path.to.github,"Rdata/health.ko.filt.clr.c.Rda"))
+} else{
+  # set seed again to ensure consistency of results
+  set.seed(2023)
+  
+  # make matrix of scale distributions for healthy samples: sd of 0.5 and
+  # difference of 1: 1.15
+  mu.matrix.h <- aldex.makeScaleMatrix(gamma = 0.5, mu = c(1, 1.15), 
+                                       conditions = health.groups$groups.3)
+  
+  # CLR-transform healthy-only virginia K0 dataset with scale sim
+  health.ko.filt.clr <- aldex.clr(health.ko.filt, conds = health.groups$groups.3,
+                                  gamma = mu.matrix.h, verbose = TRUE)
+  
+  # calculate effect size and t-test statistics, then merge dataframes
+  health.ko.filt.clr.e <- aldex.effect(health.ko.filt.clr, verbose = TRUE,
+                                       include.sample.summary = TRUE)
+  health.ko.filt.clr.t <- aldex.ttest(health.ko.filt.clr,
+                                      verbose = TRUE)
+  health.ko.filt.clr.c <- cbind(health.ko.filt.clr.e, health.ko.filt.clr.t) 
+  
+  save(health.ko.filt.clr.c, 
+       file = paste0(path.to.github, "Rdata/health.ko.filt.clr.c.Rda"))
+  }
 
 # plot intra-group CLR dispersion vs. median CLR difference between groups (MW)
 # png(paste(path.to.github,
