@@ -130,7 +130,11 @@
 %% sample for unstructured abstract %%
 %%==================================%%
 
-\abstract{The application of `-omics' technologies to study bacterial vaginosis (BV) has uncovered vast differences in composition and scale between the vaginal microbiomes of healthy and BV patients. Compared to amplicon sequencing and shotgun metagenomic approaches focusing on a single or few species, investigating the transcriptome of the vaginal microbiome at a system-wide level can provide insight into the functions which are actively expressed and differential between states of health and disease. We conducted a meta-analysis of vaginal metatranscriptomes from three studies, split into exploratory (\textit{n} = 44) and validation (\textit{n} = 297) datasets, accounting for the compositional nature of sequencing data and differences in scale between healthy and BV microbiomes. Conducting differential abundance analyses on the exploratory dataset, we identified a multitude of strategies employed by microbes associated with states of health and BV to evade host cationic antimicrobial peptides (CAMPs); putative mechanisms used by BV-associated species to resist and counteract the low vaginal pH; and potential approaches to disrupt vaginal epithelial integrity so as to establish sites for adherence and biofilm formation. Moreover, we identified several distinct functional subgroups within the BV population, distinguished by genes involved in motility, chemotaxis, biofilm formation and co-factor biosynthesis. After defining molecular states of health and BV in the validation dataset using KEGG orthology terms rather than community state types, differential abundance analysis confirmed earlier observations regarding CAMP resistance and compromising epithelial barrier integrity in healthy and BV microbiomes, and also supported the existence of motile vs. non-motile subgroups in the BV population. Our findings highlight a need to focus on functional rather than taxonomic differences when considering the role of microbiomes in disease and identify pathways for further research as potential BV treatment targets.}
+\abstract{\textbf{Background:} The application of `-omics' technologies to study bacterial vaginosis (BV) has uncovered vast differences in composition and scale between the vaginal microbiomes of healthy and BV patients. Compared to amplicon sequencing and shotgun metagenomic approaches focusing on a single or few species, investigating the transcriptome of the vaginal microbiome at a system-wide level can provide insight into the functions which are actively expressed and differential between states of health and disease.
+
+\textbf{Results:} We conducted a meta-analysis of vaginal metatranscriptomes from three studies, split into exploratory (n = 44) and validation (n = 297) datasets, accounting for the compositional nature of sequencing data and differences in scale between healthy and BV microbiomes. Conducting differential abundance analyses on the exploratory dataset, we identified a multitude of strategies employed by microbes associated with states of health and BV to evade host cationic antimicrobial peptides (CAMPs); putative mechanisms used by BV-associated species to resist and counteract the low vaginal pH; and potential approaches to disrupt vaginal epithelial integrity so as to establish sites for adherence and biofilm formation. Moreover, we identified several distinct functional subgroups within the BV population, distinguished by genes involved in motility, chemotaxis, biofilm formation and co-factor biosynthesis. After defining molecular states of health and BV in the validation dataset using KEGG orthology terms rather than community state types, differential abundance analysis confirmed earlier observations regarding CAMP resistance and compromising epithelial barrier integrity in healthy and BV microbiomes, and also supported the existence of motile vs. non-motile subgroups in the BV population. These findings were independent of the enzyme classification system used (KEGG or EggNOG).
+
+\textbf{Conclusions:} Our findings highlight a need to focus on functional rather than taxonomic differences when considering the role of microbiomes in disease and identify pathways for further research as potential BV treatment targets.}
 
 %%================================%%
 %% Sample for structured abstract %%
@@ -344,31 +348,45 @@ All values calculated by ALDEx2 and used for analysis are the median values of t
 \subsection{Identification of signature functions between groups} \label{subsec:subsecCoda4Micro}
 Signature functions were identified for groups of metatranscriptomes (healthy vs. BV and BV subgroups 1 vs. 2) using the `coda4microbiome' R package. Feature tables were aggregated by KEGG pathway and subject to SLR transformation using `aldex.clr', calculating the geometric mean using only the low-variance, high-abundance features. Pathways with a median within-group dispersion $\leq$4 and effect score $\geq$0.5 were passed to the `coda\_glmnet' function to identify signature functions.
 
-\subsection{Data availability and code}\label{subsec:subsecDataAvail}
-Raw FASTQ files are available for each of the datasets used. London and European datasets are immediately available from the European Nucleotide Archive under the accession numbers PRJEB31833 and PRJEB21446, respectively.
+\subsection{Re-assigning pathways}\label{subsec:subsecPathways}
+All gene function assignments were performed automatically using the Kyoto Encyclopedia of Genes and Genomes \cite{Kanehisa:2010}. However, due to the unique environment and somewhat generic annotation in KEGG, several assignments were clearly incorrect. Each function was individually investigated and re-assigned using the Kyoto Encyclopedia of Genes and Genomes. First the KO numbers were identified, then each function was investigated looking at the pathway, enzymatic function, chemical reaction, location, and which species was expressing it in our samples. Using that knowledge, as well as knowledge of the vaginal environment, the most probable function was inferred. KO terms that were modified, including the rationale for each, are in the `Supplement' directory under `pathway-changes.xlsx' and in `lon\_eur\_health\_vs\_BV.R' and `virginia\_definingMolecularBV.R' in the `code' directory of the GitHub repository for this study. The latter two R scripts also contain DOIs linking to peer-reviewed literature supporting the KO term changes at the end of the files.
 
-The Virginia dataset was obtained from the Database of Genotypes and Phenotypes (dbGaP; accession no. phs001523.v1.p1) after a successful data access request, following the conditions of the data access policy under the University of Western Ontario Research Ethics Board approval \#123506.
+\section{Declarations}\label{sec:secDeclare}
+
+\subsection{Ethics approval and consent to participate}\label{subsec:subsecEthics}
+A data access request was submitted to the NCBI Database of Genotypes and Phenotypes (dbGaP) to obtain the FASTQ files associated with vaginal metatranscriptome samples from the MOMS-PI study (dbGaP; accession no. phs001523.v1.p1). Access was authorised by dbGaP following the conditions of the data access policy under the University of Western Ontario Research Ethics Board approval \#123506.
+
+\subsection{Consent for publication}\label{subsec:subsecPubConsent}
+Not applicable.
+
+\subsection{Availability of data and materials}\label{subsec:subsecDataAvail}
+Raw FASTQ files are available for each of the datasets used. London and European datasets are immediately available from the European Nucleotide Archive under the accession numbers PRJEB31833 and PRJEB21446, respectively. Raw FASTQ files from the Virginia are available from dbGaP under accession no. phs001523.v1.p1.
 
 Whole genome sequences of \textit{Gardnerella} spp. type strains used in this study can be found under BioProject accession PRJNA474758 on NCBI. Whole genome sequences for the additional \textit{Gardnerella} strains used in this study can be found under the following BioProject accessions: \textit{G. leopoldii} UMB6774, PRJNA970254; \textit{G. piotii} JNFY15, PRJNA761238; \textit{G. swidsinskii} JNFY3, PRJNA761238; and \textit{G. vaginalis} NR001, PRJNA394757.
 
 All code used for the re-processing of FASTQ files at the command line and data analysis in RStudio is available as a code stable release at: \url{https://github.com/scottdossantos/dossantos2024study}.
 
-\subsection{Re-assigning pathways}\label{subsec:subsecPathways}
-All gene function assignments were performed automatically using the Kyoto Encyclopedia of Genes and Genomes \cite{Kanehisa:2010}. However, due to the unique environment and somewhat generic annotation in KEGG, several assignments were clearly incorrect. Each function was individually investigated and re-assigned using the Kyoto Encyclopedia of Genes and Genomes. First the KO numbers were identified, then each function was investigated looking at the pathway, enzymatic function, chemical reaction, location, and which species was expressing it in our samples. Using that knowledge, as well as knowledge of the vaginal environment, the most probable function was inferred. KO terms that were modified, including the rationale for each, are in the `Supplement' directory under `pathway-changes.xlsx' and in `lon\_eur\_health\_vs\_BV.R' and `virginia\_definingMolecularBV.R' in the `code' directory of the GitHub repository for this study. The latter two R scripts also contain DOIs linking to peer-reviewed literature supporting the KO term changes at the end of the files.
+\subsection{Competing interests}\label{subsec:subsecCompInt}
+The authors declare that they have no competing interests.
 
-\subsection{Author contributions}\label{subsec:subsecContribs}
+\subsection{Funding}\label{subsec:subsecFunding}
+SJDS and JMM were supported by an internal grant from the Schulich School of Medicine \& Dentistry at Western University, awarded to GG. CC was supported by an award from the Weston Family foundation (award no. 20170705). GR held a grant from the Natural Sciences and Engineering Research Council of Canada (NSERC).
+
+\subsection{Authors' contributions}\label{subsec:subsecContribs}
 Author contributions are listed below, according to the CRediT taxonomy:
-\\
-\newline
-\textbf{Funding acquisition:} GR, GBG\newline
-\textbf{Conceptualisation:} GR, GBG\newline
-\textbf{Data curation:} SJDS, CC, JMM\newline
-\textbf{Formal analysis:} SJDS, CC, JMM, GG\newline
-\textbf{Writing- original draft:} SJDS, CC, GBG\newline
-\textbf{Writing- review \& editing:} All authors
-\newpage
+\begin{itemize}
+\item Funding acquisition: GR, GBG
+\item Conceptualisation: GR, GBG
+\item Data curation: SJDS, CC, JMM
+\item Formal analysis: SJDS, CC, JMM, GG
+\item Writing- original draft: SJDS, CC, GBG
+\item Writing- review \& editing: All authors
+\end{itemize}
 
-\section{Supplementary figures} \label{sec:secSupplFigs}
+\subsection{Acknowledgements}\label{subsec:subsecAcknowl}
+The authors would like to thank Dr. Jeremy Burton and Wongsakorn Kiattiburut for their helpful discussions regarding cationic antimicrobial peptides, and Amy McMillan for her assistance with data collection.\newpage
+
+\section{Supplementary figures} \label{sec:secSupplFigs}x
 % the next four commands do the following: 1) resets the figure counter at this point to 0; 2) changes the figure names (bolded) after this point to "Supplementary Fig."; 3) appends "S[fig #]" after "Supplementary Figure"; 4) makes sure that the figure hyperlinks for supplementary figures point to the supplementary figures and NOT the main figures (NOTE: may have to typeset twice for this to work properly!).
 
 \setcounter{figure}{0}
