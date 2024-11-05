@@ -1,0 +1,1575 @@
+%% BioMed_Central_Bib_Style_v1.01
+
+\begin{thebibliography}{76}
+% BibTex style file: bmc-mathphys.bst (version 2.1), 2014-07-24
+\ifx \bisbn   \undefined \def \bisbn  #1{ISBN #1}\fi
+\ifx \binits  \undefined \def \binits#1{#1}\fi
+\ifx \bauthor  \undefined \def \bauthor#1{#1}\fi
+\ifx \batitle  \undefined \def \batitle#1{#1}\fi
+\ifx \bjtitle  \undefined \def \bjtitle#1{#1}\fi
+\ifx \bvolume  \undefined \def \bvolume#1{\textbf{#1}}\fi
+\ifx \byear  \undefined \def \byear#1{#1}\fi
+\ifx \bissue  \undefined \def \bissue#1{#1}\fi
+\ifx \bfpage  \undefined \def \bfpage#1{#1}\fi
+\ifx \blpage  \undefined \def \blpage #1{#1}\fi
+\ifx \burl  \undefined \def \burl#1{\textsf{#1}}\fi
+\ifx \doiurl  \undefined \def \doiurl#1{\url{https://doi.org/#1}}\fi
+\ifx \betal  \undefined \def \betal{\textit{et al.}}\fi
+\ifx \binstitute  \undefined \def \binstitute#1{#1}\fi
+\ifx \binstitutionaled  \undefined \def \binstitutionaled#1{#1}\fi
+\ifx \bctitle  \undefined \def \bctitle#1{#1}\fi
+\ifx \beditor  \undefined \def \beditor#1{#1}\fi
+\ifx \bpublisher  \undefined \def \bpublisher#1{#1}\fi
+\ifx \bbtitle  \undefined \def \bbtitle#1{#1}\fi
+\ifx \bedition  \undefined \def \bedition#1{#1}\fi
+\ifx \bseriesno  \undefined \def \bseriesno#1{#1}\fi
+\ifx \blocation  \undefined \def \blocation#1{#1}\fi
+\ifx \bsertitle  \undefined \def \bsertitle#1{#1}\fi
+\ifx \bsnm \undefined \def \bsnm#1{#1}\fi
+\ifx \bsuffix \undefined \def \bsuffix#1{#1}\fi
+\ifx \bparticle \undefined \def \bparticle#1{#1}\fi
+\ifx \barticle \undefined \def \barticle#1{#1}\fi
+\bibcommenthead
+\ifx \bconfdate \undefined \def \bconfdate #1{#1}\fi
+\ifx \botherref \undefined \def \botherref #1{#1}\fi
+\ifx \url \undefined \def \url#1{\textsf{#1}}\fi
+\ifx \bchapter \undefined \def \bchapter#1{#1}\fi
+\ifx \bbook \undefined \def \bbook#1{#1}\fi
+\ifx \bcomment \undefined \def \bcomment#1{#1}\fi
+\ifx \oauthor \undefined \def \oauthor#1{#1}\fi
+\ifx \citeauthoryear \undefined \def \citeauthoryear#1{#1}\fi
+\ifx \endbibitem  \undefined \def \endbibitem {}\fi
+\ifx \bconflocation  \undefined \def \bconflocation#1{#1}\fi
+\ifx \arxivurl  \undefined \def \arxivurl#1{\textsf{#1}}\fi
+\csname PreBibitemsHook\endcsname
+
+%%% 1
+\bibitem[\protect\citeauthoryear{Srinivasan and
+  Fredricks}{2008}]{Srinivasan:2008}
+\begin{barticle}
+\bauthor{\bsnm{Srinivasan}, \binits{S.}},
+\bauthor{\bsnm{Fredricks}, \binits{D.N.}}:
+\batitle{The human vaginal bacterial biota and bacterial vaginosis}.
+\bjtitle{Interdisciplinary Perspectives on Infectious Diseases}
+\bvolume{2008},
+\bfpage{750479}
+(\byear{2008})
+\doiurl{10.1155/2008/750479}
+\end{barticle}
+\endbibitem
+
+%%% 2
+\bibitem[\protect\citeauthoryear{Peebles et~al.}{2019}]{peebles_2019}
+\begin{barticle}
+\bauthor{\bsnm{Peebles}, \binits{K.}},
+\bauthor{\bsnm{Velloza}, \binits{J.}},
+\bauthor{\bsnm{Balkus}, \binits{J.E.}},
+\bauthor{\bsnm{McClelland}, \binits{S.R.}},
+\bauthor{\bsnm{Barnabas}, \binits{R.V.}}:
+\batitle{High global burden and costs of bacterial vaginosis: a systematic
+  review and meta-analysis}.
+\bjtitle{Sexually Transmitted Diseases}
+\bvolume{46}(\bissue{5}),
+\bfpage{304}--\blpage{311}
+(\byear{2019})
+\doiurl{10.1097/OLQ.0000000000000972}
+\end{barticle}
+\endbibitem
+
+%%% 3
+\bibitem[\protect\citeauthoryear{Kenyon et~al.}{2013}]{kenyon_global_2013}
+\begin{barticle}
+\bauthor{\bsnm{Kenyon}, \binits{C.}},
+\bauthor{\bsnm{Colebunders}, \binits{R.}},
+\bauthor{\bsnm{Crucitti}, \binits{T.}}:
+\batitle{The global epidemiology of bacterial vaginosis: a systematic review}.
+\bjtitle{American Journal of Obstetrics and Gynecology}
+\bvolume{209}(\bissue{6}),
+\bfpage{505}--\blpage{23}
+(\byear{2013})
+\doiurl{10.1016/j.ajog.2013.05.006}
+\end{barticle}
+\endbibitem
+
+%%% 4
+\bibitem[\protect\citeauthoryear{Allsworth and
+  Peipert}{2011}]{Allsworth:2011aa}
+\begin{barticle}
+\bauthor{\bsnm{Allsworth}, \binits{J.E.}},
+\bauthor{\bsnm{Peipert}, \binits{J.F.}}:
+\batitle{Severity of bacterial vaginosis and the risk of sexually transmitted
+  infection}.
+\bjtitle{American Journal of Obstetrics and Gynecology}
+\bvolume{205}(\bissue{2}),
+\bfpage{113}--\blpage{16}
+(\byear{2011})
+\doiurl{10.1016/j.ajog.2011.02.060}
+\end{barticle}
+\endbibitem
+
+%%% 5
+\bibitem[\protect\citeauthoryear{Abou~Chacra et~al.}{2023}]{Chacra:2023aa}
+\begin{botherref}
+\oauthor{\bsnm{Abou~Chacra}, \binits{L.}},
+\oauthor{\bsnm{Ly}, \binits{C.}},
+\oauthor{\bsnm{Hammoud}, \binits{A.}},
+\oauthor{\bsnm{Iwaza}, \binits{R.}},
+\oauthor{\bsnm{Mediannikov}, \binits{O.}},
+\oauthor{\bsnm{Bretelle}, \binits{F.}},
+\oauthor{\bsnm{Fenollar}, \binits{F.}}:
+Relationship between bacterial vaginosis and sexually transmitted infections:
+  coincidence, consequence or co-transmission?
+Microorganisms
+\textbf{11}(10)
+(2023)
+\doiurl{10.3390/microorganisms11102470}
+\end{botherref}
+\endbibitem
+
+%%% 6
+\bibitem[\protect\citeauthoryear{Adolfsson et~al.}{2016}]{adolfsson_how_2016}
+\begin{barticle}
+\bauthor{\bsnm{Adolfsson}, \binits{A.}},
+\bauthor{\bsnm{Hagander}, \binits{A.}},
+\bauthor{\bsnm{Mahjoubipour}, \binits{F.}},
+\bauthor{\bsnm{Larsson}, \binits{P.-G.}}:
+\batitle{How vaginal infections impact women's everyday life--- women's lived
+  experiences of bacterial vaginosis and recurrent vulvovaginal candidiasis}.
+\bjtitle{Advances in Sexual Medicine}
+\bvolume{7}(\bissue{1}),
+\bfpage{1}--\blpage{19}
+(\byear{2016})
+\doiurl{10.4236/asm.2017.71001}
+\end{barticle}
+\endbibitem
+
+%%% 7
+\bibitem[\protect\citeauthoryear{Fettweis et~al.}{2019}]{Fettweis:2019aa}
+\begin{barticle}
+\bauthor{\bsnm{Fettweis}, \binits{J.M.}},
+\bauthor{\bsnm{Serrano}, \binits{M.G.}},
+\bauthor{\bsnm{Brooks}, \binits{J.P.}},
+\bauthor{\bsnm{Edwards}, \binits{D.J.}},
+\bauthor{\bsnm{Girerd}, \binits{P.H.}},
+\bauthor{\bsnm{Parikh}, \binits{H.I.}},
+\bauthor{\bsnm{Huang}, \binits{B.}},
+\bauthor{\bsnm{Arodz}, \binits{T.J.}},
+\bauthor{\bsnm{Edupuganti}, \binits{L.}},
+\bauthor{\bsnm{Glascock}, \binits{A.L.}},
+\bauthor{\bsnm{Xu}, \binits{J.}},
+\bauthor{\bsnm{Jimenez}, \binits{N.R.}},
+\bauthor{\bsnm{Vivadelli}, \binits{S.C.}},
+\bauthor{\bsnm{Fong}, \binits{S.S.}},
+\bauthor{\bsnm{Sheth}, \binits{N.U.}},
+\bauthor{\bsnm{Jean}, \binits{S.}},
+\bauthor{\bsnm{Lee}, \binits{V.}},
+\bauthor{\bsnm{Bokhari}, \binits{Y.A.}},
+\bauthor{\bsnm{Lara}, \binits{A.M.}},
+\bauthor{\bsnm{Mistry}, \binits{S.D.}},
+\bauthor{\bsnm{Duckworth}, \binits{R.A.} \bsuffix{3rd}},
+\bauthor{\bsnm{Bradley}, \binits{S.P.}},
+\bauthor{\bsnm{Koparde}, \binits{V.N.}},
+\bauthor{\bsnm{Orenda}, \binits{X.V.}},
+\bauthor{\bsnm{Milton}, \binits{S.H.}},
+\bauthor{\bsnm{Rozycki}, \binits{S.K.}},
+\bauthor{\bsnm{Matveyev}, \binits{A.V.}},
+\bauthor{\bsnm{Wright}, \binits{M.L.}},
+\bauthor{\bsnm{Huzurbazar}, \binits{S.V.}},
+\bauthor{\bsnm{Jackson}, \binits{E.M.}},
+\bauthor{\bsnm{Smirnova}, \binits{E.}},
+\bauthor{\bsnm{Korlach}, \binits{J.}},
+\bauthor{\bsnm{Tsai}, \binits{Y.-C.}},
+\bauthor{\bsnm{Dickinson}, \binits{M.R.}},
+\bauthor{\bsnm{Brooks}, \binits{J.L.}},
+\bauthor{\bsnm{Drake}, \binits{J.I.}},
+\bauthor{\bsnm{Chaffin}, \binits{D.O.}},
+\bauthor{\bsnm{Sexton}, \binits{A.L.}},
+\bauthor{\bsnm{Gravett}, \binits{M.G.}},
+\bauthor{\bsnm{Rubens}, \binits{C.E.}},
+\bauthor{\bsnm{Wijesooriya}, \binits{N.R.}},
+\bauthor{\bsnm{Hendricks-Mu{\~n}oz}, \binits{K.D.}},
+\bauthor{\bsnm{Jefferson}, \binits{K.K.}},
+\bauthor{\bsnm{Strauss}, \binits{J.F.} \bsuffix{3rd}},
+\bauthor{\bsnm{Buck}, \binits{G.A.}}:
+\batitle{The vaginal microbiome and preterm birth}.
+\bjtitle{Nature Medicine}
+\bvolume{25}(\bissue{6}),
+\bfpage{1012}--\blpage{1021}
+(\byear{2019})
+\doiurl{10.1038/s41591-019-0450-2}
+\end{barticle}
+\endbibitem
+
+%%% 8
+\bibitem[\protect\citeauthoryear{Oduyebo et~al.}{2009}]{Oduyebo:2009}
+\begin{botherref}
+\oauthor{\bsnm{Oduyebo}, \binits{O.O.}},
+\oauthor{\bsnm{Anorlu}, \binits{R.I.}},
+\oauthor{\bsnm{Ogunsola}, \binits{F.T.}}:
+The effects of antimicrobial therapy on bacterial vaginosis in non-pregnant
+  women.
+Cochrane Database of Systematic Reviews
+(3),
+006055
+(2009)
+\doiurl{10.1002/14651858.CD006055.pub2}
+\end{botherref}
+\endbibitem
+
+%%% 9
+\bibitem[\protect\citeauthoryear{Bradshaw
+  et~al.}{2006}]{bradshaw_recurrence_2006}
+\begin{barticle}
+\bauthor{\bsnm{Bradshaw}, \binits{C.}},
+\bauthor{\bsnm{Morton}, \binits{A.}},
+\bauthor{\bsnm{Hocking}, \binits{J.}},
+\bauthor{\bsnm{Garland}, \binits{S.}},
+\bauthor{\bsnm{Morris}, \binits{M.}},
+\bauthor{\bsnm{Moss}, \binits{L.}},
+\bauthor{\bsnm{Horvath}, \binits{L.}},
+\bauthor{\bsnm{Kuzevska}, \binits{I.}},
+\bauthor{\bsnm{Fairley}, \binits{C.}}:
+\batitle{High recurrence rates of bacterial vaginosis over the course of 12
+  months after oral metronidazole therapy and factors associated with
+  recurrence}.
+\bjtitle{Journal of Infectious Diseases}
+\bvolume{193}(\bissue{11}),
+\bfpage{1478}--\blpage{1486}
+(\byear{2006})
+\doiurl{10.1086/503780}
+\end{barticle}
+\endbibitem
+
+%%% 10
+\bibitem[\protect\citeauthoryear{Lev-Sagie
+  et~al.}{2022}]{lev-sagie_vaginal_2022}
+\begin{barticle}
+\bauthor{\bsnm{Lev-Sagie}, \binits{A.}},
+\bauthor{\bsnm{De~Seta}, \binits{F.}},
+\bauthor{\bsnm{Verstraelen}, \binits{H.}},
+\bauthor{\bsnm{Ventolini}, \binits{G.}},
+\bauthor{\bsnm{Lonnee-Hoffmann}, \binits{R.}},
+\bauthor{\bsnm{Vieira-Baptista}, \binits{P.}}:
+\batitle{The vaginal microbiome {II}: vaginal dysbiotic conditions}.
+\bjtitle{Journal of Lower Genital Tract Disease}
+\bvolume{26}(\bissue{1}),
+\bfpage{79}--\blpage{84}
+(\byear{2022})
+\doiurl{10.1097/LGT.0000000000000644}
+\end{barticle}
+\endbibitem
+
+%%% 11
+\bibitem[\protect\citeauthoryear{Zozaya-Hinchliffe et~al.}{2010}]{Zozaya:2010}
+\begin{barticle}
+\bauthor{\bsnm{Zozaya-Hinchliffe}, \binits{M.}},
+\bauthor{\bsnm{Lillis}, \binits{R.}},
+\bauthor{\bsnm{Martin}, \binits{D.H.}},
+\bauthor{\bsnm{Ferris}, \binits{M.J.}}:
+\batitle{Quantitative {PCR} assessments of bacterial species in women with and
+  without bacterial vaginosis}.
+\bjtitle{Journal of Clinical Microbiology}
+\bvolume{48}(\bissue{5}),
+\bfpage{1812}--\blpage{9}
+(\byear{2010})
+\doiurl{10.1128/JCM.00851-09}
+\end{barticle}
+\endbibitem
+
+%%% 12
+\bibitem[\protect\citeauthoryear{Nouioui
+  et~al.}{2018}]{nouioui_actinobacteria_2018}
+\begin{barticle}
+\bauthor{\bsnm{Nouioui}, \binits{I.}},
+\bauthor{\bsnm{Carro}, \binits{L.}},
+\bauthor{\bsnm{García-López}, \binits{M.}},
+\bauthor{\bsnm{Meier-Kolthoff}, \binits{J.}},
+\bauthor{\bsnm{Woyke}, \binits{T.}},
+\bauthor{\bsnm{Kyrpides}, \binits{N.}},
+\bauthor{\bsnm{Pukall}, \binits{R.}},
+\bauthor{\bsnm{Klenk}, \binits{H.}},
+\bauthor{\bsnm{Goodfellow}, \binits{M.}},
+\bauthor{\bsnm{Göker}, \binits{M.}}:
+\batitle{Genome-based taxonomic classification of the phylum actinobacteria}.
+\bjtitle{Frontiers in Microbiology}
+\bvolume{9},
+\bfpage{2007}
+(\byear{2018})
+\doiurl{10.3389/fmicb.2018.02007}
+\end{barticle}
+\endbibitem
+
+%%% 13
+\bibitem[\protect\citeauthoryear{Ravel et~al.}{2011}]{Ravel:2010}
+\begin{botherref}
+\oauthor{\bsnm{Ravel}, \binits{J.}},
+\oauthor{\bsnm{Gajer}, \binits{P.}},
+\oauthor{\bsnm{Abdo}, \binits{Z.}},
+\oauthor{\bsnm{Schneider}, \binits{G.M.}},
+\oauthor{\bsnm{Koenig}, \binits{S.S.K.}},
+\oauthor{\bsnm{McCulle}, \binits{S.L.}},
+\oauthor{\bsnm{Karlebach}, \binits{S.}},
+\oauthor{\bsnm{Gorle}, \binits{R.}},
+\oauthor{\bsnm{Russell}, \binits{J.}},
+\oauthor{\bsnm{Tacket}, \binits{C.O.}},
+\oauthor{\bsnm{Brotman}, \binits{R.M.}},
+\oauthor{\bsnm{Davis}, \binits{C.C.}},
+\oauthor{\bsnm{Ault}, \binits{K.}},
+\oauthor{\bsnm{Peralta}, \binits{L.}},
+\oauthor{\bsnm{Forney}, \binits{L.J.}}:
+Vaginal microbiome of reproductive-age women.
+Proceedings of the National Academy of Sciences USA
+(108),
+4680--4687
+(2011)
+\doiurl{10.1073/pnas.100611107}
+\end{botherref}
+\endbibitem
+
+%%% 14
+\bibitem[\protect\citeauthoryear{France et~al.}{2020}]{france_valencia_2020}
+\begin{barticle}
+\bauthor{\bsnm{France}, \binits{M.}},
+\bauthor{\bsnm{Bing}, \binits{M.}},
+\bauthor{\bsnm{Gajer}, \binits{P.}},
+\bauthor{\bsnm{Brown}, \binits{S.}},
+\bauthor{\bsnm{Humphrys}, \binits{M.}},
+\bauthor{\bsnm{Holm}, \binits{J.}},
+\bauthor{\bsnm{Waetjen}, \binits{L.}},
+\bauthor{\bsnm{Brotman}, \binits{R.}},
+\bauthor{\bsnm{Ravel}, \binits{J.}}:
+\batitle{Valencia: a nearest centroid classification method for vaginal
+  microbial communities based on composition}.
+\bjtitle{Microbiome}
+\bvolume{8}(\bissue{1}),
+\bfpage{166}
+(\byear{2020})
+\doiurl{10.1186/s40168-020-00934-6}
+\end{barticle}
+\endbibitem
+
+%%% 15
+\bibitem[\protect\citeauthoryear{Albert et~al.}{2015}]{albert_study_2015}
+\begin{barticle}
+\bauthor{\bsnm{Albert}, \binits{A.Y.K.}},
+\bauthor{\bsnm{Chaban}, \binits{B.}},
+\bauthor{\bsnm{Wagner}, \binits{E.C.}},
+\bauthor{\bsnm{Schellenberg}, \binits{J.J.}},
+\bauthor{\bsnm{Links}, \binits{M.G.}},
+\bauthor{\bsnm{Van~Schalkwyk}, \binits{J.}},
+\bauthor{\bsnm{Reid}, \binits{G.}},
+\bauthor{\bsnm{Hemmingsen}, \binits{S.M.}},
+\bauthor{\bsnm{Hill}, \binits{J.E.}},
+\bauthor{\bsnm{Money}, \binits{D.}}:
+\batitle{A study of the vaginal microbiome in healthy {Canadian} women
+  utilizing cpn60-based molecular profiling reveals distinct {Gardnerella}
+  subgroup community state types}.
+\bjtitle{PLoS One}
+\bvolume{10}(\bissue{8}),
+\bfpage{0135620}
+(\byear{2015})
+\doiurl{10.1371/journal.pone.0135620}
+\end{barticle}
+\endbibitem
+
+%%% 16
+\bibitem[\protect\citeauthoryear{Dos~Santos et~al.}{2023}]{dossantos_2023}
+\begin{barticle}
+\bauthor{\bsnm{Dos~Santos}, \binits{S.J.}},
+\bauthor{\bsnm{Pakzad}, \binits{Z.}},
+\bauthor{\bsnm{Albert}, \binits{A.Y.K.}},
+\bauthor{\bsnm{Elwood}, \binits{C.N.}},
+\bauthor{\bsnm{Grabowska}, \binits{K.}},
+\bauthor{\bsnm{Links}, \binits{M.G.}},
+\bauthor{\bsnm{Hutcheon}, \binits{J.A.}},
+\bauthor{\bsnm{Maan}, \binits{E.J.}},
+\bauthor{\bsnm{Manges}, \binits{A.R.}},
+\bauthor{\bsnm{Dumonceaux}, \binits{T.J.}},
+\bauthor{\bsnm{Hodgson}, \binits{Z.G.}},
+\bauthor{\bsnm{Lyons}, \binits{J.}},
+\bauthor{\bsnm{Mitchell-Foster}, \binits{S.M.}},
+\bauthor{\bsnm{Gantt}, \binits{S.}},
+\bauthor{\bsnm{Joseph}, \binits{K.S.}},
+\bauthor{\bsnm{Van~Schalkwyk}, \binits{J.E.}},
+\bauthor{\bsnm{Hill}, \binits{J.E.}},
+\bauthor{\bsnm{Money}, \binits{D.M.}}:
+\batitle{Maternal vaginal microbiome composition does not affect development of
+  the infant gut microbiome in early life}.
+\bjtitle{Frontiers in Cellular and Infection Microbiology}
+\bvolume{13},
+\bfpage{1144254}
+(\byear{2023})
+\doiurl{10.3389/fcimb.2023.1144254}
+\end{barticle}
+\endbibitem
+
+%%% 17
+\bibitem[\protect\citeauthoryear{Symul
+  et~al.}{2023}]{symul_sub-communities_2023}
+\begin{barticle}
+\bauthor{\bsnm{Symul}, \binits{L.}},
+\bauthor{\bsnm{Jeganathan}, \binits{P.}},
+\bauthor{\bsnm{Costello}, \binits{E.K.}},
+\bauthor{\bsnm{France}, \binits{M.}},
+\bauthor{\bsnm{Bloom}, \binits{S.M.}},
+\bauthor{\bsnm{Kwon}, \binits{D.S.}},
+\bauthor{\bsnm{Ravel}, \binits{J.}},
+\bauthor{\bsnm{Relman}, \binits{D.A.}},
+\bauthor{\bsnm{Holmes}, \binits{S.}}:
+\batitle{Sub-communities of the vaginal microbiota in pregnant and non-pregnant
+  women}.
+\bjtitle{Proceedings of the Royal Society B: Biological Sciences}
+\bvolume{290}(\bissue{2011}),
+\bfpage{20231461}
+(\byear{2023})
+\doiurl{10.1098/rspb.2023.1461}
+\end{barticle}
+\endbibitem
+
+%%% 18
+\bibitem[\protect\citeauthoryear{Goltsman
+  et~al.}{2018}]{goltsman_metagenomic_2018}
+\begin{barticle}
+\bauthor{\bsnm{Goltsman}, \binits{D.S.A.}},
+\bauthor{\bsnm{Sun}, \binits{C.L.}},
+\bauthor{\bsnm{Proctor}, \binits{D.M.}},
+\bauthor{\bsnm{DiGiulio}, \binits{D.B.}},
+\bauthor{\bsnm{Robaczewska}, \binits{A.}},
+\bauthor{\bsnm{Thomas}, \binits{B.C.}},
+\bauthor{\bsnm{Shaw}, \binits{G.M.}},
+\bauthor{\bsnm{Stevenson}, \binits{D.K.}},
+\bauthor{\bsnm{Holmes}, \binits{S.P.}},
+\bauthor{\bsnm{Banfield}, \binits{J.F.}},
+\bauthor{\bsnm{Relman}, \binits{D.A.}}:
+\batitle{Metagenomic analysis with strain-level resolution reveals fine-scale
+  variation in the human pregnancy microbiome}.
+\bjtitle{Genome Research}
+\bvolume{28}(\bissue{10}),
+\bfpage{1467}--\blpage{1480}
+(\byear{2018})
+\doiurl{10.1101/gr.236000.118}
+\end{barticle}
+\endbibitem
+
+%%% 19
+\bibitem[\protect\citeauthoryear{Lev-Sagie et~al.}{2019}]{Lev-Sagie:2019aa}
+\begin{barticle}
+\bauthor{\bsnm{Lev-Sagie}, \binits{A.}},
+\bauthor{\bsnm{Goldman-Wohl}, \binits{D.}},
+\bauthor{\bsnm{Cohen}, \binits{Y.}},
+\bauthor{\bsnm{Dori-Bachash}, \binits{M.}},
+\bauthor{\bsnm{Leshem}, \binits{A.}},
+\bauthor{\bsnm{Mor}, \binits{U.}},
+\bauthor{\bsnm{Strahilevitz}, \binits{J.}},
+\bauthor{\bsnm{Moses}, \binits{A.E.}},
+\bauthor{\bsnm{Shapiro}, \binits{H.}},
+\bauthor{\bsnm{Yagel}, \binits{S.}},
+\bauthor{\bsnm{Elinav}, \binits{E.}}:
+\batitle{Vaginal microbiome transplantation in women with intractable bacterial
+  vaginosis}.
+\bjtitle{Nature Medicine}
+\bvolume{25}(\bissue{10}),
+\bfpage{1500}--\blpage{1504}
+(\byear{2019})
+\doiurl{10.1038/s41591-019-0600-6}
+\end{barticle}
+\endbibitem
+
+%%% 20
+\bibitem[\protect\citeauthoryear{Pistner-Nixon et~al.}{2023}]{nixon2023scale}
+\begin{barticle}
+\bauthor{\bsnm{Pistner-Nixon}, \binits{M.}},
+\bauthor{\bsnm{Letourneau}, \binits{J.}},
+\bauthor{\bsnm{David}, \binits{L.A.}},
+\bauthor{\bsnm{Lazar}, \binits{N.A.}},
+\bauthor{\bsnm{Mukherjee}, \binits{S.}},
+\bauthor{\bsnm{Silverman}, \binits{J.D.}}:
+\batitle{Scale reliant inference}.
+\bjtitle{arXiv}
+(\byear{2023})
+\doiurl{10.48550/arXiv.2201.03616}
+\end{barticle}
+\endbibitem
+
+%%% 21
+\bibitem[\protect\citeauthoryear{Macklaim et~al.}{2013}]{macklaim:2013}
+\begin{barticle}
+\bauthor{\bsnm{Macklaim}, \binits{J.M.}},
+\bauthor{\bsnm{Fernandes}, \binits{A.D.}},
+\bauthor{\bsnm{Di~Bella}, \binits{J.M.}},
+\bauthor{\bsnm{Hammond}, \binits{J.-A.}},
+\bauthor{\bsnm{Reid}, \binits{G.}},
+\bauthor{\bsnm{Gloor}, \binits{G.B.}}:
+\batitle{Comparative meta-{RNA}-seq of the vaginal microbiota and differential
+  expression by lactobacillus iners in health and dysbiosis}.
+\bjtitle{Microbiome}
+\bvolume{1}(\bissue{1}),
+\bfpage{12}
+(\byear{2013})
+\doiurl{10.1186/2049-2618-1-12}
+\end{barticle}
+\endbibitem
+
+%%% 22
+\bibitem[\protect\citeauthoryear{Ma et~al.}{2020}]{Ma:2020aa}
+\begin{barticle}
+\bauthor{\bsnm{Ma}, \binits{B.}},
+\bauthor{\bsnm{France}, \binits{M.T.}},
+\bauthor{\bsnm{Crabtree}, \binits{J.}},
+\bauthor{\bsnm{Holm}, \binits{J.B.}},
+\bauthor{\bsnm{Humphrys}, \binits{M.S.}},
+\bauthor{\bsnm{Brotman}, \binits{R.M.}},
+\bauthor{\bsnm{Ravel}, \binits{J.}}:
+\batitle{A comprehensive non-redundant gene catalog reveals extensive
+  within-community intraspecies diversity in the human vagina}.
+\bjtitle{Nature Communications}
+\bvolume{11}(\bissue{1}),
+\bfpage{940}
+(\byear{2020})
+\doiurl{10.1038/s41467-020-14677-3}
+\end{barticle}
+\endbibitem
+
+%%% 23
+\bibitem[\protect\citeauthoryear{France et~al.}{2022}]{France:2022aa}
+\begin{barticle}
+\bauthor{\bsnm{France}, \binits{M.T.}},
+\bauthor{\bsnm{Fu}, \binits{L.}},
+\bauthor{\bsnm{Rutt}, \binits{L.}},
+\bauthor{\bsnm{Yang}, \binits{H.}},
+\bauthor{\bsnm{Humphrys}, \binits{M.S.}},
+\bauthor{\bsnm{Narina}, \binits{S.}},
+\bauthor{\bsnm{Gajer}, \binits{P.M.}},
+\bauthor{\bsnm{Ma}, \binits{B.}},
+\bauthor{\bsnm{Forney}, \binits{L.J.}},
+\bauthor{\bsnm{Ravel}, \binits{J.}}:
+\batitle{Insight into the ecology of vaginal bacteria through integrative
+  analyses of metagenomic and metatranscriptomic data}.
+\bjtitle{Genome Biology}
+\bvolume{23}(\bissue{1}),
+\bfpage{66}
+(\byear{2022})
+\doiurl{10.1186/s13059-022-02635-9}
+\end{barticle}
+\endbibitem
+
+%%% 24
+\bibitem[\protect\citeauthoryear{Gloor et~al.}{2023}]{gloorScale}
+\begin{barticle}
+\bauthor{\bsnm{Gloor}, \binits{G.B.}},
+\bauthor{\bsnm{Pistner-Nixon}, \binits{M.}},
+\bauthor{\bsnm{Silverman}, \binits{J.D.}}:
+\batitle{Normalizations are not what you think: Explicit scale simulation in
+  {ALDEx2}}.
+\bjtitle{bioArxiv}
+(\byear{2023})
+\doiurl{10.1101/2023.10.21.563431}
+\end{barticle}
+\endbibitem
+
+%%% 25
+\bibitem[\protect\citeauthoryear{McGovern et~al.}{2023}]{McGovern2023}
+\begin{barticle}
+\bauthor{\bsnm{McGovern}, \binits{K.C.}},
+\bauthor{\bsnm{Nixon}, \binits{M.P.}},
+\bauthor{\bsnm{Silverman}, \binits{J.D.}}:
+\batitle{Addressing erroneous scale assumptions in microbe and gene set
+  enrichment analysis}.
+\bjtitle{PLoS Computational Biology}
+\bvolume{19}(\bissue{11}),
+\bfpage{1011659}
+(\byear{2023})
+\doiurl{10.1371/journal.pcbi.1011659}
+\end{barticle}
+\endbibitem
+
+%%% 26
+\bibitem[\protect\citeauthoryear{Fernandes et~al.}{2013}]{fernandes:2013}
+\begin{barticle}
+\bauthor{\bsnm{Fernandes}, \binits{A.D.}},
+\bauthor{\bsnm{Macklaim}, \binits{J.M.}},
+\bauthor{\bsnm{Linn}, \binits{T.G.}},
+\bauthor{\bsnm{Reid}, \binits{G.}},
+\bauthor{\bsnm{Gloor}, \binits{G.B.}}:
+\batitle{{ANOVA}-like differential expression ({ALDE}x) analysis for mixed
+  population {RNA}-seq}.
+\bjtitle{PLoS One}
+\bvolume{8}(\bissue{7}),
+\bfpage{67019}
+(\byear{2013})
+\doiurl{10.1371/journal.pone.0067019}
+\end{barticle}
+\endbibitem
+
+%%% 27
+\bibitem[\protect\citeauthoryear{Macklaim and Gloor}{2018}]{Macklaim:2018aa}
+\begin{barticle}
+\bauthor{\bsnm{Macklaim}, \binits{J.M.}},
+\bauthor{\bsnm{Gloor}, \binits{G.B.}}:
+\batitle{From {RNA}-seq to biological inference: using compositional data
+  analysis in meta-transcriptomics}.
+\bjtitle{Methods in Molecular Biology}
+\bvolume{1849},
+\bfpage{193}--\blpage{213}
+(\byear{2018})
+\doiurl{10.1007/978-1-4939-8728-3_13}
+\end{barticle}
+\endbibitem
+
+%%% 28
+\bibitem[\protect\citeauthoryear{Deng et~al.}{2018}]{Denge00262-18}
+\begin{botherref}
+\oauthor{\bsnm{Deng}, \binits{Z.-L.}},
+\oauthor{\bsnm{Gottschick}, \binits{C.}},
+\oauthor{\bsnm{Bhuju}, \binits{S.}},
+\oauthor{\bsnm{Masur}, \binits{C.}},
+\oauthor{\bsnm{Abels}, \binits{C.}},
+\oauthor{\bsnm{Wagner-D{\"o}bler}, \binits{I.}}:
+Metatranscriptome analysis of the vaginal microbiota reveals potential
+  mechanisms for protection against metronidazole in bacterial vaginosis.
+mSphere
+\textbf{3}(3)
+(2018)
+\doiurl{10.1128/mSphereDirect.00262-18}
+{\href{https://arxiv.org/abs/https://msphere.asm.org/content/3/3/e00262-18.full.pdf}{{https://msphere.asm.org/content/3/3/e00262-18.full.pdf}}}
+\end{botherref}
+\endbibitem
+
+%%% 29
+\bibitem[\protect\citeauthoryear{Xiao et~al.}{2022}]{Xiao:2022aa}
+\begin{barticle}
+\bauthor{\bsnm{Xiao}, \binits{M.}},
+\bauthor{\bsnm{Lu}, \binits{B.}},
+\bauthor{\bsnm{Ding}, \binits{R.}},
+\bauthor{\bsnm{Liu}, \binits{X.}},
+\bauthor{\bsnm{Wu}, \binits{X.}},
+\bauthor{\bsnm{Li}, \binits{Y.}},
+\bauthor{\bsnm{Liu}, \binits{X.}},
+\bauthor{\bsnm{Qiu}, \binits{L.}},
+\bauthor{\bsnm{Zhang}, \binits{Z.}},
+\bauthor{\bsnm{Xie}, \binits{J.}},
+\bauthor{\bsnm{Chen}, \binits{Y.}},
+\bauthor{\bsnm{Zhang}, \binits{D.}},
+\bauthor{\bsnm{Dong}, \binits{L.}},
+\bauthor{\bsnm{Zhang}, \binits{M.}},
+\bauthor{\bsnm{Peng}, \binits{J.}},
+\bauthor{\bsnm{Yang}, \binits{H.}},
+\bauthor{\bsnm{Kudihna}, \binits{T.}},
+\bauthor{\bsnm{Xu}, \binits{Y.}},
+\bauthor{\bsnm{Li}, \binits{T.}},
+\bauthor{\bsnm{Yi}, \binits{C.}},
+\bauthor{\bsnm{Zhu}, \binits{L.}}:
+\batitle{Metatranscriptomic analysis of host response and vaginal microbiome of
+  patients with severe {COVID}-19}.
+\bjtitle{Science China Life Sciences}
+\bvolume{65}(\bissue{7}),
+\bfpage{1473}--\blpage{1476}
+(\byear{2022})
+\doiurl{10.1007/s11427-021-2091-0}
+\end{barticle}
+\endbibitem
+
+%%% 30
+\bibitem[\protect\citeauthoryear{Gottschick et~al.}{2017}]{Gottschick:2017aa}
+\begin{barticle}
+\bauthor{\bsnm{Gottschick}, \binits{C.}},
+\bauthor{\bsnm{Deng}, \binits{Z.-L.}},
+\bauthor{\bsnm{Vital}, \binits{M.}},
+\bauthor{\bsnm{Masur}, \binits{C.}},
+\bauthor{\bsnm{Abels}, \binits{C.}},
+\bauthor{\bsnm{Pieper}, \binits{D.H.}},
+\bauthor{\bsnm{Rohde}, \binits{M.}},
+\bauthor{\bsnm{Mendling}, \binits{W.}},
+\bauthor{\bsnm{Wagner-D{\"o}bler}, \binits{I.}}:
+\batitle{Treatment of biofilms in bacterial vaginosis by an amphoteric tenside
+  pessary-clinical study and microbiota analysis}.
+\bjtitle{Microbiome}
+\bvolume{5}(\bissue{1}),
+\bfpage{119}
+(\byear{2017})
+\doiurl{10.1186/s40168-017-0326-y}
+\end{barticle}
+\endbibitem
+
+%%% 31
+\bibitem[\protect\citeauthoryear{Zhang et~al.}{2020}]{Zhang:2020ab}
+\begin{barticle}
+\bauthor{\bsnm{Zhang}, \binits{Y.}},
+\bauthor{\bsnm{Parmigiani}, \binits{G.}},
+\bauthor{\bsnm{Johnson}, \binits{W.E.}}:
+\batitle{Com{Bat}-seq: batch effect adjustment for {RNA}-seq count data}.
+\bjtitle{Nucleic Acids Research: Genomics and Bioinformatics}
+\bvolume{2}(\bissue{3}),
+\bfpage{078}
+(\byear{2020})
+\doiurl{10.1093/nargab/lqaa078}
+\end{barticle}
+\endbibitem
+
+%%% 32
+\bibitem[\protect\citeauthoryear{Fernandes et~al.}{2014}]{fernandes:2014}
+\begin{barticle}
+\bauthor{\bsnm{Fernandes}, \binits{A.D.}},
+\bauthor{\bsnm{Reid}, \binits{J.N.}},
+\bauthor{\bsnm{Macklaim}, \binits{J.M.}},
+\bauthor{\bsnm{McMurrough}, \binits{T.A.}},
+\bauthor{\bsnm{Edgell}, \binits{D.R.}},
+\bauthor{\bsnm{Gloor}, \binits{G.B.}}:
+\batitle{Unifying the analysis of high-throughput sequencing datasets:
+  characterizing {RNA}-seq, 16{S} r{RNA} gene sequencing and selective growth
+  experiments by compositional data analysis}.
+\bjtitle{Microbiome}
+\bvolume{2},
+\bfpage{15}--\blpage{11513}
+(\byear{2014})
+\doiurl{10.1186/2049-2618-2-15}
+\end{barticle}
+\endbibitem
+
+%%% 33
+\bibitem[\protect\citeauthoryear{Aitchison and
+  Greenacre}{2002}]{aitchison2002biplots}
+\begin{barticle}
+\bauthor{\bsnm{Aitchison}, \binits{J.}},
+\bauthor{\bsnm{Greenacre}, \binits{M.}}:
+\batitle{Biplots of compositional data}.
+\bjtitle{Journal of the Royal Statistical Society: Series C (Applied
+  Statistics)}
+\bvolume{51}(\bissue{4}),
+\bfpage{375}--\blpage{392}
+(\byear{2002})
+\doiurl{10.1111/1467-9876.00275}
+\end{barticle}
+\endbibitem
+
+%%% 34
+\bibitem[\protect\citeauthoryear{Glascock et~al.}{2021}]{glascock_unique_2021}
+\begin{barticle}
+\bauthor{\bsnm{Glascock}, \binits{A.L.}},
+\bauthor{\bsnm{Jimenez}, \binits{N.R.}},
+\bauthor{\bsnm{Boundy}, \binits{S.}},
+\bauthor{\bsnm{Koparde}, \binits{V.N.}},
+\bauthor{\bsnm{Brooks}, \binits{J.P.}},
+\bauthor{\bsnm{Edwards}, \binits{D.J.}},
+\bauthor{\bsnm{Strauss~III}, \binits{J.F.}},
+\bauthor{\bsnm{Jefferson}, \binits{K.K.}},
+\bauthor{\bsnm{Serrano}, \binits{M.G.}},
+\bauthor{\bsnm{Buck}, \binits{G.A.}},
+\bauthor{\bsnm{Fettweis}, \binits{J.M.}}:
+\batitle{Unique roles of vaginal {Megasphaera} phylotypes in reproductive
+  health}.
+\bjtitle{Microbial Genomics}
+\bvolume{7}(\bissue{12}),
+\bfpage{000526}
+(\byear{2021})
+\doiurl{10.1099/mgen.0.000526}
+\end{barticle}
+\endbibitem
+
+%%% 35
+\bibitem[\protect\citeauthoryear{Vaneechoutte
+  et~al.}{2019}]{vaneechoutte_emended_2019}
+\begin{barticle}
+\bauthor{\bsnm{Vaneechoutte}, \binits{M.}},
+\bauthor{\bsnm{Guschin}, \binits{A.}},
+\bauthor{\bsnm{Simaey}, \binits{L.V.}},
+\bauthor{\bsnm{Gansemans}, \binits{Y.}},
+\bauthor{\bsnm{Nieuwerburgh}, \binits{F.V.}},
+\bauthor{\bsnm{Cools}, \binits{P.}}:
+\batitle{Emended description of {Gardnerella} vaginalis and description of
+  {Gardnerella} leopoldii sp. nov., {Gardnerella} piotii sp. nov. and
+  {Gardnerella} swidsinskii sp. nov., with delineation of 13 genomic species
+  within the genus {Gardnerella}}.
+\bjtitle{International Journal of Systemic and Evolutionary Microbiology}
+\bvolume{69}(\bissue{3}),
+\bfpage{679}--\blpage{87}
+(\byear{2019})
+\doiurl{10.1099/ijsem.0.003200}
+\end{barticle}
+\endbibitem
+
+%%% 36
+\bibitem[\protect\citeauthoryear{Sousa et~al.}{2023}]{sousa_gardSpp_2023}
+\begin{barticle}
+\bauthor{\bsnm{Sousa}, \binits{M.}},
+\bauthor{\bsnm{Ksiezarek}, \binits{M.}},
+\bauthor{\bsnm{Perovic}, \binits{S.}},
+\bauthor{\bsnm{Antunes-Lopes}, \binits{T.}},
+\bauthor{\bsnm{Grosso}, \binits{F.}},
+\bauthor{\bsnm{Ribeiro}, \binits{T.}},
+\bauthor{\bsnm{Peixe}, \binits{L.}}:
+\batitle{Gardnerella pickettii sp. nov. (formerly gardnerella genomic species
+  3) and gardnerella greenwoodii sp. nov. (formerly gardnerella genomic species
+  8) isolated from female urinary microbiome}.
+\bjtitle{International Journal of Systematic and Evolutionary Microbiology}
+\bvolume{73}(\bissue{11}),
+\bfpage{006140}
+(\byear{2023})
+\doiurl{10.1099/ijsem.0.006140}
+\end{barticle}
+\endbibitem
+
+%%% 37
+\bibitem[\protect\citeauthoryear{Yeoman et~al.}{2013}]{yeoman_multi-omic_2013}
+\begin{barticle}
+\bauthor{\bsnm{Yeoman}, \binits{C.J.}},
+\bauthor{\bsnm{Thomas}, \binits{S.M.}},
+\bauthor{\bsnm{Miller}, \binits{M.E.B.}},
+\bauthor{\bsnm{Ulanov}, \binits{A.V.}},
+\bauthor{\bsnm{Torralba}, \binits{M.}},
+\bauthor{\bsnm{Lucas}, \binits{S.}},
+\bauthor{\bsnm{Gillis}, \binits{M.}},
+\bauthor{\bsnm{Cregger}, \binits{M.}},
+\bauthor{\bsnm{Gomez}, \binits{A.}},
+\bauthor{\bsnm{Ho}, \binits{M.}},
+\bauthor{\bsnm{Leigh}, \binits{S.R.}},
+\bauthor{\bsnm{Stumpf}, \binits{R.}},
+\bauthor{\bsnm{Creedon}, \binits{D.J.}},
+\bauthor{\bsnm{Smith}, \binits{M.A.}},
+\bauthor{\bsnm{Weisbaum}, \binits{J.S.}},
+\bauthor{\bsnm{Nelson}, \binits{K.E.}},
+\bauthor{\bsnm{Wilson}, \binits{B.A.}},
+\bauthor{\bsnm{White}, \binits{B.A.}}:
+\batitle{A multi-omic systems-based approach reveals metabolic markers of
+  bacterial vaginosis and insight into the disease}.
+\bjtitle{PLoS One}
+\bvolume{8}(\bissue{2}),
+\bfpage{56111}
+(\byear{2013})
+\doiurl{10.1371/journal.pone.0056111}
+\end{barticle}
+\endbibitem
+
+%%% 38
+\bibitem[\protect\citeauthoryear{Hardy et~al.}{2017}]{hardy_presence_2017-1}
+\begin{barticle}
+\bauthor{\bsnm{Hardy}, \binits{L.}},
+\bauthor{\bsnm{Jespers}, \binits{V.}},
+\bauthor{\bsnm{Bulck}, \binits{M.V.d.}},
+\bauthor{\bsnm{Buyze}, \binits{J.}},
+\bauthor{\bsnm{Mwambarangwe}, \binits{L.}},
+\bauthor{\bsnm{Musengamana}, \binits{V.}},
+\bauthor{\bsnm{Vaneechoutte}, \binits{M.}},
+\bauthor{\bsnm{Crucitti}, \binits{T.}}:
+\batitle{The presence of the putative {Gardnerella} vaginalis sialidase {A}
+  gene in vaginal specimens is associated with bacterial vaginosis biofilm}.
+\bjtitle{PLoS One}
+\bvolume{12}(\bissue{2}),
+\bfpage{0172522}
+(\byear{2017})
+\doiurl{10.1371/journal.pone.0172522}
+\end{barticle}
+\endbibitem
+
+%%% 39
+\bibitem[\protect\citeauthoryear{Neuhaus and
+  Baddiley}{2003}]{neuhaus_continuum_2003}
+\begin{barticle}
+\bauthor{\bsnm{Neuhaus}, \binits{F.C.}},
+\bauthor{\bsnm{Baddiley}, \binits{J.}}:
+\batitle{A continuum of anionic charge: structures and functions of
+  {D}-alanyl-teichoic acids in {Gram}-positive bacteria}.
+\bjtitle{Microbiology and Molecular Biology Reviews}
+\bvolume{67}(\bissue{4}),
+\bfpage{686}--\blpage{723}
+(\byear{2003})
+\doiurl{10.1128/mmbr.67.4.686-723.2003}
+\end{barticle}
+\endbibitem
+
+%%% 40
+\bibitem[\protect\citeauthoryear{Mueller et~al.}{2021}]{mueller_active_2021}
+\begin{barticle}
+\bauthor{\bsnm{Mueller}, \binits{E.A.}},
+\bauthor{\bsnm{Iken}, \binits{A.G.}},
+\bauthor{\bsnm{Ali~{\"O}zt{\"u}rk}, \binits{M.}},
+\bauthor{\bsnm{Winkle}, \binits{M.}},
+\bauthor{\bsnm{Schmitz}, \binits{M.}},
+\bauthor{\bsnm{Vollmer}, \binits{W.}},
+\bauthor{\bsnm{Di~Ventura}, \binits{B.}},
+\bauthor{\bsnm{Levin}, \binits{P.A.}}:
+\batitle{The active repertoire of {Escherichia} coli peptidoglycan amidases
+  varies with physiochemical environment}.
+\bjtitle{Molecular Microbiology}
+\bvolume{116}(\bissue{1}),
+\bfpage{311}--\blpage{328}
+(\byear{2021})
+\doiurl{10.1111/mmi.14711}
+\end{barticle}
+\endbibitem
+
+%%% 41
+\bibitem[\protect\citeauthoryear{Ernst et~al.}{2009}]{ernst_bacterial_2009}
+\begin{barticle}
+\bauthor{\bsnm{Ernst}, \binits{C.M.}},
+\bauthor{\bsnm{Staubitz}, \binits{P.}},
+\bauthor{\bsnm{Mishra}, \binits{N.N.}},
+\bauthor{\bsnm{Yang}, \binits{S.-J.}},
+\bauthor{\bsnm{Hornig}, \binits{G.}},
+\bauthor{\bsnm{Kalbacher}, \binits{H.}},
+\bauthor{\bsnm{Bayer}, \binits{A.S.}},
+\bauthor{\bsnm{Kraus}, \binits{D.}},
+\bauthor{\bsnm{Peschel}, \binits{A.}}:
+\batitle{The {Bacterial} {Defensin} {Resistance} {Protein} {MprF} {Consists} of
+  {Separable} {Domains} for {Lipid} {Lysinylation} and {Antimicrobial}
+  {Peptide} {Repulsion}}.
+\bjtitle{PLoS Pathogens}
+\bvolume{5}(\bissue{11}),
+\bfpage{1000660}
+(\byear{2009})
+\doiurl{10.1371/journal.ppat.1000660}
+\end{barticle}
+\endbibitem
+
+%%% 42
+\bibitem[\protect\citeauthoryear{Raetz et~al.}{2007}]{raetz_lipid_2007}
+\begin{barticle}
+\bauthor{\bsnm{Raetz}, \binits{C.R.H.}},
+\bauthor{\bsnm{Reynolds}, \binits{C.M.}},
+\bauthor{\bsnm{Trent}, \binits{M.S.}},
+\bauthor{\bsnm{Bishop}, \binits{R.E.}}:
+\batitle{Lipid {A} modification systems in {Gram}-negative bacteria}.
+\bjtitle{Annual Review of Biochemistry}
+\bvolume{76},
+\bfpage{295}--\blpage{329}
+(\byear{2007})
+\doiurl{10.1146/annurev.biochem.76.010307.145803}
+\end{barticle}
+\endbibitem
+
+%%% 43
+\bibitem[\protect\citeauthoryear{Coetzer
+  et~al.}{2008}]{coetzer_oligopeptidase_2008}
+\begin{barticle}
+\bauthor{\bsnm{Coetzer}, \binits{T.H.T.}},
+\bauthor{\bsnm{Goldring}, \binits{J.P.D.}},
+\bauthor{\bsnm{Huson}, \binits{L.E.J.}}:
+\batitle{Oligopeptidase {B}: a processing peptidase involved in pathogenesis}.
+\bjtitle{Biochimie}
+\bvolume{90}(\bissue{2}),
+\bfpage{336}--\blpage{344}
+(\byear{2008})
+\doiurl{10.1016/j.biochi.2007.10.011}
+\end{barticle}
+\endbibitem
+
+%%% 44
+\bibitem[\protect\citeauthoryear{Strugatsky
+  et~al.}{2013}]{strugatsky_structure_2013}
+\begin{barticle}
+\bauthor{\bsnm{Strugatsky}, \binits{D.}},
+\bauthor{\bsnm{McNulty}, \binits{R.}},
+\bauthor{\bsnm{Munson}, \binits{K.}},
+\bauthor{\bsnm{Chen}, \binits{C.-K.}},
+\bauthor{\bsnm{Soltis}, \binits{S.M.}},
+\bauthor{\bsnm{Sachs}, \binits{G.}},
+\bauthor{\bsnm{Luecke}, \binits{H.}}:
+\batitle{Structure of the proton-gated urea channel from the gastric pathogen
+  {Helicobacter} pylori}.
+\bjtitle{Nature}
+\bvolume{493}(\bissue{7431}),
+\bfpage{255}--\blpage{258}
+(\byear{2013})
+\doiurl{10.1038/nature11684}
+\end{barticle}
+\endbibitem
+
+%%% 45
+\bibitem[\protect\citeauthoryear{Lithgow et~al.}{2022a}]{lithgow_porph_2022}
+\begin{barticle}
+\bauthor{\bsnm{Lithgow}, \binits{K.V.}},
+\bauthor{\bsnm{Buchholz}, \binits{V.C.H.}},
+\bauthor{\bsnm{Ku}, \binits{E.}},
+\bauthor{\bsnm{Konschuch}, \binits{S.}},
+\bauthor{\bsnm{D'Aubeterre}, \binits{A.}},
+\bauthor{\bsnm{Sycuro}, \binits{L.K.}}:
+\batitle{Protease activities of vaginal porphyromonas species disrupt
+  coagulation and extracellular matrix in the cervicovaginal niche}.
+\bjtitle{npj Biofilms and Microbiomes}
+\bvolume{8}(\bissue{1}),
+\bfpage{1}--\blpage{15}
+(\byear{2022})
+\doiurl{10.1038/s41522-022-00270-7}
+\end{barticle}
+\endbibitem
+
+%%% 46
+\bibitem[\protect\citeauthoryear{Lithgow
+  et~al.}{2022b}]{lithgow_collagenase_2022}
+\begin{barticle}
+\bauthor{\bsnm{Lithgow}, \binits{K.}},
+\bauthor{\bsnm{Buchholz}, \binits{V.}},
+\bauthor{\bsnm{D'Aubeterre}, \binits{A.}},
+\bauthor{\bsnm{Sycuro}, \binits{L.}}:
+\batitle{Collagenase activity of vaginal microbes associated with preterm
+  labour}.
+\bjtitle{American Journal of Obstetrics and Gynecology}
+\bvolume{226}(\bissue{2}),
+\bfpage{302}
+(\byear{2022})
+\doiurl{10.1016/j.ajog.2021.11.1299}
+\end{barticle}
+\endbibitem
+
+%%% 47
+\bibitem[\protect\citeauthoryear{Chan et~al.}{2023}]{chan_structural_2023}
+\begin{barticle}
+\bauthor{\bsnm{Chan}, \binits{C.}},
+\bauthor{\bsnm{Ng}, \binits{D.}},
+\bauthor{\bsnm{Fraser}, \binits{M.E.}},
+\bauthor{\bsnm{Schryvers}, \binits{A.B.}}:
+\batitle{Structural and functional insights into iron acquisition from
+  lactoferrin and transferrin in {Gram}-negative bacterial pathogens}.
+\bjtitle{Biometals}
+\bvolume{36}(\bissue{3}),
+\bfpage{683}--\blpage{702}
+(\byear{2023})
+\doiurl{10.1007/s10534-022-00466-6}
+\end{barticle}
+\endbibitem
+
+%%% 48
+\bibitem[\protect\citeauthoryear{Weinberg}{1997}]{weinberg_lactobacillus_1997}
+\begin{barticle}
+\bauthor{\bsnm{Weinberg}, \binits{E.D.}}:
+\batitle{The {Lactobacillus} anomaly: total iron abstinence}.
+\bjtitle{Perspectives in Biology and Medicine}
+\bvolume{40}(\bissue{4}),
+\bfpage{578}--\blpage{583}
+(\byear{1997})
+\doiurl{10.1353/pbm.1997.0072}
+\end{barticle}
+\endbibitem
+
+%%% 49
+\bibitem[\protect\citeauthoryear{Holm et~al.}{2020}]{holm_comparative_2020}
+\begin{barticle}
+\bauthor{\bsnm{Holm}, \binits{J.B.}},
+\bauthor{\bsnm{France}, \binits{M.T.}},
+\bauthor{\bsnm{Ma}, \binits{B.}},
+\bauthor{\bsnm{McComb}, \binits{E.}},
+\bauthor{\bsnm{Robinson}, \binits{C.K.}},
+\bauthor{\bsnm{Mehta}, \binits{A.}},
+\bauthor{\bsnm{Tallon}, \binits{L.J.}},
+\bauthor{\bsnm{Brotman}, \binits{R.M.}},
+\bauthor{\bsnm{Ravel}, \binits{J.}}:
+\batitle{Comparative metagenome-assembled genome analysis of ``{Candidatus}
+  {Lachnocurva} vaginae'', formerly known as bacterial vaginosis-associated
+  bacterium-1 ({BVAB1})}.
+\bjtitle{Frontiers in Cellular and Infection Microbiology}
+\bvolume{10},
+\bfpage{117}
+(\byear{2020})
+\doiurl{10.3389/fcimb.2020.00117}
+\end{barticle}
+\endbibitem
+
+%%% 50
+\bibitem[\protect\citeauthoryear{Miller et~al.}{2009}]{miller_diversity_2009}
+\begin{bbook}
+\bauthor{\bsnm{Miller}, \binits{L.D.}},
+\bauthor{\bsnm{Russell}, \binits{M.H.}},
+\bauthor{\bsnm{Alexandre}, \binits{G.}}:
+\bbtitle{Diversity in {Bacterial} {Chemotactic} {Responses} and {Niche}
+  {Adaptation}}
+vol. \bseriesno{66},
+pp. \bfpage{53}--\blpage{75}.
+\bpublisher{Academic Press}, \blocation{???}
+(\byear{2009}).
+\doiurl{10.1016/s0065-2164(08)00803-4}
+\end{bbook}
+\endbibitem
+
+%%% 51
+\bibitem[\protect\citeauthoryear{Armitage and
+  Berry}{2020}]{armitage_assembly_2020}
+\begin{barticle}
+\bauthor{\bsnm{Armitage}, \binits{J.P.}},
+\bauthor{\bsnm{Berry}, \binits{R.M.}}:
+\batitle{Assembly and dynamics of the bacterial flagellum}.
+\bjtitle{Annual Review of Microbiology}
+\bvolume{74},
+\bfpage{181}--\blpage{200}
+(\byear{2020})
+\doiurl{10.1146/annurev-micro-090816-093411}
+\end{barticle}
+\endbibitem
+
+%%% 52
+\bibitem[\protect\citeauthoryear{Choi et~al.}{2009}]{choi_pgaabcd_2009}
+\begin{barticle}
+\bauthor{\bsnm{Choi}, \binits{A.H.K.}},
+\bauthor{\bsnm{Slamti}, \binits{L.}},
+\bauthor{\bsnm{Avci}, \binits{F.Y.}},
+\bauthor{\bsnm{Pier}, \binits{G.B.}},
+\bauthor{\bsnm{Maira-Litr{\'a}n}, \binits{T.}}:
+\batitle{The {pgaABCD} locus of {Acinetobacter} baumannii encodes the
+  production of poly-β-1-6-{N}-acetylglucosamine, which is critical for
+  biofilm formation}.
+\bjtitle{Journal of Bacteriology}
+\bvolume{191}(\bissue{19}),
+\bfpage{5953}--\blpage{5963}
+(\byear{2009})
+\doiurl{10.1128/jb.00647-09}
+\end{barticle}
+\endbibitem
+
+%%% 53
+\bibitem[\protect\citeauthoryear{Agladze et~al.}{2005}]{agladze_spatial_2005}
+\begin{barticle}
+\bauthor{\bsnm{Agladze}, \binits{K.}},
+\bauthor{\bsnm{Wang}, \binits{X.}},
+\bauthor{\bsnm{Romeo}, \binits{T.}}:
+\batitle{Spatial periodicity of {Escherichia} coli {K}-12 biofilm
+  microstructure initiates during a reversible, polar attachment phase of
+  development and requires the polysaccharide adhesin {PGA}}.
+\bjtitle{Journal of Bacteriology}
+\bvolume{187}(\bissue{24}),
+\bfpage{8237}--\blpage{8246}
+(\byear{2005})
+\doiurl{10.1128/jb.187.24.8237-8246.2005}
+\end{barticle}
+\endbibitem
+
+%%% 54
+\bibitem[\protect\citeauthoryear{Swidsinski
+  et~al.}{2014}]{swidsinski_biofilm_2014}
+\begin{barticle}
+\bauthor{\bsnm{Swidsinski}, \binits{A.}},
+\bauthor{\bsnm{Loening-Baucke}, \binits{V.}},
+\bauthor{\bsnm{Mendling}, \binits{W.}},
+\bauthor{\bsnm{D{\"o}rffel}, \binits{Y.}},
+\bauthor{\bsnm{Schilling}, \binits{J.}},
+\bauthor{\bsnm{Halwani}, \binits{Z.}},
+\bauthor{\bsnm{Jiang}, \binits{X.}},
+\bauthor{\bsnm{Verstraelen}, \binits{H.}},
+\bauthor{\bsnm{Swidsinski}, \binits{S.}}:
+\batitle{Infection through structured polymicrobial gardnerella biofilms
+  ({S}t{PM}-{GB})}.
+\bjtitle{Histology and Histopathology}
+\bvolume{29}(\bissue{5}),
+\bfpage{567}--\blpage{587}
+(\byear{2014})
+\doiurl{10.14670/HH-29.10.567}
+\end{barticle}
+\endbibitem
+
+%%% 55
+\bibitem[\protect\citeauthoryear{Simoes et~al.}{2006}]{simoes2006clinical}
+\begin{barticle}
+\bauthor{\bsnm{Simoes}, \binits{J.}},
+\bauthor{\bsnm{Discacciati}, \binits{M.}},
+\bauthor{\bsnm{Brolazo}, \binits{E.}},
+\bauthor{\bsnm{Portugal}, \binits{P.}},
+\bauthor{\bsnm{Dini}, \binits{D.}},
+\bauthor{\bsnm{Dantas}, \binits{M.}}:
+\batitle{Clinical diagnosis of bacterial vaginosis}.
+\bjtitle{International Journal of Gynecology and Obstetrics}
+\bvolume{94}(\bissue{1}),
+\bfpage{28}--\blpage{32}
+(\byear{2006})
+\doiurl{10.1016/j.ijgo.2006.04.013}
+\end{barticle}
+\endbibitem
+
+%%% 56
+\bibitem[\protect\citeauthoryear{Fang et~al.}{2017}]{fang_microbial_2017}
+\begin{barticle}
+\bauthor{\bsnm{Fang}, \binits{H.}},
+\bauthor{\bsnm{Kang}, \binits{J.}},
+\bauthor{\bsnm{Zhang}, \binits{D.}}:
+\batitle{Microbial production of vitamin {B12}: a review and future
+  perspectives}.
+\bjtitle{Microbial Cell Factories}
+\bvolume{16}(\bissue{1}),
+\bfpage{15}
+(\byear{2017})
+\doiurl{10.1186/s12934-017-0631-y}
+\end{barticle}
+\endbibitem
+
+%%% 57
+\bibitem[\protect\citeauthoryear{Tonkin-Hill et~al.}{2020}]{Tonkin-Hill:2020aa}
+\begin{barticle}
+\bauthor{\bsnm{Tonkin-Hill}, \binits{G.}},
+\bauthor{\bsnm{MacAlasdair}, \binits{N.}},
+\bauthor{\bsnm{Ruis}, \binits{C.}},
+\bauthor{\bsnm{Weimann}, \binits{A.}},
+\bauthor{\bsnm{Horesh}, \binits{G.}},
+\bauthor{\bsnm{Lees}, \binits{J.A.}},
+\bauthor{\bsnm{Gladstone}, \binits{R.A.}},
+\bauthor{\bsnm{Lo}, \binits{S.}},
+\bauthor{\bsnm{Beaudoin}, \binits{C.}},
+\bauthor{\bsnm{Floto}, \binits{R.A.}},
+\bauthor{\bsnm{Frost}, \binits{S.D.W.}},
+\bauthor{\bsnm{Corander}, \binits{J.}},
+\bauthor{\bsnm{Bentley}, \binits{S.D.}},
+\bauthor{\bsnm{Parkhill}, \binits{J.}}:
+\batitle{Producing polished prokaryotic pangenomes with the panaroo pipeline}.
+\bjtitle{Genome Biology}
+\bvolume{21}(\bissue{1}),
+\bfpage{180}
+(\byear{2020})
+\doiurl{10.1186/s13059-020-02090-4}
+\end{barticle}
+\endbibitem
+
+%%% 58
+\bibitem[\protect\citeauthoryear{Puebla-Barragan
+  et~al.}{2021}]{puebla_barragan_amines_2021}
+\begin{barticle}
+\bauthor{\bsnm{Puebla-Barragan}, \binits{S.}},
+\bauthor{\bsnm{Watson}, \binits{E.}},
+\bauthor{\bsnm{Veer}, \binits{C.}},
+\bauthor{\bsnm{Chmiel}, \binits{J.}},
+\bauthor{\bsnm{Carr}, \binits{C.}},
+\bauthor{\bsnm{Burton}, \binits{J.}},
+\bauthor{\bsnm{Sumarah}, \binits{M.}},
+\bauthor{\bsnm{Kort}, \binits{R.}},
+\bauthor{\bsnm{Reid}, \binits{G.}}:
+\batitle{Interstrain variability of human vaginal \textit{Lactobacillus
+  crispatus} for metabolism of biogenic amines and antimicrobial activity
+  against urogenital pathogens}.
+\bjtitle{Molecules}
+\bvolume{26}(\bissue{15}),
+\bfpage{4538}
+(\byear{2021})
+\doiurl{10.3390/molecules26154538}
+\end{barticle}
+\endbibitem
+
+%%% 59
+\bibitem[\protect\citeauthoryear{Hutzinger
+  et~al.}{1985}]{hutzinger_sources_1985}
+\begin{barticle}
+\bauthor{\bsnm{Hutzinger}, \binits{O.}},
+\bauthor{\bsnm{Blumich}, \binits{M.J.}},
+\bauthor{\bsnm{v.d.Berg}, \binits{M.}},
+\bauthor{\bsnm{Olie}, \binits{K.}}:
+\batitle{Sources and fate of {PCDDs} and {PCDFs}: an overview}.
+\bjtitle{Chemosphere}
+\bvolume{14}(\bissue{6}),
+\bfpage{581}--\blpage{600}
+(\byear{1985})
+\doiurl{10.1016/0045-6535(85)90167-5}
+\end{barticle}
+\endbibitem
+
+%%% 60
+\bibitem[\protect\citeauthoryear{Nelson et~al.}{2015}]{nelson_amines_2015}
+\begin{barticle}
+\bauthor{\bsnm{Nelson}, \binits{T.}},
+\bauthor{\bsnm{Borgogna}, \binits{J.}},
+\bauthor{\bsnm{Brotman}, \binits{R.}},
+\bauthor{\bsnm{Ravel}, \binits{J.}},
+\bauthor{\bsnm{Walker}, \binits{S.}},
+\bauthor{\bsnm{Yeoman}, \binits{C.}}:
+\batitle{Vaginal biogenic amines: biomarkers of bacterial vaginosis or
+  precursors to vaginal dysbiosis?}
+\bjtitle{Frontiers in Physiology}
+\bvolume{6},
+\bfpage{253}
+(\byear{2015})
+\doiurl{10.3389/fphys.2015.00253}
+\end{barticle}
+\endbibitem
+
+%%% 61
+\bibitem[\protect\citeauthoryear{Kiattiburut et~al.}{2021}]{Kiattiburut:2021}
+\begin{barticle}
+\bauthor{\bsnm{Kiattiburut}, \binits{W.}},
+\bauthor{\bsnm{Burton}, \binits{J.}},
+\bauthor{\bsnm{Hickling}, \binits{D.}}:
+\batitle{Immunomodulatory roles of antimicrobial peptide {LL}-37 in urinary
+  bladder bacterial infection}.
+\bjtitle{Journal of Urology}
+\bvolume{206}(\bissue{3}),
+\bfpage{491}
+(\byear{2021})
+\doiurl{10.1097/JU.0000000000002026.04}
+\end{barticle}
+\endbibitem
+
+%%% 62
+\bibitem[\protect\citeauthoryear{Fettweis
+  et~al.}{2014}]{fettweis_ethnicity_2014}
+\begin{barticle}
+\bauthor{\bsnm{Fettweis}, \binits{J.M.}},
+\bauthor{\bsnm{Brooks}, \binits{J.P.}},
+\bauthor{\bsnm{Serrano}, \binits{M.G.}},
+\bauthor{\bsnm{Sheth}, \binits{N.U.}},
+\bauthor{\bsnm{Girerd}, \binits{P.H.}},
+\bauthor{\bsnm{Edwards}, \binits{D.J.}},
+\bauthor{\bsnm{Strauss}, \binits{J.F.}},
+\bauthor{\bsnm{Consortium}, \binits{T.V.M.}},
+\bauthor{\bsnm{Jefferson}, \binits{K.K.}},
+\bauthor{\bsnm{Buck}, \binits{G.A.}}:
+\batitle{Differences in vaginal microbiome in african american women versus
+  women of european ancestry}.
+\bjtitle{Microbiology}
+\bvolume{160}(\bissue{10}),
+\bfpage{2272}--\blpage{2282}
+(\byear{2014})
+\doiurl{10.1099/mic.0.081034-0}
+\end{barticle}
+\endbibitem
+
+%%% 63
+\bibitem[\protect\citeauthoryear{Smeianov et~al.}{2000}]{smeianov_camps_2000}
+\begin{barticle}
+\bauthor{\bsnm{Smeianov}, \binits{V.}},
+\bauthor{\bsnm{Scott}, \binits{K.}},
+\bauthor{\bsnm{Reid}, \binits{G.}}:
+\batitle{Activity of cecropin {P1} and {FA-LL}-37 against urogenital
+  microflora}.
+\bjtitle{Microbes and Infection}
+\bvolume{2}(\bissue{7}),
+\bfpage{773}--\blpage{777}
+(\byear{2000})
+\doiurl{10.1016/S1286-4579(00)90359-9}
+\end{barticle}
+\endbibitem
+
+%%% 64
+\bibitem[\protect\citeauthoryear{Freitas et~al.}{2017}]{freitas_vaginal_2017}
+\begin{barticle}
+\bauthor{\bsnm{Freitas}, \binits{A.C.}},
+\bauthor{\bsnm{Chaban}, \binits{B.}},
+\bauthor{\bsnm{Bocking}, \binits{A.}},
+\bauthor{\bsnm{Rocco}, \binits{M.}},
+\bauthor{\bsnm{Yang}, \binits{S.}},
+\bauthor{\bsnm{Hill}, \binits{J.E.}},
+\bauthor{\bsnm{Money}, \binits{D.M.}},
+\bauthor{\bsnm{VOGUE Research~Group}, \binits{T.}}:
+\batitle{The vaginal microbiome of pregnant women is less rich and diverse,
+  with lower prevalence of {Mollicutes}, compared to non-pregnant women}.
+\bjtitle{Scientific Reports}
+\bvolume{7}(\bissue{1}),
+\bfpage{9212}
+(\byear{2017})
+\doiurl{10.1038/s41598-017-07790-9}
+\end{barticle}
+\endbibitem
+
+%%% 65
+\bibitem[\protect\citeauthoryear{Romero et~al.}{2014}]{romero_composition_2014}
+\begin{barticle}
+\bauthor{\bsnm{Romero}, \binits{R.}},
+\bauthor{\bsnm{Hassan}, \binits{S.S.}},
+\bauthor{\bsnm{Gajer}, \binits{P.}},
+\bauthor{\bsnm{Tarca}, \binits{A.L.}},
+\bauthor{\bsnm{Fadrosh}, \binits{D.W.}},
+\bauthor{\bsnm{Nikita}, \binits{L.}},
+\bauthor{\bsnm{Galuppi}, \binits{M.}},
+\bauthor{\bsnm{Lamont}, \binits{R.F.}},
+\bauthor{\bsnm{Chaemsaithong}, \binits{P.}},
+\bauthor{\bsnm{Miranda}, \binits{J.}},
+\bauthor{\bsnm{Chaiworapongsa}, \binits{T.}},
+\bauthor{\bsnm{Ravel}, \binits{J.}}:
+\batitle{The composition and stability of the vaginal microbiota of normal
+  pregnant women is different from that of non-pregnant women}.
+\bjtitle{Microbiome}
+\bvolume{2},
+\bfpage{4}
+(\byear{2014})
+\doiurl{10.1186/2049-2618-2-4}
+\end{barticle}
+\endbibitem
+
+%%% 66
+\bibitem[\protect\citeauthoryear{McGroarty}{1994}]{mcgroarty_cell_1994}
+\begin{barticle}
+\bauthor{\bsnm{McGroarty}, \binits{J.A.}}:
+\batitle{Cell surface appendages of lactobacilli}.
+\bjtitle{FEMS Microbiology Letters}
+\bvolume{124}(\bissue{3}),
+\bfpage{405}--\blpage{409}
+(\byear{1994})
+\doiurl{10.1111/j.1574-6968.1994.tb07316.x}
+\end{barticle}
+\endbibitem
+
+%%% 67
+\bibitem[\protect\citeauthoryear{Elli et~al.}{2000}]{elli_iron_2000}
+\begin{barticle}
+\bauthor{\bsnm{Elli}, \binits{M.}},
+\bauthor{\bsnm{Zink}, \binits{R.}},
+\bauthor{\bsnm{Rytz}, \binits{A.}},
+\bauthor{\bsnm{Reniero}, \binits{R.}},
+\bauthor{\bsnm{Morelli}, \binits{L.}}:
+\batitle{Iron requirement of {Lactobacillus} spp. in completely chemically
+  defined growth media}.
+\bjtitle{Journal of Applied Microbiology}
+\bvolume{88}(\bissue{4}),
+\bfpage{695}--\blpage{703}
+(\byear{2000})
+\doiurl{10.1046/j.1365-2672.2000.01013.x}
+\end{barticle}
+\endbibitem
+
+%%% 68
+\bibitem[\protect\citeauthoryear{Onderdonk et~al.}{2020}]{onderdonk_human_2020}
+\begin{barticle}
+\bauthor{\bsnm{Onderdonk}, \binits{A.B.}},
+\bauthor{\bsnm{Delaney}, \binits{M.L.}},
+\bauthor{\bsnm{Fichorova}, \binits{R.N.}}:
+\batitle{The human microbiome during bacterial vaginosis}.
+\bjtitle{Clinical Microbiology Reviews}
+\bvolume{29}(\bissue{2}),
+\bfpage{223}--\blpage{238}
+(\byear{2020})
+\doiurl{10.1128/cmr.00075-15}
+\end{barticle}
+\endbibitem
+
+%%% 69
+\bibitem[\protect\citeauthoryear{Africa et~al.}{2014}]{africa_anaerobes_2014}
+\begin{barticle}
+\bauthor{\bsnm{Africa}, \binits{C.W.J.}},
+\bauthor{\bsnm{Nel}, \binits{J.}},
+\bauthor{\bsnm{Stemmet}, \binits{M.}}:
+\batitle{Anaerobes and bacterial vaginosis in pregnancy: virulence factors
+  contributing to vaginal colonisation}.
+\bjtitle{International Journal of Environmental Research and Public Health}
+\bvolume{11}(\bissue{7}),
+\bfpage{6979}--\blpage{7000}
+(\byear{2014})
+\doiurl{10.3390/ijerph110706979}
+\end{barticle}
+\endbibitem
+
+%%% 70
+\bibitem[\protect\citeauthoryear{Al-Mushrif
+  et~al.}{2000}]{al-mushrif_inhibition_2000}
+\begin{barticle}
+\bauthor{\bsnm{Al-Mushrif}, \binits{S.}},
+\bauthor{\bsnm{Eley}, \binits{A.}},
+\bauthor{\bsnm{Jones}, \binits{B.M.}}:
+\batitle{Inhibition of chemotaxis by organic acids from anaerobes may prevent a
+  purulent response in bacterial vaginosis}.
+\bjtitle{Journal of Medical Microbiology}
+\bvolume{49}(\bissue{11}),
+\bfpage{1023}--\blpage{1030}
+(\byear{2000})
+\doiurl{10.1099/0022-1317-49-11-1023}
+\end{barticle}
+\endbibitem
+
+%%% 71
+\bibitem[\protect\citeauthoryear{Hofstad}{1984}]{hofstad_pathogenicity_1984}
+\begin{barticle}
+\bauthor{\bsnm{Hofstad}, \binits{T.}}:
+\batitle{Pathogenicity of anaerobic {Gram}-negative rods: possible mechanisms}.
+\bjtitle{Reviews of Infectious Diseases}
+\bvolume{6}(\bissue{2}),
+\bfpage{189}--\blpage{199}
+(\byear{1984})
+\doiurl{10.1093/clinids/6.2.189}
+\end{barticle}
+\endbibitem
+
+%%% 72
+\bibitem[\protect\citeauthoryear{Boase
+  et~al.}{2013}]{boase_bacterial-induced_2013}
+\begin{barticle}
+\bauthor{\bsnm{Boase}, \binits{S.}},
+\bauthor{\bsnm{Jervis-Bardy}, \binits{J.}},
+\bauthor{\bsnm{Cleland}, \binits{E.}},
+\bauthor{\bsnm{Pant}, \binits{H.}},
+\bauthor{\bsnm{Tan}, \binits{L.}},
+\bauthor{\bsnm{Wormald}, \binits{P.-J.}}:
+\batitle{Bacterial-induced epithelial damage promotes fungal biofilm formation
+  in a sheep model of sinusitis}.
+\bjtitle{International Forum of Allergy and Rhinology}
+\bvolume{3}(\bissue{5}),
+\bfpage{341}--\blpage{348}
+(\byear{2013})
+\doiurl{10.1002/alr.21138}
+\end{barticle}
+\endbibitem
+
+%%% 73
+\bibitem[\protect\citeauthoryear{Chegini
+  et~al.}{2023}]{chegini_destruction_2023}
+\begin{barticle}
+\bauthor{\bsnm{Chegini}, \binits{Z.}},
+\bauthor{\bsnm{Noei}, \binits{M.}},
+\bauthor{\bsnm{Hemmati}, \binits{J.}},
+\bauthor{\bsnm{Arabestani}, \binits{M.R.}},
+\bauthor{\bsnm{Shariati}, \binits{A.}}:
+\batitle{The destruction of mucosal barriers, epithelial remodeling, and
+  impaired mucociliary clearance: possible pathogenic mechanisms of
+  {Pseudomonas} aeruginosa and {Staphylococcus} aureus in chronic
+  rhinosinusitis}.
+\bjtitle{Cell Communication and Signaling}
+\bvolume{21}(\bissue{1}),
+\bfpage{306}
+(\byear{2023})
+\doiurl{10.1186/s12964-023-01347-2}
+\end{barticle}
+\endbibitem
+
+%%% 74
+\bibitem[\protect\citeauthoryear{Huerta-Cepas
+  et~al.}{2019}]{Huerta-Cepas:2019uf}
+\begin{barticle}
+\bauthor{\bsnm{Huerta-Cepas}, \binits{J.}},
+\bauthor{\bsnm{Szklarczyk}, \binits{D.}},
+\bauthor{\bsnm{Heller}, \binits{D.}},
+\bauthor{\bsnm{Hern{\'a}ndez-Plaza}, \binits{A.}},
+\bauthor{\bsnm{Forslund}, \binits{S.K.}},
+\bauthor{\bsnm{Cook}, \binits{H.}},
+\bauthor{\bsnm{Mende}, \binits{D.R.}},
+\bauthor{\bsnm{Letunic}, \binits{I.}},
+\bauthor{\bsnm{Rattei}, \binits{T.}},
+\bauthor{\bsnm{Jensen}, \binits{L.J.}},
+\bauthor{\bsnm{Mering}, \binits{C.}},
+\bauthor{\bsnm{Bork}, \binits{P.}}:
+\batitle{eggnog 5.0: a hierarchical, functionally and phylogenetically
+  annotated orthology resource based on 5090 organisms and 2502 viruses}.
+\bjtitle{Nucleic Acids Res}
+\bvolume{47}(\bissue{D1}),
+\bfpage{309}--\blpage{314}
+(\byear{2019})
+\doiurl{10.1093/nar/gky1085}
+\end{barticle}
+\endbibitem
+
+%%% 75
+\bibitem[\protect\citeauthoryear{Kanehisa et~al.}{2010}]{Kanehisa:2010}
+\begin{barticle}
+\bauthor{\bsnm{Kanehisa}, \binits{M.}},
+\bauthor{\bsnm{Goto}, \binits{S.}},
+\bauthor{\bsnm{Furumichi}, \binits{M.}},
+\bauthor{\bsnm{Tanabe}, \binits{M.}},
+\bauthor{\bsnm{Hirakawa}, \binits{M.}}:
+\batitle{{KEGG} for representation and analysis of molecular networks involving
+  diseases and drugs}.
+\bjtitle{Nucleic Acids Research}
+\bvolume{38}(\bissue{{S}1}),
+\bfpage{355}--\blpage{60}
+(\byear{2010})
+\doiurl{10.1093/nar/gkp896}
+\end{barticle}
+\endbibitem
+
+%%% 76
+\bibitem[\protect\citeauthoryear{Schwengers
+  et~al.}{2021}]{schwengers_bakta_2021}
+\begin{barticle}
+\bauthor{\bsnm{Schwengers}, \binits{O.}},
+\bauthor{\bsnm{Jelonek}, \binits{L.}},
+\bauthor{\bsnm{Dieckmann}, \binits{M.}},
+\bauthor{\bsnm{Beyvers}, \binits{S.}},
+\bauthor{\bsnm{Blom}, \binits{J.}},
+\bauthor{\bsnm{Goesmann}, \binits{A.}}:
+\batitle{Prokka: rapid prokaryotic genome annotation}.
+\bjtitle{Microbial Genomics}
+\bvolume{7}(\bissue{11}),
+\bfpage{000685}
+(\byear{2021})
+\doiurl{10.1099/mgen.0.000685}
+\end{barticle}
+\endbibitem
+
+\end{thebibliography}

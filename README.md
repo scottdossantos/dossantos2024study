@@ -26,8 +26,11 @@ This repository contains step-by-step walkthroughs and R code to reproduce all d
 	- **SVGs:**
 		- Directory containing .svg files created in Inkscape for final study figures
 
-- **paper:**
-	- Directory exported from Overleaf, containing all files used for compilation of the manuscript .tex file as well as the resulting manuscript .pdf file.
+- **paper_initial:**
+	- Directory exported from Overleaf, containing all files used for compilation of the manuscript .tex file as well as the resulting manuscript .pdf file. This is the INITIAL SUBMISSION to Microbiome.
+
+- **paper_revised:**
+	- Directory exported from Overleaf, containing all files used for compilation of the manuscript .tex file as well as the resulting manuscript .pdf file and responses to all reviewer comments. This is the REVISED SUBMISSION to Microbiome.
 
 - **RData:**
 	- Directory containing .Rda /.txt /.tsv /.csv files imported into R for use in the analysis and/or visualisation of study data.
@@ -35,36 +38,39 @@ This repository contains step-by-step walkthroughs and R code to reproduce all d
 		- Directory containing .txt files containing information on quality control and mapping of raw FASTQ files to various databases during data processing, as well as an R script for summarising these files.
 
 - **Supplement:**
-	- Directory containing supplementary information on the changes made to the KEGG orthology terms (i.e. pathway names) and justifications for these changes.
+	- Directory containing supplementary information on the changes made to the KEGG orthology terms (i.e. pathway names) and justifications for these changes, an Excel file containing strain names and accession numbers for all _Gardnerella_ genomes used in the pangenome analysis,  and the old code and input files used to determine _Gardnerella_ marker genes (i.e. corresponding to the initial submission to Microbiome).
 
 <br>
 
 ### Figure code
-All R scripts are located in the `code/` directory. All figures were edited in inkscape in some way (details given in `figs_for_paper/multipanel_fig_edits.txt`)
+All R scripts are located in the `code/` directory. All figures were edited in Inkscape in some way (details given in `figs_for_paper/multipanel_fig_edits.txt`)
 
 ##### <u>Main text figures</u>
 
 - **Figure 1:**
-  - Created with BioRender.
+  - Initially created with BioRender and edited in Inkscape.
 
 - **Figure 2:**
   - A: `lon_eur_species_heatmap.R`
   - B: `lon_eur_species_biplots.R`
   - C: `lon_eur_health_vs_BV.R`
-  - D: Created with BioRender
+  - D: Initially created with BioRender and edited in Inkscape.
 
 - **Figure 3:**
   - Top: `lon_eur_bv_subgroups.R`
-  - Bottom: `lon_eur_bvSubgroups_stackedBars.R`
+  - Bottom: `revisions_stackedBars_redo.R` (revision); `lon_eur_bvSubgroups_stackedBars.R` (initial submission)
   
 - **Figure 4:**
   - A: `preg_vs_nonpreg.R`
-  - B: `preg_vs_nonpreg_gardnerella_biplots.R`
+  - B: `gardnerella_pca_redo` (revision); `preg_vs_nonpreg_gardnerella_biplots.R` (initial submission)
 
 - **Figure 5:**
   - A: `virginia_validating.R`
   - B: `virginia_validating.R`
   - C: `virginia_validating.R`
+  
+- **Figure 6:**
+  - Initially created with BioRender and edited in Inkscape.
 
 <br>
 
@@ -72,42 +78,35 @@ All R scripts are located in the `code/` directory. All figures were edited in i
 Naming of the supplementary figure files follows a numerical order. The file name corresponding to each supplementary figure in the manuscript is indicated below, along with the R script used to produce it.
 
 - **Suppl. Fig. 1:**
-  - `supplFig1.png`
-  - `scale_vs_noScale_MWplots.R`
+  -  `revisions_scale_plots.R` (revision); `scale_vs_noScale_MWplots.R` (initial submission)
 
 - **Suppl. Fig. 2:**
-  - `supplFig2.png`
   - `lon_eur_health_vs_BV.R`
 
 - **Suppl. Fig. 3:**
-  - `supplFig3.png`
-  - `virginia_definingMolecularBV.R`
+  - `revisions_bvSubgroups_noBVAB1.R`
 
 - **Suppl. Fig. 4:**
-  - `supplFig4.png`
-  - `lon_eur_gardnerella_biplots.R` (A) and `virginia_gardnerella_biplots.R` (B)
+  - `virginia_definingMolecularBV.R` (initial submission)
 
 - **Suppl. Fig. 5:**
-  - `supplFig5.png`
-  - `virginia_definingMolecularBV.R`
+  -  `gardnerella_pca_redo.R` (A \& B, revision); `lon_eur_gardnerella_biplots.R` (A, initial submission) and `virginia_gardnerella_biplots.R` (B, initial submission)
 
 - **Suppl. Fig. 6:**
-  - `supplFig6.png`
-  - `virginia_validating.R`
+  - `virginia_definingMolecularBV.R`
 
 - **Suppl. Fig. 7:**
-  - `supplFig7.png`
-  - `virginia_coda4microbiome.R`
+  - `virginia_validating.R`
 
 - **Suppl. Fig. 8:**
-  - `supplFig8.png`
-  - `virginia_bvSubgroups_stackedBars.R`
+  - `virginia_coda4microbiome.R`
 
 - **Suppl. Fig. 9:**
-  - `supplFig9.png`
-  - `virginia_validating_eggNOG.R`
-
+  - `revisions_stackedBars_redo.R` (revision); `virginia_bvSubgroups_stackedBars.R` (initial submission)
 
 - **Suppl. Fig. 10:**
-  - `supplFig8.png`
+  - `virginia_validating_eggNOG.R`
+  
+  - **Suppl. Fig. 11:**
   - `virginia_validating.R`
+  

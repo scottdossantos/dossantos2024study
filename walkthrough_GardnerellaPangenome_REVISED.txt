@@ -1,0 +1,139 @@
+######################## README for identifying genes unique to each named Gardnerella species ########################
+
+- If you have any questions about the content of this walkthrough, please contact Dr. Scott Dos Santos (sdossa5@uwo.ca
+  or scottdossantos93@gmail.com) or Dr. Gregory Gloor (ggloor@uwo.ca) and they can help you out.
+
+- REVISED MANUSCRIPT NOTE NOVEMBER 4TH 2024: This walkthrough refers to the revised manuscript in which we were asked
+  By one of the reviewers to repeat our prior Gardnerella pan genome analyses to include two recently delineated
+  species of Gardnerella (G. greenwoodii and G. pickettii) which we were unaware of when we initially made the plots.
+  For the sake of transparency and completeness, we have kept the OLD version of this walkthrough (which uses prokka
+  rather than bakta, and ONLY a % similarity threshold for determining marker genes) in the study's GitHub directory
+  under the 'Supplement' directory.   
+
+===================================== Genome annotation and pangenome analysis =====================================
+
+- NOTE: conda and mamba required for installation of several tools used in this walkthrough
+
+- Downloaded genomes for each Gardnerella species from NCBI as in the file 'gardnerella_genomes.xlsx'. Breakdown is:
+	- G. greenwoodii	 4
+	- G. leopoldii		 5
+	- G. pickettii		11
+	- G. piotii		 4
+	- G. swidsinskii	 7
+	- G. vaginalis		13
+
+
+- Renamed genome FASTAs in the following format: 'gardnerella_[species])[strain].fasta'
+  (e.g. 'gardnerella_vaginalis_ATCC14018.fna') and put all in a directory called 'gard_genomes'
+
+
+- Pangenome analysis with panaroo requires .gff files. Install bakta & dependencies
+  using conda
+
+conda create -n bakta
+conda activate bakta
+conda install -c bioconda bakta
+
+
+- Download FULL bakta database
+
+bakta_db download --output [PATH/TO]/bakta_2024-03-22/ --type full
+
+
+- Make a bash script to annotate all of the Gardnerella genomes with bakta
+
+nano annotate_bakta.sh [copy code below]
+
+# ================= START COPY =================
+source [PATH/TO]/miniconda3/etc/profile.d/conda.sh
+conda activate bakta
+
+BAKTA="[PATH/TO]/bakta_2024-03-22/db/"
+GENOMES="[PATH/TO]/gard_genomes"
+OUT="[PATH/TO]/bakta"
+
+
+for i in $(ls -1 ${GENOMES}/*.fasta) ; do
+        FILE="${i#[PATH/TO]/gard_genomes/}"
+        BASE="${FILE%.fasta}"
+        echo -e "Annotating genome: ${BASE}..."
+        bakta --db ${BAKTA} --verbose --output ${OUT}/${BASE} --prefix ${BASE} --threads 50 ${GENOMES}/${FILE}
+	echo -e "Finished annotating ${BASE}!\n"
+done
+# ================== END COPY ==================
+
+
+- Run bakta (will take ~3-3.5 hours to finish on server with 50 threads and nothing else going on)
+
+nohup bash annotate_bakta.sh >> annotate_bakta.txt &
+
+
+- After it finishes, grab all the .gff3 files and stick them in a new directory
+
+mkdir gff
+for i in $(ls -1p ./bakta) ; do cp ./bakta/${i}/*.gff3 ./gff ; done
+
+
+- Install panaroo in a new conda environment
+
+conda deactivate
+conda create -n panaroo python=3.9
+conda activate panaroo
+mamba install -c conda-forge -c bioconda -c defaults 'panaroo>=1.3'
+
+
+- Make a bash script to run panaroo on all annotation files
+
+nano annotate_panaroo.sh [paste code below]
+
+
+# ================= START COPY =================
+source [PATH/TO]miniconda3/etc/profile.d/conda.sh
+conda activate panaroo
+
+panaroo -i [PATH/TO]/gff/*.gff3 -o panaroo --clean-mode strict 
+# ================== END COPY ==================
+
+
+- Run panaroo 
+
+nohup bash annotate_panaroo.sh >> annotate_panaroo.txt &
+
+
+- Make a new conda environment for blast, seqtk and seqkit
+conda deactivate
+conda create -n blast
+conda activate blast
+mamba install -c bioconda blast seqtk seqkit
+
+
+- Explore output in R (script is on GitHub at 'code/gardnerella_marker_genes.R') and identify marker genes for each
+  species. Part of this script will write a file containing the vNumbers of genes that were assigned to G. vaginalis
+  by the VIRGO authors. Use this to subset the VIRGO NT.fasta file and align the ~3,200 pangenome genes to these 
+  ~32,000 VIRGO genes
+
+- Copy 'gardnerella_vnums.txt' from GitHub directory to VIRGO '0_db' directory and move to it
+
+cp [PATH/TO]/GitHub/dossantos2024study/Rdata/gardnerella_vnums.txt [PATH/TO]/VIRGO/0_db/
+
+cd [PATH/TO]/VIRGO/0_db/
+
+seqtk subseq NT.fasta ./gardnerella_vnums.txt > ./gardnerella_vnums.fasta
+
+makeblastdb -dbtype nucl -in gardnerella_vnums.fasta -out gardnerella_vnums
+
+blastn -db gardnerella_vnums -num_threads 10 -query [PATH/TO]/pan_genome_reference.fa -max_hsps 1 -max_target_seqs 1 -out panaroo_blast.tsv -outfmt 6
+
+
+# grab the length of the pangenome genes
+
+seqkit fx2tab --length --name --header-line pan_genome_reference.fa > panaroo_reference_length.txt
+
+
+- In R ('dossantos2024study/code/gard_marker_genes.R'), determine which vNumbers correspond to these marker genes.
+
+- We provide pre-computed '.Rda' files for PCA objects (from prcomp), taxa vectors, gene loading lists, and group 
+  loading lists for London/Europe, Virginia and Pregnant vs. Non-pregnant datasets, to be used as part of the R script
+  'gardnerella_pca_redo.R' to produce the PCA plots displayed in Figure 4B and Supplementary Figure S5.
+
+######################################################### END #########################################################

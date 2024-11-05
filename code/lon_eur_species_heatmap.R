@@ -197,6 +197,9 @@ hm.column.cols<-list(Dataset=c(Europe="grey10", London="snow"),
                            IV=viridis(5)[4],
                            V=viridis(5)[5]))
 
+# change colour for CST IV in accordance with reviewer comment
+hm.column.cols[["CST"]][4] <- "#9AC869FF"
+
 # save(hm.column.cols,
 #      file = paste(path.to.github, "Rdata/hm.column.cols.Rda", sep = ""))
 

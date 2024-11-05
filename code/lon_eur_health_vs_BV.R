@@ -341,6 +341,28 @@ diff.sig.ko.path <- diff.sig.ko %>%
   group_by(pathway) %>% 
   count()
 
+# pull KOs representing the four Dlt CAMP resistance genes (H)
+camp.healthy <- c("K03367", "K03739", "K03740", "K14188")
+
+# filter vnum -> KO lookup table for genes in filtered London/Europe dataset
+lookup.le.ko <- KO[rownames(new.both.filt),]
+
+# filter for genes corresponding to the four CAMP KOs
+lookup.le.ko <- lookup.le.ko %>% 
+  filter(V2 %in% camp.healthy)
+
+# pull gene taxonomy
+lookup.le.ko$tax <- tax.table[rownames(lookup.le.ko),2]
+
+# calculate read totals across filtered London/Europe dataset 
+lookup.le.ko <- lookup.le.ko %>% 
+  mutate(totals=rowSums(new.both.filt[rownames(lookup.le.ko),]))
+
+# group by taxonomy and calculate total reads per taxon
+lookup.le.ko %>% 
+  group_by(tax) %>% 
+  summarise(sums=sum(totals))
+
 # =================== INVESTIGATING KOs OF INTEREST (START) ===================
 
  # make vector of KO terms to pull (2012,2217,7243 = iron, 8303 = collagenase,

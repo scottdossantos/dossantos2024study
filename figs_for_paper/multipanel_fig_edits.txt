@@ -7,6 +7,13 @@ Record of edits made in Inkscape to assemble multi-panel figures
   https://github.com/ggloor/metatranscriptome/tree/main/figs_for_paper/SVGs
 
 ------------------------------------------------------------------------------
+Fig 1: Workflow summary
+------------------------------------------------------------------------------
+A) - Added white box and text to obscure the original dataset names, change
+     them to 'London', 'Europe' and 'Virginia' for consistency, and correct a
+     Typo (BioRender figure incorrectly says n=22 for London dataset).
+
+------------------------------------------------------------------------------
 Fig 2: London & Europe Dataset summary / functional heatmaps & biplot
 ------------------------------------------------------------------------------
 A) - Added lines surrounding colour boxes and heatmap colour scale in the 
@@ -45,6 +52,11 @@ c) - Added lines surrounding colour boxes and heatmap colour scale in the
 
 D) - No changes- made with BioRender and original figure is on GitHub.
 
+E) - FOR REVIEWER RESPONSES: Edited the colour for CST IV and re-made this
+     individual heatmap. Cropped just the tree and colour bars from the new
+     heatmap and overlaid onto the existing heatmap data from the 'old' Fig
+     2C. All data is identical except the colour for CST IV!
+
 ------------------------------------------------------------------------------
 Fig 3: BV subgroup analyses for London/Europe datasets with stacked bar graphs
        for composition (BVAB1)
@@ -78,6 +90,10 @@ Fig 4: Pregnant vs. non-pregnant metatranscriptome violin plot and Gardnerella
 A) - Clipped the figure to remove the x-axis tick labels and title. Replaced 
      with text boxes corresponding to original labels/title but in a larger 
      font size.
+   - Added white box to obscure 'Atopobium vaginae' and replaced with a text
+     box containing 'Fannyhessea vaginae' as per reviewer 1's request.
+   - Added coloured boxes to obscure the (n = xx) for London and Europe title
+     boxes and replaced with text boxes containing the CORRECT group sizes.
 
 B) - Added white boxes to obscure original numeric and text labels for the x 
      and y axes of the PCA plot and density plots, and added text boxes with 
@@ -85,14 +101,11 @@ B) - Added white boxes to obscure original numeric and text labels for the x
      axis tick labels).
    - Clipped both density plots and moved them closer to the corresponding y 
      and x axes of the PCA plot to reduce the gap between them.
-   - Added a large white box to the top-right corner of the PCA plot to cover
+   - Added a large white box to the bottom-right corner of the PCA plot to cover
      the original species colour legend and added text boxes corresponding to 
      the original legend, but in italic font. Also added a transparent circle
      with dotted black outline and a text box containing '(not drawn)' which
      corresponds to the 'Other taxa' label.
-   - Obscured the 'pp' in 'Gardnerella spp.' from the original figure title at
-     the top-centre of the plot with a white box and added a small horizontal
-     black line to fill in the gap introduced to the top y-axis.
 
 ------------------------------------------------------------------------------
 Fig 5: Functional heatmaps for Virginia dataset
@@ -104,9 +117,6 @@ A) - Added lines surrounding colour boxes and the heatmap colour scale in the
      Z-score'.   
    - Added white boxes to obscure original numeric labels on colour scale and
      added corresponding text boxes with rotated labels.
-   - Added a white box to obscure the original row text labels and replaced 
-     with text boxes containing the same text in a larger font size to match
-     the size of the text labels in the other heatmaps.
    - Clipped the heatmap legend into the two separate categories (CST, Group)
      and arranged as three columns at the right-hand side of the heatmap.
    - Added a white box to obscure column colour bar labels, 'Group' and 'CST'.
@@ -133,3 +143,10 @@ C) - Added lines surrounding the legend colour boxes and heatmap colour scale.
    - Added a white box to obscure column colour bar labels, 'Group' and 'CST'.
    - Added white boxes to obscure ' (H)' and ' (BV)' at the end of several 
      pathway labels as they were not necessary in this subset of pathways.
+
+------------------------------------------------------------------------------
+Fig 1: Summary of findings & mechanisms
+------------------------------------------------------------------------------
+A) - Added a box of the same background colour to obscure 'Atopobium' and 
+     added a text box containing 'Fannyhessea'- change requested by reviewer 1
+ 

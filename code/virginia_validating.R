@@ -66,6 +66,28 @@ diff.virginia.ko.path.grp <- diff.virginia.ko.path %>%
   group_by(pathway) %>% 
   count()
 
+# pull KOs representing the four Dlt CAMP resistance genes (H)
+camp.healthy <- c("K03367", "K03739", "K03740", "K14188")
+
+# filter vnum -> KO lookup table for genes in filtered London/Europe dataset
+lookup.virg.ko <- KO[rownames(virginia.filt),]
+
+# filter for genes corresponding to the four CAMP KOs
+lookup.virg.ko <- lookup.virg.ko %>% 
+  filter(V2 %in% camp.healthy)
+
+# pull gene taxonomy
+lookup.virg.ko$tax <- tax.table[rownames(lookup.virg.ko),2]
+
+# calculate read totals across filtered London/Europe dataset 
+lookup.virg.ko <- lookup.virg.ko %>% 
+  mutate(totals=rowSums(virginia.filt[rownames(lookup.virg.ko),]))
+
+# group by taxonomy and calculate total reads per taxon
+lookup.virg.ko %>% 
+  group_by(tax) %>% 
+  summarise(sums=sum(totals))
+
 # =========== INVESTIGATING PREVIOUSLY ID'D KOs OF INTEREST (START) ===========
 
 # load the KEGGREST package to allow access to KEGG database
