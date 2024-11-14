@@ -38,11 +38,14 @@ load(paste(path.to.github, "Rdata/virginia.filt.ko.clr.c.Rda", sep = ""))
 ############### health vs. molecular BV: differential abundance ################
 
 # subset the virginia K0 -> pathway table based on 567 K0 terms with absolute
-# effect size >1 (note: 'drop = FALSE' when subsetting retains row names)
+# effect size >1 (note: 'drop = FALSE' when subsetting retains row names for a
+# single column)
 diff.virginia.ko.path <- virginia.ko.path.filt[which(abs(virginia.filt.ko.clr.c$effect)>1), , drop=F]
 
-# add effect sizes to this subset
+# add effect sizes and P values (Welch's t & Wilcoxon rank sum, BH corrected)
 diff.virginia.ko.path$effect <- virginia.filt.ko.clr.c[which(abs(virginia.filt.ko.clr.c$effect)>1),"effect"]
+diff.virginia.ko.path$we.eBH <- virginia.filt.ko.clr.c[which(abs(virginia.filt.ko.clr.c$effect)>1),"we.eBH"]
+diff.virginia.ko.path$wi.eBH <- virginia.filt.ko.clr.c[which(abs(virginia.filt.ko.clr.c$effect)>1),"wi.eBH"]
 
 # remove K0 terms with "Unknown" pathway (down to 325 K0 terms)
 diff.virginia.ko.path <- diff.virginia.ko.path %>% 
@@ -69,7 +72,7 @@ diff.virginia.ko.path.grp <- diff.virginia.ko.path %>%
 # pull KOs representing the four Dlt CAMP resistance genes (H)
 camp.healthy <- c("K03367", "K03739", "K03740", "K14188")
 
-# filter vnum -> KO lookup table for genes in filtered London/Europe dataset
+# filter vnum -> KO lookup table for genes in filtered Virginia dataset
 lookup.virg.ko <- KO[rownames(virginia.filt),]
 
 # filter for genes corresponding to the four CAMP KOs
