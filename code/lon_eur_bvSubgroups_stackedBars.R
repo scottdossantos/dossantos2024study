@@ -163,7 +163,7 @@ bars.df.plot %>%
   theme(legend.text = element_markdown(colour = "black", size = 10),
         legend.title = element_markdown(colour = "black", size = 11),
         legend.key.size = unit(0.4,"cm"), legend.box.spacing = unit(0.05, "cm"),
-        legend.spacing.y = unit(0.1,"cm"),
+        legend.key.spacing.y = unit(0.1,"cm"),
         axis.title.x = element_text(colour = "black", size = 12),
         axis.title.y = element_text(colour = "black", size = 12),
         axis.text.y = element_text(colour = "black", size = 11),
