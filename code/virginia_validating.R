@@ -412,7 +412,7 @@ any(rowSums(sub.virginia.ko) == 0) # returns FALSE
 # CLR transform data, or load final object if it has already been made
 
 if(file.exists(paste0(path.to.github,"Rdata/sub.virginia.ko.clr.all.Rda"))){
-  load(paste0(path.to.github,"Rdata/sub.virginia.ko.clr.all"))
+  load(paste0(path.to.github,"Rdata/sub.virginia.ko.clr.all.rda"))
 } else{
   
   # make scale matrix using sd of 0.5 and difference of 15%
